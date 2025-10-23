@@ -1,0 +1,287 @@
+:root {
+    --color-bg: #FFFFFF;
+    --color-light: #F5F5F5;
+    --color-dark: #333333;  
+    --color-primary: #0C2D4A;
+    --color-accent: #F57C00;
+    --color-alert: #D32F2F;
+    --color-green: #388E3C;
+    --color-purple: #9C27B0;    
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+    --font-main: 'Roboto', sans-serif;
+    --transition-fast: 0.3s ease-in-out;
+    --transition-medium: 0.5s ease-in-out;
+}
+
+
+/*Applying global font*/
+body {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-dark);
+    background-color: var(--color-bg);
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    margin-top: 0;
+}
+
+
+/*SECTION #1: NavBar CSS*/
+
+header {
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 2rem;
+    max-height: 100px;
+    font-family: var(--font-main);
+}
+
+.logo img {
+    height: 110px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 4rem
+}
+
+nav ul.mainmenu {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul.mainmenu > li > a {
+    color: var(--color-light);
+    text-decoration: none;
+    transition: var(--transition-fast) ;
+    font-size: 1.1rem; 
+    font-weight: 600;
+    font-family: var(--font-heading);
+
+}
+
+nav ul.mainmenu > li > a:hover {
+    color: var(--color-accent);
+}
+
+/*SubMenu*/
+.submenu_Services {
+    position: relative;
+}
+
+.dropdown_Services {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+    border-radius: 1rem;
+}
+
+.submenu_Services:hover .dropdown_Services {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.dropdown_Services li a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--color-dark);
+    text-decoration: none;
+    transition: var(--transition-medium);
+}
+
+.dropdown_Services li a:hover {
+    background-color: var(--color-accent);
+    color: var(--color-light);
+    text-shadow: 0 0 1px #FFFFFF, 0 0 2px #FFFFFF;
+    transition-duration: 0.5s;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+    margin-left: 0.3rem;
+    font-size: 0.7rem;
+}
+
+.submenu_Services:hover .arrow {
+    transform: rotate(180deg);
+}
+
+/*Contact now button*/
+.boton_contact {
+    background-color: var(--color-accent);
+    color: var(--color-light);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600; 
+    font-family: var(--font-heading);
+    transition: var(--transition-fast);
+    display: inline-block;
+    text-align: center;
+}
+
+.boton_contact:hover {
+    background-color: var(--color-light);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+}
+
+/*NavBar End*/
+
+/*SECTION #2: welcome_intruction CSS*/
+#welcome_intruction {
+    position: relative;
+    min-height: 480px;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: var(--font-body);
+    color: var(--color-dark);
+    background-color: transparent;
+    overflow: hidden;
+}
+
+/*Background image*/
+
+#welcome_intruction::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url('../ASSETS/IMG/mecano_aimplas.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgba(0, 0, 0, 0.819);
+    z-index: -1;
+    opacity: 0.7;
+}
+#welcome_intruction > * {
+  position: relative;
+  z-index: 1;
+}
+
+#welcome_intruction h2 {
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+}
+
+#welcome_intruction p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--color-dark);
+
+}
+
+#welcome_intruction .text_box {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 2rem 3rem;
+    border-radius: 1rem;
+    max-width: 800px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/*welcome_intruction end*/
+
+/*SECTION #3: about_Services CSS*/
+
+#about_Services {
+  background-color: white;
+  text-align: center;
+  padding: 5rem 2rem;
+  font-family: var(--font-body);
+}
+
+#about_Services h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+#about_Services h2 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  font-family: var(--font-heading);
+}
+
+#about_Services p {
+  font-size: 1.1rem;
+  color: var(--color-dark);
+  max-width: 800px;
+  margin: 0 auto 2rem auto;
+  line-height: 1.6;
+}
+
+/*contact buttons*/
+
+.intro_service_buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.boton_services {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.boton_services:hover {
+  background-color: var(--color-accent);
+}
+
+.boton_contact {
+  background-color: white;
+  color: var(--color-primary);
+  border: 2px solid var(--color-accent);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.boton_contact:hover {
+  background-color: var(--color-accent);
+  color: white;
+}
