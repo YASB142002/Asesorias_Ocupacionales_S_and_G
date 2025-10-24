@@ -1,20 +1,20 @@
 /* ==========================================================================
-   Proyecto: S&G Seguridad Ocupacional
-   Página: Inicio (index.html)
+   Proyect: S&G Seguridad Ocupacional
+   Page: Inicio (index.html)
    Autor: YASB
-   Fecha: 23/10/2025
-   Descripción: Estilos base y layout institucional para la página de inicio.
+   Date: 23/10/2025
+   Description: Base CSS stylesheet for the homepage of S&G Seguridad Ocupacional
    ========================================================================== */
 
 :root {
     --color-bg: #FFFFFF;
     --color-light: #F5F5F5;
-    --color-dark: #333333;  
+    --color-dark: #333333;
     --color-primary: #0C2D4A;
     --color-accent: #F57C00;
     --color-alert: #D32F2F;
     --color-green: #388E3C;
-    --color-purple: #9C27B0;    
+    --color-purple: #9C27B0;
     --font-heading: 'Montserrat', sans-serif;
     --font-body: 'Roboto', sans-serif;
     --font-main: 'Roboto', sans-serif;
@@ -36,7 +36,12 @@ body {
     padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-heading);
     font-weight: 700;
     margin-top: 0;
@@ -73,17 +78,17 @@ nav ul.mainmenu {
     padding: 0;
 }
 
-nav ul.mainmenu > li > a {
+nav ul.mainmenu>li>a {
     color: var(--color-light);
     text-decoration: none;
-    transition: var(--transition-fast) ;
-    font-size: 1.1rem; 
+    transition: var(--transition-fast);
+    font-size: 1.1rem;
     font-weight: 600;
     font-family: var(--font-heading);
 
 }
 
-nav ul.mainmenu > li > a:hover {
+nav ul.mainmenu>li>a:hover {
     color: var(--color-accent);
 }
 
@@ -108,7 +113,7 @@ nav ul.mainmenu > li > a:hover {
     transform: translateY(10px);
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     border-radius: 1rem;
 }
@@ -154,17 +159,27 @@ nav ul.mainmenu > li > a:hover {
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
     text-decoration: none;
-    font-weight: 600; 
+    font-weight: 600;
     font-family: var(--font-heading);
     transition: var(--transition-fast);
     display: inline-block;
     text-align: center;
 }
 
-.boton_contact:hover {
-    background-color: var(--color-light);
+#first_button_navbar {
+    background-color: white;
     color: var(--color-primary);
-    border: 1px solid var(--color-primary);
+    border: 2px solid var(--color-accent);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#first_button_navbar:hover {
+    background-color: var(--color-accent);
+    color: white;
 }
 
 /* ======================================================
@@ -198,8 +213,10 @@ nav ul.mainmenu > li > a:hover {
 #welcome_intruction::before {
     content: "";
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-image: url('../ASSETS/IMG/mecano_aimplas.jpg');
     background-size: cover;
     background-position: center;
@@ -209,9 +226,10 @@ nav ul.mainmenu > li > a:hover {
     z-index: -1;
     opacity: 0.7;
 }
-#welcome_intruction > * {
-  position: relative;
-  z-index: 1;
+
+#welcome_intruction>* {
+    position: relative;
+    z-index: 1;
 }
 
 #welcome_intruction h2 {
@@ -234,7 +252,7 @@ nav ul.mainmenu > li > a:hover {
     padding: 2rem 3rem;
     border-radius: 1rem;
     max-width: 800px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* ======================================================
@@ -242,39 +260,39 @@ nav ul.mainmenu > li > a:hover {
    ====================================================== */
 
 /* ======================================================
-   SECTION #3: about_Services CSS 
+   SECTION #3: about_Services CSS
    ====================================================== */
 
 #about_Services {
-  background-color: white;
-  text-align: center;
-  padding: 5rem 2rem;
-  font-family: var(--font-body);
+    background-color: white;
+    text-align: center;
+    padding: 5rem 2rem;
+    font-family: var(--font-body);
 }
 
 #about_Services h3 {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
-  letter-spacing: 1px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
 }
 
 #about_Services h2 {
-  font-size: 2.4rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  margin-bottom: 1rem;
-  font-family: var(--font-heading);
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-family: var(--font-heading);
 }
 
 #about_Services p {
-  font-size: 1.1rem;
-  color: var(--color-dark);
-  max-width: 800px;
-  margin: 0 auto 2rem auto;
-  line-height: 1.6;
+    font-size: 1.1rem;
+    color: var(--color-dark);
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+    line-height: 1.6;
 }
 
 /*  ======================
@@ -282,48 +300,423 @@ nav ul.mainmenu > li > a:hover {
     ====================== */
 
 .intro_service_buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .boton_services {
-  background-color: var(--color-primary);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
 }
 
 .boton_services:hover {
-  background-color: var(--color-accent);
+    background-color: var(--color-accent);
 }
 
 .boton_contact {
-  background-color: white;
-  color: var(--color-primary);
-  border: 2px solid var(--color-accent);
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: white;
+    color: var(--color-primary);
+    border: 2px solid var(--color-accent);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .boton_contact:hover {
-  background-color: var(--color-accent);
-  color: white;
+    background-color: var(--color-accent);
+    color: white;
 }
 
 /* ======================================================
-   END SECTION #3: about_Services CSS 
+   END SECTION #3: about_Services CSS
    ====================================================== */
 
 /* ======================================================
-   SECTION #4: our_little_services CSS 
+   SECTION #4: our_little_services CSS
    ====================================================== */
 
-   
+#our_little_services {
+    background-color: #0f1a2c;
+    padding: 5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.service_item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.1rem;
+    align-items: center;
+    max-width: 1500px;
+    margin-bottom: 5rem;
+    /*This can control the distance between every service_item*/
+    color: white;
+
+}
+
+.service_number_and_title {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-light);
+    margin-bottom: 7rem;
+}
+
+/*  ======================
+    Text content in every service CSS
+    ====================== */
+
+.service_text_content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.service_text_content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-light);
+    margin: 0;
+}
+
+.service_text_content h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+}
+
+.service_Description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #d0d0d0;
+}
+
+/*  ======================
+    Image in every service CSS
+    ====================== */
+
+.service_image img {
+    width: 100%;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.our_little_service_button {
+    grid-column: 1 / -1;
+    margin-top: 1rem;
+    text-align: left;
+}
+
+/*  ======================
+    Info button CSS
+    ====================== */
+
+.boton_More_Info {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.boton_More_Info:hover {
+    background-color: var(--color-accent);
+}
+
+/* ======================================================
+   END SECTION #4: our_little_services CSS
+   ====================================================== */
+
+/* ======================================================
+   SECTION #5: our_little_services CSS
+   ====================================================== */
+
+#why_Us {
+    background-color: white;
+    padding: 5rem 2rem;
+    font-family: var(--font-body);
+    max-width: 1200px;
+    margin: 0 auto;
+    /* display: flex; */
+    padding: 5rem 2rem;
+}
+
+.Why_Us_Question {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.Why_Us_Question h2 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+/*  ======================
+    Layout img + benefits CSS
+    ====================== */
+
+.why_Us_Content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/*  ======================
+    Image CSS
+    ====================== */
+
+.why_Us_Image {
+    flex: 1 1 40%;
+}
+
+.why_Us_Image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+}
+
+/*  ======================
+    Benefits text CSS
+    ====================== */
+
+.why_Us_Benefits {
+    flex: 1 1 55%;
+    display: flex;
+    flex-direction: column;
+}
+
+.why_Us_Benefits h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-top: 1rem;
+}
+
+.why_Us_Benefits p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-dark);
+    margin-top: -1.5rem;
+}
+
+/* ======================================================
+   END SECTION #5: our_little_services CSS
+   ====================================================== */
+
+/* ======================================================
+   SECTION #6: contact_Us_Now CSS
+   ====================================================== */
+
+#contact_Us_Now {
+    background-color: #f7f8f9;
+    padding: 5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.contact_Us_Content {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/*  ======================
+    Contact Us text CSS
+    ====================== */
+
+.contact_Us_Content h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.contact_Us_Content p {
+    font-size: 1.1rem;
+    color: var(--color-dark);
+    line-height: 1.6;
+    margin-top: -2.5rem;
+}
+
+/*  ======================
+    Contact button CSS
+    ====================== */
+
+.boton_contact {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    width: fit-content;
+}
+
+.boton_contact:hover {
+    background-color: var(--color-accent);
+}
+
+/*  ======================
+    Conctact Us Img CSS
+    ====================== */
+
+.contact_Us_Img {
+    flex: 1 1 40%;
+}
+
+.contact_Us_Img img {
+    width: 100%;
+    max-width: 700px;
+    border-radius: 1rem;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ======================================================
+   END SECTION #6: contact_Us_Now CSS
+   ====================================================== */
+
+/* ======================================================
+   Footer CSS
+   ====================================================== */
+
+#site_footer {
+    background-color: #0f1a2c;
+    color: white;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* gap: 2rem; */
+    font-family: var(--font-body);
+    border-top: 1px solid #ffffff33;
+    position: relative;
+}
+
+#site_footer::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-accent);
+    margin-bottom: 2rem;
+}
+
+
+/*  ======================
+    Footer logo img CSS
+    ====================== */
+
+.footer_logo img {
+    width: 120px;
+    height: auto;
+    border-radius: 0.5rem;
+    margin-right: 2rem;
+}
+
+/*  ======================
+    Footer Text info CSS
+    ====================== */
+
+.footer_info {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-size: 0.95rem;
+    /* margin-top: -3rem; */
+}
+
+.footer_info p {
+    margin: 0.2rem 0;
+    /* decrease the vertical space */
+    line-height: 1.4;
+    /* Just in case */
+}
+
+/*  ======================
+    Footer Social Media CSS
+    ====================== */
+
+.footer_social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.footer_social a {
+    color: white;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.footer_social a:hover {
+    color: var(--color-accent);
+}
+
+/*  ======================
+    Footer Links CSS
+    ====================== */
+
+.footer_links {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem, 2rem;
+}
+
+.footer_links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.footer_links a:hover {
+    color: var(--color-accent);
+}
+
+/*  ======================
+    Footer Legal CSS
+    ====================== */
+
+.footer_legal {
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    color: #c0c0c0;
+}
+
+
+/* ======================================================
+   END Footer CSS
+   ====================================================== */
