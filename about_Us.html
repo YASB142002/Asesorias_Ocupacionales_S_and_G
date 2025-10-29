@@ -4,30 +4,220 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Inicio del sitio institucional de S&G Asesorías Ocupacionales" />
-  <title>Nosotros | S&G Asesorías</title>
-  <link rel="stylesheet" href="css/estilos.css" />
+  <title>S&G Asesorías | Nosotros</title>
+  <link rel="stylesheet" href="CSS/About_Us_Stylesheet.css" />
 </head>
 <body>
   <header>
+    <figure class="logo">
+      <a href="index.html">
+        <img src="ASSETS/IMG/Logo_200x200.png" alt="Logo de S&G Asesorías Ocupacionales" />
+      </a>
+    </figure>
+
     <nav>
-      <ul>
+      <ul class="mainmenu">
         <li><a href="index.html">Inicio</a></li>
-        <li><a href="nosotros.html">Nosotros</a></li>
-        <li><a href="servicios.html">Servicios</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="about_Us.html">Nosotros</a></li>
+
+        <li class="submenu_Services">
+            <a href="our_Services.html">
+                Servicios <i class="fas fa-chevron-down arrow"></i> 
+            </a>
+            <ul class="dropdown_Services">
+                <li><a href="our_Services.html">Higiene Ocupacional</a></li> <!--Elaboración de planes de emergencia-->
+                <li><a href="our_Services.html">Seguridad Química</a></li> <!--Clasificación y gestión de residuos peligrosos-->
+                <li><a href="our_Services.html">Gestión Ocupacional</a></li> <!--Implementación del SGA-->
+                <li><a href="our_Services.html">Auditorías internas</a></li> <!--Auditorías internas en seguridad e higiene ocupacional-->
+            </ul>
+        </li>
       </ul>
     </nav>
+    
+    <aside class="contact_cta">
+      <a href="contact_Us.html" class="boton_contact"> Cotizar ahora!</a>
+    </aside>
   </header>
 
   <main>
-    <section>
-      <h1>Bienvenido a S&G Asesorías Ocupacionales</h1>
-      <p>Soluciones técnicas en higiene, seguridad química y gestión ocupacional.</p>
+    <section class="Identity_Intro">
+      <article class="identity_Content">
+        <header>
+          <h1 class="main_Title">Gestión Química y Ocupacional</h1>
+          <p class="sub_Title">Elimine riesgos. Cumplimiento garantizado.</p>
+        </header>
+
+        <p class="identity_Description">
+          Somos expertos técnicos en Nicaragua, comprometidos con la seguridad industrial, la higiene ocupacional y el manejo responsable de sustancias químicas...
+        </p>
+
+        <nav class="intro_Actions">
+          <a href="contact_Us.html" class="boton_contact">Solicitar un Diagnóstico sin Costo</a>
+          <a href="our_Services.html" class="boton_services">Ver Todos los Servicios</a>
+        </nav>
+      </article>
     </section>
+
+    <section class="About_Our_Identity">
+      <article class="solutions_content">
+        <header>
+          <h2 class="main_title">Soluciones integrales de seguridad ocupacional</h2>
+          <p class="main_description">
+            S&G Asesorías Ocupacionales ofrece servicios especializados para proteger la salud y seguridad de los trabajadores en empresas de Nicaragua.
+          </p>
+        </header>
+
+        <section class="strategy_blocks">
+          <article class="strategy_item">
+            <h3>Soluciones estratégicas</h3>
+            <p>
+              Transformamos la gestión de riesgos laborales con precisión y compromiso profesional.
+            </p>
+          </article>
+
+          <article class="strategy_item">
+            <h3>Impacto profesional</h3>
+            <p>
+              Desarrollamos estrategias personalizadas que garantizan la seguridad y eficiencia empresarial.
+            </p>
+          </article>
+        </section>
+
+        <nav class="action_buttons">
+          <a href="about_Us.html" class="boton_services">Conocer más</a>
+          <a href="contact_Us.html" class="boton_contact">Contactar</a>
+        </nav>
+      </article>
+    </section>
+
+    <section class="Identity_section">
+      <article class="identity_content">
+        <header>
+          <h2 class="identity_title">Nuestra identidad</h2>
+        </header>
+
+        <section class="identity_blocks">
+          <article class="identity_item">
+            <h3 class="item_title">Nuestra misión</h3>
+            <p class="item_description">
+              Transformar la seguridad laboral mediante soluciones innovadoras que protejan la integridad de los trabajadores y el éxito empresarial.
+            </p>
+          </article>
+
+          <article class="identity_item">
+            <h3 class="item_title">Nuestra visión</h3>
+            <p class="item_description">
+              Ser el referente líder en consultoría de seguridad ocupacional en Nicaragua, reconocidos por nuestra excelencia y compromiso profesional.
+            </p>
+          </article>
+
+          <article class="identity_item">
+            <h3 class="item_title">Nuestros valores</h3>
+            <p class="item_description">
+              Integridad, responsabilidad profesional, mejora continua y respeto por la vida humana en cada intervención que realizamos.
+            </p>
+          </article>
+        </section>
+
+        <aside class="identity_image">
+          <img src="ASSETS/IMG/placeholder_identity.png" alt="Imagen institucional de S&G Asesorías Ocupacionales" />
+        </aside>
+      </article>
+    </section>
+
+    <section class="Lead_consultant">
+      <article class="consultant_profile">
+        <header>
+          <h2 class="section_title">Conozca a nuestro Consultor Principal</h2>
+          <p class="section_subtitle">
+            Yeison Sequeira: experiencia técnica al servicio de la seguridad ocupacional.
+          </p>
+        </header>
+
+        <section class="consultant_details">
+          <h3 class="consultant_name">Yeison Sequeira</h3>
+          <p class="consultant_role">Ingeniero Químico | Fundador y Consultor Principal</p>
+
+          <p class="consultant_bio">
+            Graduado de la Universidad Nacional de Ingeniería (UNI), Yeison cuenta con más de 6 años de experiencia en inspecciones técnicas, higiene industrial, seguridad ocupacional y gestión de sustancias químicas. Su enfoque combina precisión normativa con sensibilidad hacia los entornos laborales nicaragüenses, garantizando soluciones sin fisuras para cada cliente.
+          </p>
+
+          <section class="consultant_expertise">
+            <h4 class="expertise_title">Áreas de experiencia clave</h4>
+            <ul class="expertise_list">
+              <li>Higiene Industrial</li>
+              <li>Seguridad Ocupacional</li>
+              <li>Gestión de Sustancias Químicas</li>
+              <li>Cumplimiento Normativo Ambiental</li>
+            </ul>
+          </section>
+        </section>
+
+        <aside class="consultant_image">
+          <img src="ASSETS/IMG/yeison_sequeira.png" alt="Foto de Yeison Sequeira, Consultor Principal de S&G Asesorías Ocupacionales" />
+        </aside>
+      </article>
+    </section>
+
+    <section class="Cta_section">
+      <article class="cta_content">
+        <header>
+          <h2 class="cta_title">Coloque la experticia de S&G a trabajar hoy</h2>
+          <p class="cta_description">
+            Agende una consulta personalizada. Permitamos diseñar la estrategia que garantizará la seguridad y el cumplimiento normativo de su empresa.
+          </p>
+        </header>
+
+        <nav class="cta_buttons">
+          <a href="contact_Us.html" class="btn_schedule">Agendar Consulta Directa</a>
+          <a href="contact_Us.html#faq" class="btn_questions">¿Tiene dudas? Contáctenos</a>
+        </nav>
+      </article>
+
+      <aside class="cta_image">
+        <img src="ASSETS/IMG/cta_banner.png" alt="Equipo técnico de S&G revisando estrategias de seguridad ocupacional" />
+      </aside>
+    </section>
+    
   </main>
 
-  <footer>
-    <p>&copy; 2025 S&G Asesorías Ocupacionales. Todos los derechos reservados.</p>
+  <footer id="site_footer">
+    <figure class="footer_logo">
+      <img src="ASSETS/IMG/Logo_200x200.png" alt="Logo de S&G Asesorías Ocupacionales" />
+    </figure>
+
+    <address class="footer_info">
+      <p>S&G Asesorías Ocupacionales</p>
+      <p>Managua, Nicaragua</p>
+      <p>Correo: <a href="mailto:contacto@sgasesorias.com">contacto@sgasesorias.com</a></p>
+      <p>Teléfono: <a href="tel:+50588042988">+505 8804 2988</a></p>
+    </address>
+
+    <nav class="footer_social">
+      <a href="https://facebook.com" target="_blank" aria-label="Facebook" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram" rel="noopener">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://youtube.com" target="_blank" aria-label="YouTube" rel="noopener">
+        <i class="fab fa-youtube"></i>
+      </a>
+    </nav>
+
+    <nav class="footer_links">
+      <a href="index.html">Inicio</a>
+      <a href="about_Us.html">Nosotros</a>
+      <a href="our_Services.html">Servicios</a>
+      <a href="contact_Us.html">Contacto</a>
+    </nav>
+
+    <small class="footer_legal">
+      &copy; 2025 S&G Asesorías Ocupacionales. Todos los derechos reservados.
+    </small>
   </footer>
 </body>
 </html>
