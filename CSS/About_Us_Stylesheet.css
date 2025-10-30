@@ -1,0 +1,496 @@
+/* ==========================================================================
+   Proyect: S&G Seguridad Ocupacional
+   Page: About us (About_Us.html)
+   Autor: YASB
+   Date: 29/10/2025
+   Description: Base CSS stylesheet for the About us page of S&G Seguridad Ocupacional
+   ========================================================================== */
+
+:root {
+    --color-bg: #FFFFFF;
+    --color-light: #F5F5F5;
+    --color-dark: #333333;  
+    --color-primary: #0C2D4A;
+    --color-accent: #F57C00;
+    --color-alert: #D32F2F;
+    --color-green: #388E3C;
+    --color-purple: #9C27B0;    
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+    --font-main: 'Roboto', sans-serif;
+    --transition-fast: 0.3s ease-in-out;
+    --transition-medium: 0.5s ease-in-out;
+}
+
+
+/*  ===========================
+    Applying global font styles
+    =========================== */
+body {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-dark);
+    background-color: var(--color-bg);
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    margin-top: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+/*  ======================================================
+    SECTION #1: NavBar CSS
+    ====================================================== */
+
+header {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+  max-height: 100px;
+  font-family: var(--font-main);
+}
+
+/* Logo institucional */
+.logo img {
+  height: 110px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 4rem;
+}
+
+/* Menú principal */
+nav ul.mainmenu {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul.mainmenu > li > a {
+  color: var(--color-light);
+  text-decoration: none;
+  transition: var(--transition-fast);
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+}
+
+nav ul.mainmenu > li > a:hover {
+  color: var(--color-accent);
+}
+
+
+/*  ====================
+    SubMenu Services CSS
+    ==================== */
+
+.submenu_services {
+  position: relative;
+}
+
+.dropdown_services {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 1rem;
+}
+
+.submenu_services:hover .dropdown_services {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown_services li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--color-dark);
+  text-decoration: none;
+  transition: var(--transition-medium);
+}
+
+.dropdown_services li a:hover {
+  background-color: var(--color-accent);
+  color: var(--color-light);
+  text-shadow: 0 0 1px #FFFFFF, 0 0 2px #FFFFFF;
+  transition-duration: 0.5s;
+}
+
+/* Flecha del submenú */
+.arrow {
+  transition: transform 0.3s ease;
+  margin-left: 0.3rem;
+  font-size: 0.7rem;
+}
+
+.submenu_services:hover .arrow {
+  transform: rotate(180deg);
+}
+
+/*  ======================
+    Contact now button CSS
+    ====================== */
+
+
+#first_button_navbar {
+    background-color: white;
+    color: var(--color-primary);
+    border: 2px solid var(--color-accent);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#first_button_navbar:hover {
+    background-color: var(--color-accent);
+    color: white;
+}
+
+/* ======================================================
+   END SECTION #1: NavBar CSS
+   ====================================================== */
+
+/* ======================================================
+   SECTION #2: about_us CSS
+   ====================================================== */
+.Identity_Intro {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('../ASSETS/IMG/Identity_Intro_IMG.jpg') center/cover no-repeat;
+  color: var(--color-light);
+  min-height: 70vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: start;
+  padding: 2rem 2rem 6rem 2rem; /* menos padding arriba */
+  text-align: left;
+
+}
+
+.identity_Content {
+  max-width: 800px;
+  margin-top: 3rem; /* aire visual arriba */
+}
+
+#identity_Header {
+  margin-bottom: 2rem;
+  background: none;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+
+#identity_Header .main_Title {
+  font-size: 2.8rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  color: var(--color-light);
+}
+
+#identity_Header .sub_Title {
+  font-size: 1.5rem;
+  font-family: var(--font-body);
+  font-weight: 400;
+  margin-bottom: 2rem;
+  color: var(--color-light);
+}
+
+.identity_Description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  color: var(--color-light);
+  font-family: var(--font-body);
+}
+.intro_Actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.boton_contact,
+.boton_services {
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  font-family: var(--font-body);
+}
+
+.boton_contact {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+   font-weight: 400;
+  transition: background var(--transition-fast), color var(--transition-fast);
+
+}
+
+.boton_contact:hover {
+  background-color: #e66c00; /* tono más oscuro del accent */
+    color: var(--color-primary);
+}
+
+.boton_services {
+  background-color: transparent;
+  border: 2px solid var(--color-light);
+  color: var(--color-light);
+}
+
+.boton_services:hover {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+}
+
+/* ======================================================
+   END SECTION #2: about_us CSS
+   ====================================================== */
+
+/* ======================================================
+   SECTION #3: About_Our_Identity CSS
+   ====================================================== */
+
+.About_Our_Identity {
+  padding: 10rem 2rem;
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  display: flex;
+  justify-content: left;
+}
+
+.solutions_title {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0%;
+}
+
+.solutions_content {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.solutions_content > * {
+  margin: 0;
+}
+
+/* Encabezado principal */
+.main_title {
+  font-size: 2.2rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.main_description {
+  font-size: 1.2rem;
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-light);
+}
+
+/* Bloques de estrategia */
+.strategy_blocks {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  margin-top: 8rem;
+}
+
+.strategy_item h3 {
+  font-size: 1.4rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.strategy_item p {
+  font-size: 1rem;
+  font-family: var(--font-body);
+  line-height: 1.5;
+  color: var(--color-light);
+}
+
+.strategy_item {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.strategy_icon {
+  background-color: var(--color-bg);
+  padding: 0.5rem;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  margin-top: 0.2rem;
+}
+
+.solutions_image {
+  max-width: 700px;
+  margin-left: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.solutions_image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto sutil en hover */
+.solutions_image img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
+}
+
+.action_buttons {
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: row;
+}
+
+/* ======================================================
+   END SECTION #3: About_Our_Identity CSS
+   ====================================================== */
+
+/* ======================================================
+   SECTION #4: About_Our_Identity CSS
+   ====================================================== */
+.Identity_section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: var(--color-bg);
+  color: var(--color-dark);
+  flex-wrap: wrap;
+  gap: 0rem;
+}
+
+/* Contenido textual */
+.identity_content {
+  max-width: 800px;
+  flex: 1 1 55%;
+  display: flex;
+  flex-direction: column;
+  margin: 0%;
+  padding-inline: 1rem;
+  gap: 0rem;
+  background-color: var(--color-bg);
+}
+.identity_header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: var(--color-bg);
+  padding: 0%;
+}
+
+/* Título principal */
+.identity_title {
+  font-size: 2.2rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+/* Bloques de misión, visión, valores */
+.identity_blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  background-color: var(--color-bg);
+}
+
+.identity_item {
+  display: flex;
+  align-items: flex-start;
+  background-color: var(--color-bg);
+  gap: 1rem;
+}
+.identity_icon {
+  font-size: 1.8rem;
+  color: var(--color-primary);
+  flex-shrink: 0;
+  margin-top: 0rem;
+  width: 2rem;
+  text-align: center;
+}
+
+.item_title {
+  font-size: 1.4rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+.item_description {
+  font-size: 1rem;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: var(--color-dark);
+}
+
+/* Imagen institucional */
+.identity_image {
+  flex: 1 1 45%;
+  display: flex;
+  align-items: stretch; /* ← clave para que la imagen crezca verticalmente */
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.identity_image img {
+  width: 100%;
+  height: 100%; /* ← rellena verticalmente el contenedor */
+  object-fit: cover;
+  border-radius: 0; /* opcional: si querés que se vea sólida sin bordes redondeados */
+  box-shadow: none; /* opcional: si querés que se integre como fondo sólido */
+}
+
+/* ======================================================
+   END SECTION #4: About_Our_Identity CSS
+   ====================================================== */
