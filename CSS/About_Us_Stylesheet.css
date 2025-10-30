@@ -8,10 +8,11 @@
 
 :root {
   --color-bg: #FFFFFF;
-  --color-light: #F5F5F5;
+  --color-light: #F1F0EC;
   --color-dark: #333333;
-  --color-primary: #0C2D4A;
+  --color-primary: #161F3E;
   --color-accent: #F57C00;
+  --color-accent-dark: #e66c00;
   --color-alert: #D32F2F;
   --color-green: #388E3C;
   --color-purple: #9C27B0;
@@ -63,13 +64,13 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 2rem;
-  max-height: 100px;
+  max-height: 130px;
   font-family: var(--font-main);
 }
 
 /* Logo institucional */
 .logo img {
-  height: 110px;
+  height: 150px;
   width: auto;
   object-fit: contain;
   border-radius: 4rem;
@@ -88,7 +89,7 @@ nav ul.mainmenu>li>a {
   color: var(--color-light);
   text-decoration: none;
   transition: var(--transition-fast);
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 600;
   font-family: var(--font-heading);
 }
@@ -162,19 +163,20 @@ nav ul.mainmenu>li>a:hover {
 
 
 #first_button_navbar {
-  background-color: white;
-  color: var(--color-primary);
-  border: 2px solid var(--color-accent);
+  background-color: var(--color-accent);
+  color: var(--color-light);
+  border: 2px solid var(--color-accent-dark);
   padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 4px;
   text-decoration: none;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-weight: 400;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #first_button_navbar:hover {
-  background-color: var(--color-accent);
-  color: white;
+  background-color: var(--color-accent-dark);
+  color: var(--color-dark);
 }
 
 /* ======================================================
@@ -395,11 +397,11 @@ nav ul.mainmenu>li>a:hover {
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
 }
 
-.action_buttons {
+/* .action_buttons {
   display: flex;
   gap: 1.5rem;
   flex-direction: row;
-}
+} */
 
 /* ======================================================
    END SECTION #3: About_Our_Identity CSS
@@ -411,22 +413,31 @@ nav ul.mainmenu>li>a:hover {
 .Identity_section {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: stretch;
   background-color: var(--color-bg);
   color: var(--color-dark);
-  flex-wrap: wrap;
-  padding-block: 8rem;
+  flex-wrap: nowrap;
+  padding-top: 8rem;
+  padding-bottom: 2rem;
+  padding-inline: 0rem;
+  max-width: 100%;
+  margin-inline: 0%;
+  min-height: 600px;
+  /* gap: 2rem; */
+  /* min-height: 500px; */
 }
 
 /* Contenido textual */
 .identity_content {
-  max-width: 800px;
+  max-width: 55%;
   flex: 1 1 55%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin: 0%;
   padding-inline: 1rem;
-  gap: 0rem;
+  gap: 2rem;
   background-color: var(--color-bg);
 }
 
@@ -489,24 +500,20 @@ nav ul.mainmenu>li>a:hover {
 /* Imagen institucional */
 .identity_image {
   flex: 1 1 45%;
+  max-width: 45%;
   display: flex;
-  align-items: stretch;
-  /* ← clave para que la imagen crezca verticalmente */
+  align-items: center;
   justify-content: center;
-  margin: 0;
-  padding: 0;
+  overflow: hidden;
+
 }
 
 .identity_image img {
   width: 100%;
-  height: 100%;
-  /* ← rellena verticalmente el contenedor */
+  max-height: 600px;
   object-fit: cover;
-  border-radius: 0;
-  /* opcional: si querés que se vea sólida sin bordes redondeados */
-  box-shadow: none;
-  /* opcional: si querés que se integre como fondo sólido */
 }
+
 
 /* ======================================================
    END SECTION #4: About_Our_Identity CSS
