@@ -68,7 +68,9 @@ header {
   font-family: var(--font-main);
 }
 
-/* Logo institucional */
+/* ====================
+   Logo
+==================== */
 .logo img {
   height: 150px;
   width: auto;
@@ -76,7 +78,9 @@ header {
   border-radius: 4rem;
 }
 
-/* Menú principal */
+/* ====================
+   Menu
+==================== */
 nav ul.mainmenu {
   list-style: none;
   display: flex;
@@ -88,21 +92,36 @@ nav ul.mainmenu {
 nav ul.mainmenu>li>a {
   color: var(--color-light);
   text-decoration: none;
-  transition: var(--transition-fast);
   font-size: 1.5rem;
   font-weight: 600;
   font-family: var(--font-heading);
+  transition: var(--transition-fast);
 }
 
 nav ul.mainmenu>li>a:hover {
   color: var(--color-accent);
 }
 
+/* ====================
+   Submenu arrows
+==================== */
+.arrow {
+  margin-left: 0.3rem;
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+}
 
-/*  ====================
-    SubMenu Services CSS
-    ==================== */
+.submenu_services:hover .arrow.arrow_services {
+  transform: rotate(180deg);
+}
 
+.submenu_training:hover .arrow.arrow_training {
+  transform: rotate(-90deg);
+}
+
+/* ====================
+   Submenu: Services
+==================== */
 .submenu_services {
   position: relative;
 }
@@ -111,56 +130,113 @@ nav ul.mainmenu>li>a:hover {
   position: absolute;
   top: 100%;
   left: 0;
+  display: none;
   background-color: var(--color-light);
   color: var(--color-dark);
   list-style: none;
-  padding: 0.5rem 0;
+  padding: 0;
   margin: 0;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   opacity: 0;
   transform: translateY(10px);
   pointer-events: none;
   transition: opacity 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  border-radius: 1rem;
+  min-width: 200px;
 }
 
 .submenu_services:hover .dropdown_services {
+  display: block;
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
 
-.dropdown_services li a {
+/* ====================
+   Submenu: Training
+==================== */
+.submenu_training {
+  position: relative;
+}
+
+.submenu_training>a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--color-light);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-family: var(--font-heading);
+}
+
+.dropdown_training {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  display: none;
+  background-color: var(--color-light);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1010;
+  min-width: 200px;
+}
+
+.submenu_training:hover .dropdown_training {
+  display: block;
+}
+
+/* ====================
+   Submenu links
+==================== */
+.dropdown_services li,
+.dropdown_training li {
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown_services li a,
+.dropdown_training li a {
   display: block;
   padding: 0.5rem 1rem;
   color: var(--color-dark);
   text-decoration: none;
-  transition: var(--transition-medium);
+  font-size: 1rem;
+  font-family: var(--font-heading);
+  transition: background-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.dropdown_services li a:hover {
+.dropdown_services li a:hover,
+.dropdown_training li a:hover {
   background-color: var(--color-accent);
   color: var(--color-light);
-  text-shadow: 0 0 1px #FFFFFF, 0 0 2px #FFFFFF;
-  transition-duration: 0.5s;
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+  /*Sub efect to elevate every itme in submenu*/
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-/* Flecha del submenú */
-.arrow {
-  transition: transform 0.3s ease;
-  margin-left: 0.3rem;
-  font-size: 0.7rem;
+.dropdown_services li:first-child a,
+.dropdown_training li:first-child a {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1em;
 }
 
-.submenu_services:hover .arrow {
-  transform: rotate(180deg);
+.dropdown_services li:last-child a,
+.dropdown_training li:last-child a {
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1em;
 }
 
 /*  ======================
     Contact now button CSS
     ====================== */
-
 
 #first_button_navbar {
   background-color: var(--color-accent);
@@ -195,7 +271,6 @@ nav ul.mainmenu>li>a:hover {
   align-items: flex-start;
   justify-content: start;
   padding: 2rem 2rem 6rem 2rem;
-  /* menos padding arriba */
   text-align: left;
 
 }
@@ -203,8 +278,11 @@ nav ul.mainmenu>li>a:hover {
 .identity_Content {
   max-width: 800px;
   margin-top: 3rem;
-  /* aire visual arriba */
 }
+
+/*  ======================
+    Identity Intro Content CSS
+    ====================== */
 
 #identity_Header {
   margin-bottom: 2rem;
@@ -247,6 +325,10 @@ nav ul.mainmenu>li>a:hover {
   justify-content: center;
 }
 
+/*  ======================
+    Contact now and services button CSS
+    ====================== */
+
 .boton_contact,
 .boton_services {
   padding: 0.8rem 1.6rem;
@@ -266,8 +348,7 @@ nav ul.mainmenu>li>a:hover {
 }
 
 .boton_contact:hover {
-  background-color: #e66c00;
-  /* tono más oscuro del accent */
+  background-color: var(--color-accent-dark);
   color: var(--color-primary);
 }
 
@@ -317,7 +398,10 @@ nav ul.mainmenu>li>a:hover {
   margin: 0;
 }
 
-/* Encabezado principal */
+/*  ======================
+    About us headder button CSS
+    ====================== */
+
 .main_title {
   font-size: 2.2rem;
   font-family: var(--font-heading);
@@ -334,7 +418,10 @@ nav ul.mainmenu>li>a:hover {
   color: var(--color-light);
 }
 
-/* Bloques de estrategia */
+/*  ======================
+    Estrategy block CSS
+    ====================== */
+
 .strategy_blocks {
   align-items: flex-start;
   display: flex;
@@ -364,6 +451,10 @@ nav ul.mainmenu>li>a:hover {
   gap: 1rem;
 }
 
+/*  ======================
+    Estrategy icons CSS
+    ====================== */
+
 .strategy_icon {
   background-color: var(--color-bg);
   padding: 0.5rem;
@@ -373,6 +464,10 @@ nav ul.mainmenu>li>a:hover {
   color: var(--color-accent);
   margin-top: 0.2rem;
 }
+
+/*  ======================
+    Estrategy image CSS
+    ====================== */
 
 .solutions_image {
   max-width: 700px;
@@ -391,17 +486,10 @@ nav ul.mainmenu>li>a:hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efecto sutil en hover */
 .solutions_image img:hover {
   transform: scale(1.02);
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
 }
-
-/* .action_buttons {
-  display: flex;
-  gap: 1.5rem;
-  flex-direction: row;
-} */
 
 /* ======================================================
    END SECTION #3: About_Our_Identity CSS
@@ -424,11 +512,12 @@ nav ul.mainmenu>li>a:hover {
   max-width: 100%;
   margin-inline: 0%;
   min-height: 600px;
-  /* gap: 2rem; */
-  /* min-height: 500px; */
 }
 
-/* Contenido textual */
+/*  ======================
+    Text content CSS
+    ====================== */
+
 .identity_content {
   max-width: 55%;
   flex: 1 1 55%;
@@ -449,7 +538,6 @@ nav ul.mainmenu>li>a:hover {
   padding: 0%;
 }
 
-/* Título principal */
 .identity_title {
   font-size: 2.2rem;
   font-family: var(--font-heading);
@@ -458,7 +546,10 @@ nav ul.mainmenu>li>a:hover {
   margin-bottom: 1rem;
 }
 
-/* Bloques de misión, visión, valores */
+/*  ======================
+    Identity blocks CSS
+    ====================== */
+
 .identity_blocks {
   display: flex;
   flex-direction: column;
@@ -497,7 +588,10 @@ nav ul.mainmenu>li>a:hover {
   color: var(--color-dark);
 }
 
-/* Imagen institucional */
+/*  ======================
+    Identity image CSS
+    ====================== */
+
 .identity_image {
   flex: 1 1 45%;
   max-width: 45%;
@@ -531,7 +625,6 @@ nav ul.mainmenu>li>a:hover {
   justify-content: center;
 }
 
-/* Contenedor general */
 .consultant_profile {
   width: 90%;
   padding: 2rem;
@@ -543,7 +636,10 @@ nav ul.mainmenu>li>a:hover {
   background-color: var(--color-gb);
 }
 
-/* Encabezado */
+/*  ======================
+    Consultant description CSS
+    ====================== */
+
 .consultant_title {
   text-align: left;
   background-color: var(--color-bg);
@@ -573,7 +669,10 @@ nav ul.mainmenu>li>a:hover {
   margin: 0rem;
 }
 
-/* Biografía */
+/*  ======================
+    Consultant details CSS
+    ====================== */
+
 .consultant_details {
   display: flex;
   flex-direction: row;
@@ -590,23 +689,10 @@ nav ul.mainmenu>li>a:hover {
   padding-inline: 1rem;
 }
 
-/* Imagen del asesor */
-.consultant_image {
-  max-width: 225px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/*  ======================
+    Consultant info CSS
+    ====================== */
 
-.consultant_image img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
-}
-
-/* Información del asesor */
 .consultant_info {
   flex: 1 1 600px;
   display: flex;
@@ -639,7 +725,29 @@ nav ul.mainmenu>li>a:hover {
   color: var(--color-dark);
 }
 
-/* Experiencia clave */
+/*  ======================
+    Consultant image CSS
+    ====================== */
+
+.consultant_image {
+  max-width: 225px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.consultant_image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+/*  ======================
+    Consultant expertise CSS
+    ====================== */
+
 .consultant_expertise {
   padding: 1.5rem;
   border-radius: 8px;
@@ -698,18 +806,14 @@ nav ul.mainmenu>li>a:hover {
   justify-content: center;
 }
 
-/* Contenido textual */
 .cta_content {
   display: flex;
   flex-direction: row;
   gap: 1rem;
   background-image: url("../ASSETS/IMG/cta_banner.jpg");
   background-size: cover;
-  /* ← la imagen se escala para cubrir todo el área */
   background-position: center center;
-  /* ← la imagen se centra horizontal y verticalmente */
   background-repeat: no-repeat;
-  /* ← evita que se repita */
   padding: 4rem;
   border-radius: 8px;
   max-width: 90%;
@@ -723,7 +827,6 @@ nav ul.mainmenu>li>a:hover {
   position: absolute;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.6);
-  /* capa oscura */
   z-index: 0;
 }
 
@@ -737,13 +840,15 @@ nav ul.mainmenu>li>a:hover {
   flex-direction: column;
   align-items: flex-start;
   background-color: transparent;
-  /* o var(--color-primary-translucent) si lo tenés */
   padding-right: 4rem;
   height: auto;
   justify-content: center;
 }
 
-/* Título y descripción */
+/*  ======================
+    CTA title and content CSS
+    ====================== */
+
 .cta_title {
   font-size: 2.2rem;
   font-family: var(--font-heading);
@@ -759,7 +864,10 @@ nav ul.mainmenu>li>a:hover {
   color: var(--color-light);
 }
 
-/* Botones de acción */
+/*  ======================
+    CTA buttons CSS
+    ====================== */
+
 .cta_buttons {
   display: flex;
   gap: 3rem;
@@ -780,12 +888,9 @@ nav ul.mainmenu>li>a:hover {
   width: 220px;
   height: 48px;
   padding: 0;
-  /* ya no necesitás padding si definís height */
   line-height: 48px;
-  /* centra el texto verticalmente */
 }
 
-/* Botón principal */
 .btn_schedule {
   background-color: var(--color-accent);
   color: var(--color-bg);
@@ -796,7 +901,6 @@ nav ul.mainmenu>li>a:hover {
   color: var(--color-light);
 }
 
-/* Botón secundario */
 .btn_questions {
   background-color: transparent;
   border: 2px solid var(--color-light);
@@ -841,18 +945,16 @@ nav ul.mainmenu>li>a:hover {
 .main_footer {
   display: flex;
   flex-wrap: wrap;
-  /* ← permite que los elementos bajen si no hay espacio */
   justify-content: space-between;
-  /* ← distribuye horizontalmente */
   align-items: flex-start;
-  /* ← alinea verticalmente arriba */
   gap: 2rem;
   width: 100%;
 }
 
 /* ======================
-   Logo
+   Logo CSS
 ====================== */
+
 .footer_logo {
   flex: 1 1 120px;
   display: flex;
@@ -872,8 +974,9 @@ nav ul.mainmenu>li>a:hover {
 }
 
 /* ======================
-   Información de contacto
+   Contact info CSS
 ====================== */
+
 .footer_info {
   flex: 1 1 200px;
   display: flex;
@@ -897,8 +1000,9 @@ nav ul.mainmenu>li>a:hover {
 }
 
 /* ======================
-   Redes sociales
+   Social media CSS
 ====================== */
+
 .footer_social {
   flex: 1 1 160px;
   display: flex;
@@ -918,7 +1022,7 @@ nav ul.mainmenu>li>a:hover {
 }
 
 /* ======================
-   Enlaces institucionales
+   Links CSS
 ====================== */
 .footer_links {
   flex: 1 1 160px;
@@ -944,7 +1048,6 @@ nav ul.mainmenu>li>a:hover {
 .footer_social,
 .footer_links {
   flex: 1 1 200px;
-  /* ← se adaptan al ancho disponible */
 }
 
 .footer_legal {
@@ -955,5 +1058,5 @@ nav ul.mainmenu>li>a:hover {
 }
 
 /* ======================================================
-   Footer CSS
+   END Footer CSS
    ====================================================== */
