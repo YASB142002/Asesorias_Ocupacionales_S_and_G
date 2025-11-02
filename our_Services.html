@@ -1,22 +1,62 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Inicio del sitio institucional de S&G Asesorías Ocupacionales" />
   <title>Servicios | S&G Asesorías</title>
   <link rel="stylesheet" href="css/estilos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
   <header>
+    <figure class="logo">
+      <a href="index.html">
+        <img src="ASSETS/IMG/Logo_200x200.png" alt="Logo de S&G Asesorías Ocupacionales" />
+      </a>
+    </figure>
+
     <nav>
-      <ul>
+      <ul class="mainmenu">
         <li><a href="index.html">Inicio</a></li>
-        <li><a href="nosotros.html">Nosotros</a></li>
-        <li><a href="servicios.html">Servicios</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="about_Us.html">Nosotros</a></li>
+
+        <li class="submenu_services">
+          <a href="our_services.html">
+            Servicios <i class="fas fa-chevron-down arrow arrow_services"></i>
+          </a>
+          <ul class="dropdown_services">
+            <li><a href="our_Services.html">Trámites</a></li>
+            <li><a href="our_Services.html">Asesorías</a></li>
+
+            <li class="submenu_training">
+              <a href="our_Services.html">Capacitaciones <i class="fas fa-chevron-down arrow arrow_training"></i></a>
+              <ul class="dropdown_training">
+                <li><a href="our_Services.html">Ley 618 y su Reglamento </a></li>
+                <li><a href="our_Services.html">Higiene Ocupacional</a></li>
+                <li><a href="our_Services.html">Prevención de Riesgos Laborales</a></li>
+                <li><a href="our_Services.html">Prevención de Riesgos Químicos y Biológicos</a></li>
+                <li><a href="our_Services.html">Prevención de Riesgos Ergonómicos y Psicosociales</a></li>
+                <li><a href="our_Services.html">Brigadas de Emergencia</a></li>
+                <li><a href="our_Services.html">Primeros Auxilios</a></li>
+                <li><a href="our_Services.html">Protección Respiratoria</a></li>
+              </ul>
+            </li>
+
+            <li><a href="our_Services.html">Elaboración de Manuales</a></li>
+            <li><a href="our_Services.html">Sistema Globalmente Armonizado - SGA</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
+
+    <aside class="contact_cta">
+      <a href="contact_Us.html" class="boton_contact" id="first_button_navbar"> Cotizar ahora!</a>
+    </aside>
   </header>
 
   <main>
@@ -30,4 +70,5 @@
     <p>&copy; 2025 S&G Asesorías Ocupacionales. Todos los derechos reservados.</p>
   </footer>
 </body>
+
 </html>
