@@ -1,0 +1,520 @@
+/* ==========================================================================
+   Proyect: S&G Seguridad Ocupacional
+   Page: Our Services (our_Services.html)
+   Autor: YASB
+   Date: 03/11/2025
+   Description: Base CSS stylesheet for the our service page of S&G Seguridad Ocupacional
+   ========================================================================== */
+
+:root {
+  --color-bg: #FFFFFF;
+  --color-light: #F1F0EC;
+  --color-dark: #333333;
+  --color-primary: #161F3E;
+  --color-accent: #F57C00;
+  --color-accent-dark: #e66c00;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+  --font-main: 'Roboto', sans-serif;
+  --transition-fast: 0.3s ease-in-out;
+  --transition-medium: 0.5s ease-in-out;
+}
+
+
+/*  ===========================
+    Applying global font styles
+    =========================== */
+body {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-dark);
+  background-color: var(--color-bg);
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin-top: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/*  ======================================================
+    SECTION #1: NavBar CSS
+    ====================================================== */
+
+header {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+  max-height: 130px;
+  font-family: var(--font-main);
+}
+
+/* ====================
+   Logo
+==================== */
+.logo img {
+  height: 150px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 4rem;
+}
+
+/* ====================
+   Menu
+==================== */
+nav ul.mainmenu {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul.mainmenu>li>a {
+  color: var(--color-light);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  transition: var(--transition-fast);
+}
+
+nav ul.mainmenu>li>a:hover {
+  color: var(--color-accent);
+}
+
+/* ====================
+   Submenu arrows
+==================== */
+
+.toggle_mainmenu {
+  background: none;
+  border: none;
+  color: var(--color-light);
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.toggle_submenu {
+  background: none;
+  border: none;
+  color: var(--color-dark);
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.arrow {
+  margin-left: 0.3rem;
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+}
+
+.submenu_services:hover .arrow.arrow_services {
+  transform: rotate(180deg);
+}
+
+.submenu_training:hover .arrow.arrow_training {
+  transform: rotate(-90deg);
+}
+
+/* ====================
+   Submenu: Services
+==================== */
+.submenu_services {
+  position: relative;
+}
+
+.dropdown_services {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+  min-width: 200px;
+}
+
+.submenu_services:hover .dropdown_services {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ====================
+   Submenu: Training
+==================== */
+.submenu_training {
+  position: relative;
+}
+
+.submenu_training>a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--color-light);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-family: var(--font-heading);
+}
+
+.dropdown_training {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  display: none;
+  background-color: var(--color-light);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1010;
+  min-width: 200px;
+}
+
+.submenu_training:hover .dropdown_training {
+  display: block;
+}
+
+/* ====================
+   Submenu links
+==================== */
+.dropdown_services li,
+.dropdown_training li {
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown_services li a,
+.dropdown_training li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--color-dark);
+  text-decoration: none;
+  font-size: 1rem;
+  font-family: var(--font-heading);
+  transition: background-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dropdown_services li a:hover,
+.dropdown_training li a:hover {
+  background-color: var(--color-accent);
+  color: var(--color-light);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+  /*Sub efect to elevate every itme in submenu*/
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown_services li:first-child a,
+.dropdown_training li:first-child a {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1em;
+}
+
+.dropdown_services li:last-child a,
+.dropdown_training li:last-child a {
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1em;
+}
+
+/*  ======================
+    Contact now button CSS
+    ====================== */
+
+#first_button_navbar {
+  background-color: var(--color-accent);
+  color: var(--color-light);
+  border: 2px solid var(--color-accent-dark);
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 400;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#first_button_navbar:hover {
+  background-color: var(--color-accent-dark);
+  color: var(--color-dark);
+}
+
+/* ====================
+   Responsive Header
+==================== */
+
+#menu_toggle {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--color-light);
+  cursor: pointer;
+  display: none;
+  /* visible solo en móviles */
+}
+
+@media (max-width: 768px) {
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+    position: relative;
+    z-index: 20;
+  }
+
+  .logo img {
+    height: 80px;
+  }
+
+  #menu_toggle {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: var(--color-light);
+    cursor: pointer;
+    display: block;
+  }
+
+  #first_button_navbar {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: var(--color-accent);
+    color: var(--color-light);
+    border-radius: 4px;
+    text-decoration: none;
+  }
+
+  #main_nav {
+    background-color: var(--color-primary);
+    border-top: 1px solid var(--color-accent);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    padding: 1rem 0;
+    z-index: 30;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    max-height: 0;
+    opacity: 0;
+  }
+
+  #main_nav.expanded {
+    max-height: 1000px;
+    opacity: 1;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  #main_nav:not(.hidden) {
+    display: block;
+  }
+
+  nav ul.mainmenu {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  nav ul.mainmenu>li>a {
+    font-size: 1.2rem;
+    text-align: center;
+    color: var(--color-light);
+    text-decoration: none;
+  }
+
+  .dropdown_services {
+    max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  background: red; /* solo para debug */
+
+  }
+
+  .dropdown_services.expanded {
+    max-height: 1000px;
+    opacity: 1;
+    z-index: 40;
+  }
+
+  .dropdown_training {
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    max-height: 0px;
+    overflow-y: auto;
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+
+  .dropdown_training::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .dropdown_training::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent);
+    border-radius: 3px;
+  }
+
+  .dropdown_training.expanded {
+    max-height: 1000px;
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+
+/* ======================================================
+   END SECTION #1: NavBar CSS
+   ====================================================== */
+
+/* ======================================================
+   SECTION #2: intro_services CSS
+   ====================================================== */
+
+.intro_services {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4rem 2rem;
+  background-color: #f5f5f5;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.intro_text_services {
+  flex: 1 1 400px;
+  max-width: 600px;
+  color: #1a1a1a;
+}
+
+.intro_text_services h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.intro_text_services p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+/*  ======================
+    Contact now button CSS
+    ====================== */
+
+.btn_contact_us {
+  margin-top: 1rem;
+}
+
+.boton_contact {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-accent);
+  color: white;
+  text-decoration: none;
+  font-weight: 400;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.boton_contact:hover {
+  background-color: var(--color-accent-dark);
+  color: var(--color-dark);
+}
+
+/*  ======================
+    both img CSS
+    ====================== */
+
+.intro_image_services {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+#img0 {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#img1 {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+@media (max-width: 768px) {
+  .intro_services {
+    flex-direction: row;
+    text-align: center;
+  }
+
+  .intro_text_services h1 {
+    font-size: 2rem;
+  }
+
+  .intro_image_services {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+
+  #img0 {
+    max-width: 80%;
+  }
+
+  #img1 {
+    max-width: 45%;
+  }
+
+}

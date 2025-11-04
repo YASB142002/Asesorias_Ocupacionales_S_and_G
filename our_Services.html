@@ -5,11 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Inicio del sitio institucional de S&G Asesorías Ocupacionales" />
-  <title>Servicios | S&G Asesorías</title>
-  <link rel="stylesheet" href="css/estilos.css" />
+  <title>S&G Asesorías | Servicios</title>
+  <link rel="stylesheet" href="css/our_services.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -20,55 +19,278 @@
       </a>
     </figure>
 
-    <nav>
-      <ul class="mainmenu">
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="about_Us.html">Nosotros</a></li>
+    <button id="menu_toggle" aria-label="Abrir menú">☰</button>
 
-        <li class="submenu_services">
-          <a href="our_services.html">
-            Servicios <i class="fas fa-chevron-down arrow arrow_services"></i>
-          </a>
-          <ul class="dropdown_services">
-            <li><a href="our_Services.html">Trámites</a></li>
-            <li><a href="our_Services.html">Asesorías</a></li>
+    <nav id="main_nav">
+        <ul class="mainmenu">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="about_Us.html">Nosotros</a></li>
 
-            <li class="submenu_training">
-              <a href="our_Services.html">Capacitaciones <i class="fas fa-chevron-down arrow arrow_training"></i></a>
-              <ul class="dropdown_training">
-                <li><a href="our_Services.html">Ley 618 y su Reglamento </a></li>
-                <li><a href="our_Services.html">Higiene Ocupacional</a></li>
-                <li><a href="our_Services.html">Prevención de Riesgos Laborales</a></li>
-                <li><a href="our_Services.html">Prevención de Riesgos Químicos y Biológicos</a></li>
-                <li><a href="our_Services.html">Prevención de Riesgos Ergonómicos y Psicosociales</a></li>
-                <li><a href="our_Services.html">Brigadas de Emergencia</a></li>
-                <li><a href="our_Services.html">Primeros Auxilios</a></li>
-                <li><a href="our_Services.html">Protección Respiratoria</a></li>
-              </ul>
-            </li>
+          <li class="submenu_services">
+            <a href="our_services.html">Servicios</a>
 
-            <li><a href="our_Services.html">Elaboración de Manuales</a></li>
-            <li><a href="our_Services.html">Sistema Globalmente Armonizado - SGA</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
+            <button class="toggle_mainmenu" aria-label="Mostrar menú">
+              <i class="fas fa-chevron-down arrow arrow_services"></i>
+            </button>
 
-    <aside class="contact_cta">
-      <a href="contact_Us.html" class="boton_contact" id="first_button_navbar"> Cotizar ahora!</a>
-    </aside>
+            <ul class="dropdown_services">
+              <li><a href="our_Services.html">Trámites</a></li>
+              <li><a href="our_Services.html">Asesorías</a></li>
+
+              <li class="submenu_training">
+                <a href="our_Services.html">Capacitaciones</i></a>
+
+                <button class="toggle_submenu" aria-label="Mostrar submenú">
+                  <i class="fas fa-chevron-down arrow arrow_training"></i>
+                </button>
+
+                <ul class="dropdown_training">
+                  <li><a href="our_Services.html">Ley 618 y su Reglamento </a></li>
+                  <li><a href="our_Services.html">Higiene Ocupacional</a></li>
+                  <li><a href="our_Services.html">Prevención de Riesgos Laborales</a></li>
+                  <li><a href="our_Services.html">Prevención de Riesgos Químicos y Biológicos</a></li>
+                  <li><a href="our_Services.html">Prevención de Riesgos Ergonómicos y Psicosociales</a></li>
+                  <li><a href="our_Services.html">Brigadas de Emergencia</a></li>
+                  <li><a href="our_Services.html">Primeros Auxilios</a></li>
+                  <li><a href="our_Services.html">Protección Respiratoria</a></li>
+                </ul>
+              </li>
+
+              <li><a href="our_Services.html">Elaboración de Manuales</a></li>
+              <li><a href="our_Services.html">Sistema Globalmente Armonizado - SGA</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+
+      <aside class="contact_cta">
+          <a href="contact_Us.html" class="boton_contact" id="first_button_navbar"> Cotizar ahora!</a>
+      </aside>
   </header>
 
   <main>
-    <section>
-      <h1>Bienvenido a S&G Asesorías Ocupacionales</h1>
-      <p>Soluciones técnicas en higiene, seguridad química y gestión ocupacional.</p>
+    <section class="intro_services">
+      <article class="intro_text_services">
+        <h1>Seguridad y gestión ocupacional con precisión</h1>
+        <p>En S&G Asesorías Ocupacionales, convertimos el cumplimiento normativo en una ventaja estratégica. Nos especializamos en brindar soluciones integrales de Higiene y Seguridad Ocupacional, con un enfoque experto en la Gestión Responsable de Sustancias Químicas.</p>
+        <aside class="btn_contact_us">
+          <a href="contact_Us.html" class="boton_contact" id="btn_intro_contact">Contactanos!</a>
+        </aside>
+      </article>
+      <figure class="intro_image_services">
+        <img src="ASSETS/IMG/img_no_found.jpg" id="img0" alt="Imagen representativa de servicios ocupacionales" />
+        <img src="ASSETS/IMG/img_no_found.jpg" id="img1" alt="2da imagen representativa de servicios ocupacionales" />
+      </figure>
     </section>
+
+    <section class="procedures_service">
+      <article class="procedures_text_content">
+        <p>Trámites</p>
+        <h2>Trámites de Licencia de Higiene y Seguridad.</h2>
+        <p>Texto donde va la descripcion del servicio</p>
+      </article>
+
+      <section class="procedures_service_benefits">
+        <article class="benefit_item">
+          <div class="benefit_icon" aria-hidden="true">
+            <i class="fa-solid fa-clipboard-list" aria-hidden="true"></i>
+          </div>
+
+          <h3>
+            Registro de incidentes
+          </h3>
+
+          <div class="decoration_line" aria-hidden="true"></div>
+          <p>
+            Documentación precisa y oportuna para garantizar el cumplimiento normativo en seguridad ocupacional.
+          </p>
+        </article>
+
+        <article class="benefit_item">
+          <div class="benefit_icon" aria-hidden="true">
+            <i class="fa-solid fa-file-circle-question" aria-hidden="true"></i>
+          </div>
+
+          <h3>
+            Solicitud de evaluación
+          </h3>
+
+          <div class="decoration_line" aria-hidden="true"></div>
+          <p>
+            Simplificamos los procesos administrativos para que su empresa se concentre en la prevención.
+          </p>
+        </article>
+
+        <article class="benefit_item">
+          <div class="benefit_icon" aria-hidden="true">
+            <i class="fa-solid fa-certificate" aria-hidden="true"></i>
+          </div>
+
+          <h3>
+            Certificación de cumplimiento
+          </h3>
+
+          <div class="decoration_line" aria-hidden="true"></div>
+          <p>Agilizamos la gestión de documentos con sistemas digitales seguros y eficientes.</p>
+        </article>
+        <article class="benefit_item">
+          <div class="benefit_icon" aria-hidden="true">
+            <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+          </div>
+
+          <h3>
+            Gestión de documentación
+          </h3>
+
+          <div class="decoration_line" aria-hidden="true"></div>
+          <p>
+            Asesoramiento integral para tramitar certificaciones y permisos relacionados con seguridad laboral.
+          </p>
+        </article>
+      </section>
+    </section>
+
+    <section class="consulting_section">
+      <header class="training_title">
+        <h2>Capacitaciones Técnicas</h2>
+        <p>Texto donde va la descripcion del servicio</p>
+      </header>
+
+      <section class="cards_section">
+        <article class="main_card">
+          <h3>Titulo del curso seleccionado</h3>
+          <p>Descripción breve del curso seleccionado</p>
+          <aside>
+            <a href="contact_Us.html" class="boton_contact" id="btn_intro_contact">¿Dudas? Contactanos!</a>
+          </aside>
+          <figure>
+            <img src="ASSETS/IMG/img_no_found.jpg" alt="Imagen representativa del curso seleccionado" />
+          </figure>
+        </article>
+
+        <section class="secondary_cards_section">
+
+          <article class="secondary_card" data-id="course_1">
+
+            <h3>Titulo del curso en lote</h3>
+
+            <p>Descripción breve del curso en lote</p>
+
+            <button class="btn_moreInfo">Detalles</button>
+
+            <figure>
+              <img src="ASSETS/IMG/img_no_found.jpg" alt="Imagen representativa del curso seleccionado" />
+            </figure>
+          </article>
+          <!-- This is the container where all secondary consulting service will be add with js -->
+        </section>
+      </section>
+    </section>
+
+    <section class="training_section">
+      <article class="training_text_cylinder">
+        <h3>Capacitaciones Técnicas</h3>
+        <section class="training_cylinder">
+          <p>Texto donde va el primer texto del cilindro</p>
+          <p>2do texto donde va el primer texto del cilindro</p>
+          <!-- In this container is where all training courser will be adde with js -->
+        </section>
+      </article>
+      <article class="training_text_description">
+        <p>Texto de la descripcion de la capacitacion seleccionada</p>
+        <aside>
+          <i class="fa-solid fa-clock" aria-hidden="true"></i>
+          <p>Duracion de la capacitacion seleccionada</p>
+        </aside>
+      </article>
+    </section>
+
+    <section class="manual_development_section">
+
+      <header class="manual_development_header">
+        <h3>Manuales</h3>
+        <h2>Elaboración de manuales operativos y procedimientos de trabajos seguros</h2>
+      </header>
+
+      <article class="manual_development_description">
+        <p>
+          Texto donde va la descripcion del servicio
+        </p>
+      </article>
+    </section>
+
+    <section class="SGA_section">
+
+      <article class="sga_text_content">
+
+        <h3>SGA</h3>
+        <h2>Implementación del Sistema Globalmente Armonizado</h2>
+        <p>Texto donde va la descripcion del servicio</p>
+      </article>
+
+      <figure class="sga_image">
+          <img src="ASSETS/IMG/img_no_found.jpg" alt="Imagen representativa del SGA" />
+      </figure>
+    </section>
+
+    <section class="Cta_section">
+      <article class="cta_content">
+        <header class="cta_header">
+          <h2 class="cta_title">Transforma tu seguridad</h2>
+          <p class="cta_description">
+            Conecta con nuestro experto en higiene y seguridad ocupacional para una evaluación integral.
+          </p>
+        </header>
+
+        <nav class="cta_buttons">
+          <a href="contact_Us.html" class="btn_schedule">Agendar Asesoria Directa</a>
+        </nav>
+      </article>
+    </section>
+
   </main>
 
-  <footer>
-    <p>&copy; 2025 S&G Asesorías Ocupacionales. Todos los derechos reservados.</p>
+  <footer id="site_footer">
+    <section class="main_footer">
+      <figure class="footer_logo">
+        <img src="ASSETS/IMG/Logo_200x200.png" alt="Logo de S&G Asesorías Ocupacionales" />
+      </figure>
+
+      <address class="footer_info">
+        <h2>S&G Asesorías Ocupacionales</h2>
+        <p>Managua, Nicaragua</p>
+        <p>Correo: <a href="mailto:contacto@sgasesorias.com">contacto@sgasesorias.com</a></p>
+        <p>Teléfono: <a href="tel:+50588042988">+505 8804 2988</a></p>
+      </address>
+
+      <nav class="footer_links">
+        <a href="index.html">Inicio</a>
+        <a href="about_Us.html">Nosotros</a>
+        <a href="our_Services.html">Servicios</a>
+        <a href="contact_Us.html">Contacto</a>
+      </nav>
+
+      <nav class="footer_social">
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook" rel="noopener">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram" rel="noopener">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn" rel="noopener">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://youtube.com" target="_blank" aria-label="YouTube" rel="noopener">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </nav>
+    </section>
+
+    <small class="footer_legal">
+      &copy; 2025 S&G Asesorías Ocupacionales. Todos los derechos reservados.
+    </small>
   </footer>
+  <script src="JS/ui_our_service.js"></script>
 </body>
 
 </html>
