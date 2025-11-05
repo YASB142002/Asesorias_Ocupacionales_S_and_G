@@ -118,7 +118,14 @@ nav ul.mainmenu>li>a:hover {
   color: var(--color-dark);
   font-size: 1rem;
   cursor: pointer;
-  margin-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  height: 2.6rem; /* ← evita que se estire verticalmente sin control */
+  min-height: 100%; /* ← asegura que tenga altura suficiente */
+  box-sizing: border-box;
+  box-shadow: none;
 }
 
 .arrow {
@@ -134,6 +141,24 @@ nav ul.mainmenu>li>a:hover {
 .submenu_training:hover .arrow.arrow_training {
   transform: rotate(-90deg);
 }
+
+.submenu_training:hover > a,
+.submenu_training:hover > .toggle_submenu{
+  background-color: var(--color-accent);
+  color: var(--color-light);
+  box-shadow: 0px 3px 9px  rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* .toggle_submenu:hover{
+  box-shadow: 10px 3px 9px rgba(0, 0, 0, 0.4);
+  background-color: var(--color-accent);
+  color: var(--color-light);
+  transform: translateY(-2px);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+} */
+
 
 /* ====================
    Submenu: Services
@@ -174,6 +199,18 @@ nav ul.mainmenu>li>a:hover {
 ==================== */
 .submenu_training {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 3rem;
+  padding: 0 1rem;
+}
+
+.submenu_training a {
+  flex: 1;
+  padding: 0.75rem 0;
+  text-decoration: none;
+  color: var(--color-dark);
 }
 
 .submenu_training>a {
@@ -185,6 +222,8 @@ nav ul.mainmenu>li>a:hover {
   text-decoration: none;
   font-size: 1.5rem;
   font-family: var(--font-heading);
+  flex: 1;
+  padding-right: 0.5rem; /* espacio entre texto y flecha */
 }
 
 .dropdown_training {
@@ -209,10 +248,13 @@ nav ul.mainmenu>li>a:hover {
 /* ====================
    Submenu links
 ==================== */
-.dropdown_services li,
-.dropdown_training li {
+.dropdown_services li {
   margin: 0;
   padding: 0;
+}
+
+.dropdown_training li{
+  margin: 0;
 }
 
 .dropdown_services li a,
@@ -229,12 +271,11 @@ nav ul.mainmenu>li>a:hover {
 }
 
 .dropdown_services li a:hover,
-.dropdown_training li a:hover {
+.dropdown_training li ul a:hover{
   background-color: var(--color-accent);
   color: var(--color-light);
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.4);
   transform: translateY(-2px);
-  /*Sub efect to elevate every itme in submenu*/
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
@@ -331,15 +372,24 @@ nav ul.mainmenu>li>a:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     max-height: 0;
     opacity: 0;
+    overflow: hidden;
   }
+
+  #main_nav:not(.expanded) .mainmenu {
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  #main_nav.expanded .mainmenu {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
 
   #main_nav.expanded {
     max-height: 1000px;
     opacity: 1;
-  }
-
-  .hidden {
-    display: none;
+    overflow: visible;
   }
 
   #main_nav:not(.hidden) {
@@ -361,27 +411,43 @@ nav ul.mainmenu>li>a:hover {
 
   .dropdown_services {
     max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease, opacity 0.3s ease;
-  background: red; /* solo para debug */
-
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
   }
 
   .dropdown_services.expanded {
     max-height: 1000px;
     opacity: 1;
-    z-index: 40;
+    z-index: 30;
+    overflow: visible;
+    display: block;
+  }
+  .submenu_training {
+    position: relative; /* para que el dropdown se posicione respecto a este */
+    overflow: visible;
   }
 
   .dropdown_training {
-    overflow: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     opacity: 0;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
-    max-height: 0px;
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    max-height: 0;
     overflow-y: auto;
     transform: scaleY(0);
     transform-origin: top;
+    z-index: 40;
+    /* background-color: var(--color-primary); */
+  }
+
+  .dropdown_training.expanded {
+    max-height: 1000px;
+    opacity: 1;
+    transform: scaleY(1);
+    display: block;
   }
 
   .dropdown_training::-webkit-scrollbar {
@@ -393,11 +459,11 @@ nav ul.mainmenu>li>a:hover {
     border-radius: 3px;
   }
 
-  .dropdown_training.expanded {
-    max-height: 1000px;
-    opacity: 1;
-    transform: scaleY(1);
-  }
+  .submenu_training:hover .arrow.arrow_training {
+  transform: rotate(-180deg);
+}
+
+
 }
 
 
