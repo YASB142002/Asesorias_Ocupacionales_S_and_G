@@ -466,7 +466,6 @@ nav ul.mainmenu>li>a:hover {
 
 }
 
-
 /* ======================================================
    END SECTION #1: NavBar CSS
    ====================================================== */
@@ -583,4 +582,166 @@ nav ul.mainmenu>li>a:hover {
     max-width: 45%;
   }
 
+}
+
+/* ======================================================
+   END SECTION #2: intro_services CSS
+   ====================================================== */
+
+/* ======================================================
+   SECTION #3: procedures_service CSS
+   ====================================================== */
+
+.procedures_service {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  font-family: var(--font-body);
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+/* Texto introductorio */
+.procedures_text_content p:first-child {
+  font-size: 1.2rem;
+  color: var(--color-light);
+  margin-bottom: 0.5rem;
+}
+
+.procedures_text_content h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-light);
+  font-family: var(--font-heading);
+}
+
+.procedures_text_content p:last-child {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-light);
+}
+
+/* Beneficios en grid */
+.procedures_service_benefits {
+  display: flex;
+  flex-direction: column;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.5rem;
+}
+
+/* Cada beneficio */
+.benefit_item {
+  display: grid;
+  grid-template-columns: 60px 250px;
+  background-color: transparent;
+  border-radius: 0.75rem;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.benefit_item:hover {
+  transform: translateY(-4px);
+  /* box-shadow: 0 0 18px rgba(245, 124, 0, 0.4); var(--color-accent) con opacidad */
+}
+
+/* Ícono */
+.benefit_icon {
+  font-size: 2rem;
+  color: var(--color-light);
+  margin-bottom: 1rem;
+}
+
+/* Título del beneficio */
+.benefit_item h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  color: var(--color-light);
+  font-family: var(--font-heading);
+}
+
+/* Línea decorativa */
+.decoration_line {
+  width: 3px;
+  height: 100%;  
+  background-color: var(--color-light);
+  margin-bottom: 1rem;
+}
+
+/* Descripción */
+.benefit_item p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-light);
+}
+
+@media screen and (max-width: 768px) {
+  .procedures_service {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
+
+  .procedures_text_content p:first-child {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .procedures_text_content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    padding-left: 2rem;
+  }
+
+  .procedures_text_content p:last-child {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding-left: 2rem;
+  }
+
+  .procedures_service_benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .benefit_item {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    padding-top: 0;
+    border-radius: 0.5rem;
+  }
+
+  .benefit_icon {
+    font-size: 1.8rem;
+    margin-bottom: 0;
+  }
+
+  .benefit_item h3 {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    justify-self: flex-start;
+  }
+
+  .benefit_item p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-inline: 0;
+    margin-block: 0.2rem;
+    justify-items: flex-start;
+  }
+
+  .decoration_line {
+    width: 2px;
+    height: 100%;
+    margin: 0.5rem 0;
+  }
 }
