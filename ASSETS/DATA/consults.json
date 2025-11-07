@@ -1,0 +1,73 @@
+[
+  {
+    "id": 1,
+    "title": "Riesgos Físicos",
+    "short_description": "Identificamos y evaluamos factores físicos que pueden afectar la salud ocupacional.",
+    "big_description": "Realizamos estudios sobre exposición a ruido, vibraciones, radiaciones y temperaturas extremas, proponiendo medidas de control efectivas para proteger al personal.",
+    "img": "ASSETS/IMG/img_no_found.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Riesgos Químicos",
+    "short_description": "Evaluamos la presencia de agentes químicos peligrosos en el entorno laboral.",
+    "big_description": "Analizamos sustancias químicas utilizadas en procesos productivos, identificamos rutas de exposición y diseñamos estrategias para minimizar riesgos y cumplir con normativas.",
+    "img": "ASSETS/IMG/img_no_found.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Riesgos Biológicos",
+    "short_description": "Asesoramos en la gestión de agentes biológicos que pueden afectar la salud.",
+    "big_description": "Estudiamos la exposición a virus, bacterias, hongos y parásitos en ambientes laborales, proponiendo protocolos de bioseguridad y prevención.",
+    "img": "ASSETS/IMG/img_no_found.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Riesgos Psicosociales",
+    "short_description": "Identificamos factores que afectan el bienestar mental y emocional del trabajador.",
+    "big_description": "Evaluamos condiciones como estrés laboral, acoso, carga emocional y clima organizacional, desarrollando planes de intervención y mejora.",
+    "img": "ASSETS/IMG/img_no_found.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Riesgos Ergonómicos",
+    "short_description": "Analizamos la interacción entre el trabajador y su entorno físico.",
+    "big_description": "Estudiamos posturas, movimientos repetitivos, diseño de estaciones de trabajo y carga física, proponiendo soluciones ergonómicas para prevenir lesiones.",
+    "img": "ASSETS/IMG/img_no_found.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Riesgo Eléctricos",
+    "short_description": "Evaluamos condiciones que pueden generar accidentes eléctricos.",
+    "big_description": "Inspeccionamos instalaciones, equipos y procedimientos eléctricos, identificando fallas y proponiendo medidas de protección y mantenimiento preventivo.",
+    "img": "ASSETS/IMG/img_no_found.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Planes de Emergencias y Contingencias",
+    "short_description": "Diseñamos planes para responder eficazmente ante situaciones críticas.",
+    "big_description": "Elaboramos estrategias de evacuación, comunicación, primeros auxilios y control de incidentes, adaptadas a las características de cada organización.",
+    "img": "ASSETS/IMG/img_no_found.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Simulacro de emergencia y/o autoprotección",
+    "short_description": "Coordinamos simulacros para fortalecer la respuesta organizacional.",
+    "big_description": "Planificamos y ejecutamos ejercicios prácticos que permiten evaluar la preparación del personal ante emergencias, mejorando tiempos de reacción y protocolos.",
+    "img": "ASSETS/IMG/img_no_found.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Análisis de vulnerabilidad",
+    "short_description": "Estudiamos los factores que aumentan el riesgo ante eventos adversos.",
+    "big_description": "Identificamos debilidades estructurales, operativas y humanas que pueden comprometer la seguridad, proponiendo soluciones para reducir la exposición al riesgo.",
+    "img": "ASSETS/IMG/img_no_found.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Inspecciones de Seguridad",
+    "short_description": "Realizamos inspecciones técnicas para verificar condiciones seguras.",
+    "big_description": "Evaluamos áreas de trabajo, equipos, señalización y cumplimiento normativo, generando informes con recomendaciones para mejorar la seguridad laboral.",
+    "img": "ASSETS/IMG/img_no_found.jpg"
+  }
+  
+]
