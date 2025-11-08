@@ -566,6 +566,9 @@ nav ul.mainmenu>li>a:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/*  ======================
+    Phone responsive CSS
+    ====================== */
 
 @media (max-width: 768px) {
   .intro_services {
@@ -613,7 +616,10 @@ nav ul.mainmenu>li>a:hover {
   justify-content: space-evenly;
 }
 
-/* Texto introductorio */
+/*  ======================
+    Intro text CSS
+    ====================== */
+
 .procedures_text_content p:first-child {
   font-size: 1.2rem;
   color: var(--color-light);
@@ -634,7 +640,10 @@ nav ul.mainmenu>li>a:hover {
   color: var(--color-light);
 }
 
-/* Beneficios en grid */
+/*  ======================
+    Benefits CSS
+    ====================== */
+
 .procedures_service_benefits {
   display: flex;
   flex-direction: column;
@@ -642,7 +651,10 @@ nav ul.mainmenu>li>a:hover {
   gap: 0.5rem;
 }
 
-/* Cada beneficio */
+/*  ======================
+    Benefit list CSS
+    ====================== */
+
 .benefit_item {
   display: grid;
   grid-template-columns: 60px 250px;
@@ -655,14 +667,20 @@ nav ul.mainmenu>li>a:hover {
   transform: translateY(-4px);
 }
 
-/* Ícono */
+/*  ======================
+    Benefit icons CSS
+    ====================== */
+
 .benefit_icon {
   font-size: 2rem;
   color: var(--color-light);
   margin-bottom: 1rem;
 }
 
-/* Título del beneficio */
+/*  ======================
+    Benefits title CSS
+    ====================== */
+
 .benefit_item h3 {
   font-size: 1.2rem;
   font-weight: 600;
@@ -672,7 +690,10 @@ nav ul.mainmenu>li>a:hover {
   font-family: var(--font-heading);
 }
 
-/* Línea decorativa */
+/*  ======================
+    Benefit decoration line CSS
+    ====================== */
+
 .decoration_line {
   width: 3px;
   height: 100%;
@@ -680,12 +701,19 @@ nav ul.mainmenu>li>a:hover {
   margin-bottom: 1rem;
 }
 
-/* Descripción */
+/*  ======================
+    Benefit description CSS
+    ====================== */
+
 .benefit_item p {
   font-size: 0.95rem;
   line-height: 1.5;
   color: var(--color-light);
 }
+
+/*  ======================
+    Phone responsive CSS
+    ====================== */
 
 @media screen and (max-width: 768px) {
   .procedures_service {
@@ -1196,12 +1224,11 @@ nav ul.mainmenu>li>a:hover {
   box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.4);
 
   /*This section try to copy the macos26 effect*/
-  /* background-color: rgba(255, 255, 255, 0.1); 
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2); */
-
+    /* background-color: rgba(255, 255, 255, 0.1); 
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2); */
 }
 
 .training_text_cylinder h3 {
@@ -1224,7 +1251,6 @@ nav ul.mainmenu>li>a:hover {
 }
 
 .training_cylinder p {
-  /* background-color: var(--color-bg); */
   background: var(--color-bg);
   color: var(--color-primary);
   width: 100%;
@@ -1236,7 +1262,7 @@ nav ul.mainmenu>li>a:hover {
 }
 
 .training_cylinder p:hover {
-  background-color: var(--color-accent); /* o un tono más brillante */
+  background-color: var(--color-accent);
   box-shadow: 0 0 12px rgba(230, 115, 0, 0.6);
   transform: translateX(4px);
   color: var(--color-light);
@@ -1254,7 +1280,6 @@ nav ul.mainmenu>li>a:hover {
 }
 
 .training_cylinder::-webkit-scrollbar-track {
-  /* background: var(--color-bg); */
   background: var(--color-bg);
   border-radius: 4px;
 }
