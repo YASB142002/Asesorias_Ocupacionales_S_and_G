@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "Ley 618 y su Reglamento",
+    "description": "Ofrecemos asesoría especializada en la aplicación de la Ley 618 y su Reglamento, incluyendo obligaciones patronales, derechos laborales y procedimientos de inspección. Te ayudamos a interpretar y aplicar sus disposiciones y reglamentos, desde la conformación del Comité de Higiene y Seguridad hasta los análisis del cumplimiento y auditorías internas."
+  },
+  {
+    "id": 2,
+    "title": "Higiene Ocupacional",
+    "description": "Capacitamos al personal en la identificación de peligros, evaluación de exposiciones y control de agentes físicos, químicos y biológicos que afectan el entorno laboral. Aplicamos metodologías adaptadas a cada sector productivo."
+  },
+  {
+    "id": 3,
+    "title": "Prevención de Riesgos Laborales",
+    "description": "Diseñamos estrategias integrales para identificar peligros, evaluar riesgos y establecer controles efectivos y matriz IPER. Desde diagnósticos hasta planes de acción, fortalecemos la cultura preventiva en tu organización."
+  },
+  {
+    "id": 4,
+    "title": "Prevención de Riesgos Químicos y Biológicos",
+    "description": "Brindamos formación técnica sobre el manejo seguro de sustancias peligrosas, incluyendo etiquetado SGA, almacenamiento, Hojas de Seguridad, rutas de exposición y protocolos ante accidentes."
+  },
+  {
+    "id": 5,
+    "title": "Prevención de Riesgos Ergonómicos y Psicosociales",
+    "description": "Capacitamos en la identificación de factores ergonómicos (posturas, movimientos repetitivos, carga física) y psicosociales (estrés, acoso, clima organizacional) que afectan el desarrollo laboral."
+  },
+  {
+    "id": 6,
+    "title": "Brigadas de Emergencia",
+    "description": "Fortalecemos las capacidades de las brigadas en primeros auxilios, evaluación, incendio y respuesta ante desastres naturales o tecnológicos."
+  },
+  {
+    "id": 7,
+    "title": "Primeros Auxilios",
+    "description": "Ofrecemos cursos teórico - prácticos en primeros auxilios, dirigidos a personal operativo, brigadas y personal de seguridad. Atención de heridas, reanimación y manejo de fracturas."
+  },
+  {
+    "id": 8,
+    "title": "Protección Respiratoria",
+    "description": "Capacitamos en la selección, uso y mantenimiento de equipos de protección respiratoria (EPR) según el tipo de contaminante, normas técnicas y condiciones laborales."
+  }
+]

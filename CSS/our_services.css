@@ -1171,3 +1171,130 @@ nav ul.mainmenu>li>a:hover {
 /* ======================================================
    SECTION #5: training_section CSS
    ====================================================== */
+
+.training_section {
+  display: flex;
+  gap: 2rem;
+  padding: 14rem 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../ASSETS/IMG/training_background.jpg) center/cover no-repeat;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+  z-index: 0;
+}
+
+.training_text_cylinder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 1 300px;
+  max-width: 400px;
+  background: var(--color-bg);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.4);
+
+  /*This section try to copy the macos26 effect*/
+  /* background-color: rgba(255, 255, 255, 0.1); 
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2); */
+
+}
+
+.training_text_cylinder h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+}
+
+.training_cylinder{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 200px;
+  scroll-behavior: smooth;
+  background-color: var(--color-bg);
+  border-radius: 8px;
+  gap: 0;
+}
+
+.training_cylinder p {
+  /* background-color: var(--color-bg); */
+  background: var(--color-bg);
+  color: var(--color-primary);
+  width: 100%;
+  padding: 0.6rem 1rem;
+  box-sizing: border-box;
+  margin-block: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.training_cylinder p:hover {
+  background-color: var(--color-accent); /* o un tono más brillante */
+  box-shadow: 0 0 12px rgba(230, 115, 0, 0.6);
+  transform: translateX(4px);
+  color: var(--color-light);
+}
+
+.training_cylinder p.active_course {
+  background-color: var(--color-accent-dark);
+  box-shadow: 0 0 12px rgba(230, 115, 0, 0.8);
+  transform: translateX(6px);
+}
+
+.training_cylinder::-webkit-scrollbar {
+  width: 6px;
+  /*vertical scroll width*/
+}
+
+.training_cylinder::-webkit-scrollbar-track {
+  /* background: var(--color-bg); */
+  background: var(--color-bg);
+  border-radius: 4px;
+}
+
+.training_cylinder::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent);
+  border-radius: 4px;
+  border: 2px solid var(--color-bg);
+}
+
+.training_cylinder::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent-dark);
+}
+
+
+
+.training_text_description {
+  flex: 2 1 400px;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.training_text_description p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.training_text_description aside {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.training_text_description i {
+  color: var(--color-accent-dark);
+}
