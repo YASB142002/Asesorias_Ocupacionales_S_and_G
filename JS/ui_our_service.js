@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleServices = document.querySelector(".toggle_mainmenu");
   const dropdownServices = document.querySelector(".dropdown_services");
 
-  // Toggle main menu
+  // Toggle main menu navbar in mobile view
   toggle.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -15,12 +15,20 @@ document.addEventListener("DOMContentLoaded", () => {
     toggle.setAttribute("aria-expanded", nav.classList.contains("expanded") ? "true" : "false");
   });
 
-  // Responsive button text
-  const ajustTextButton = () => {
-    button.textContent = window.innerWidth < 932 ? "Cotizar" : "Cotizar ahora!";
-  };
-  ajustTextButton();
-  window.addEventListener("resize", ajustTextButton);
+  // Responsive button text in navbar in mobile view  
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //                                                                                    THIS SECTION WILL BE DELETED IN FUTURE VERSIONS
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  // const ajustTextButton = () => {
+  //   button.textContent = window.innerWidth < 932 ? "Contactar" : "Contactar ahora!";
+  // };
+  // ajustTextButton();
+  // window.addEventListener("resize", ajustTextButton);
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //                                                                                    THIS SECTION WILL BE DELETED IN FUTURE VERSIONS
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
   function handleToggle(toggleButton, dropdownElement) {
     toggleButton.addEventListener("click", (e) => {
@@ -33,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
   handleToggle(toggleServices, dropdownServices);
   handleToggle(toggleTraining, dropdownTraining);
 
-  // Global click handler
+  // Global click handler -> this will close menus in navbar (mobile view) when clicking outside
   document.addEventListener("mousedown", (e) => {
     const clickedInsideNav = nav.contains(e.target);
     const clickedServiceToggle = toggleServices.contains(e.target);
@@ -54,22 +62,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+
+
   //This part is to load the consulting_section information (main and secondary cards) 
 
-  let consultData = [];
+  let consultData = []; //This array will store the data loaded from the JSON file
 
-  fetch("ASSETS/DATA/consults.json")
-    .then(res => res.json())
+  fetch("ASSETS/DATA/consults.json") //This line will fetch the JSON file with the consult data, at the same time will be update with API link in future versions
+    .then(res => res.json()) //This line will parse the response as JSON
     .then(data => {
       if (Array.isArray(data)) {
         consultData = data;
         renderCards(consultData);
       } else {
-        console.error("Invalid data format");
+        console.error("Invalid data format"); //This line will log an error if the data format is not as expected
       }
-
     })
-    .catch(error => console.error("Error loading consults:", error));
+    .catch(error => console.error("Error loading consults:", error)); //This line catch any error during the fetch process
 
   function renderCards(consults) {
     const container = document.getElementById("secondary_cards_section");
@@ -96,6 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
       container.appendChild(card);
     });
   }
+
+  // Event delegation for secondary cards in consulting section
 
   document.addEventListener("click", e => {
     if (e.target.classList.contains("btn_moreInfo")) {
@@ -169,4 +180,63 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+
+
+  //This section will fech the training courses information and load it into the training section
+
+  let trainingData = [];
+
+  fetch("../ASSETS/DATA/training.json")
+    .then(res => res.json())
+    .then(data => {
+      if (Array.isArray(data)) {
+        trainingData = data;
+        renderTrainingInCilinder(trainingData);
+      } else {
+        console.error("Invalid training data format");
+      }
+    })
+    .catch(error => console.error("Error loading training courses:", error));
+
+  function renderTrainingInCilinder(courses) {
+    const container = document.querySelector(".training_cylinder");
+    container.innerHTML = "";
+    courses.forEach(course => {
+      const courseItem = document.createElement("p");
+      courseItem.setAttribute("data-id", `course_${course.id}`);
+      courseItem.innerHTML = `${course.title}`;
+      container.appendChild(courseItem);
+    });
+  }
+
+  // Event delegation for training courses in training section to know which course the user was clicked
+  document.addEventListener("click", e => {
+    if (e.target.parentElement.classList.contains("training_cylinder")) {
+      const id = parseInt(e.target.dataset.id.split("_")[1]);
+      const course = trainingData.find(searchedCourse => searchedCourse.id === id);
+      const focusPointContainer = document.querySelector(".training_text_focuspoint");
+      
+      
+      // Update main title and description of training_text_focuspoint, still missing the objetives, the way how course will be imparted and how will be focused to train, this will be added in future versions
+      const trainingDescriptionTitle = document.querySelector(".training_text_description h2");
+      const trainingDescription = document.querySelector(".training_text_description p");
+      const trainingObjective = document.getElementById("training_objective");
+      const trainingModality = document.getElementById("training_modality");
+      const trainingAudience = document.getElementById("training_audience");
+
+      trainingDescriptionTitle.textContent = course.title;
+      trainingDescription.textContent = course.description;
+      trainingObjective.innerHTML = course.objective; //This line will update the objective section with the data from the JSON file is good idea add a validation to check if the objetive exist in the JSON file
+      trainingModality.textContent = course.modality;
+      trainingAudience.textContent = course.audience;
+
+      // Fade-in effect for focus points
+      focusPointContainer.classList.add("fadde-in");
+    }
+  });
+
+
+
+
+
 });

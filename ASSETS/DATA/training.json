@@ -2,41 +2,73 @@
   {
     "id": 1,
     "title": "Ley 618 y su Reglamento",
-    "description": "Ofrecemos asesoría especializada en la aplicación de la Ley 618 y su Reglamento, incluyendo obligaciones patronales, derechos laborales y procedimientos de inspección. Te ayudamos a interpretar y aplicar sus disposiciones y reglamentos, desde la conformación del Comité de Higiene y Seguridad hasta los análisis del cumplimiento y auditorías internas."
+    "description": "Ofrecemos Asesoría especializada en la aplicación de la Ley 618 y su Reglamento. Te ayudamos a interpretar y aplicar sus disposiciones y reglamentos, desde la conformación del Comité de Higiene y Seguridad hasta los análisis del cumplimiento y auditorías internas",
+    "duration": "4 Horas",
+    "objective": "Garantizar el <strong>cumplimiento</strong> de la Ley 618 y su Reglamento.",
+    "modality": "Presencial o virtual",
+    "audience": "Gerentes, Jefes de RRHH, Jefes de Seguridad, Comités de H&S."
   },
   {
     "id": 2,
     "title": "Higiene Ocupacional",
-    "description": "Capacitamos al personal en la identificación de peligros, evaluación de exposiciones y control de agentes físicos, químicos y biológicos que afectan el entorno laboral. Aplicamos metodologías adaptadas a cada sector productivo."
+    "description": "Capacitamos al personal en la identificación de peligros, evaluación de exposiciones y control de agentes físicos, químicos y biológicos que afectan el entorno laboral. Aplicamos metodologías adaptadas a cada sector productivo.",
+    "duration": "8 Horas",
+    "objective": "Capacitar al personal en la <strong>evaluación y control</strong> de <strong>agentes de riesgo ambiental</strong>.",
+    "modality": "Presencial",
+    "audience": "Técnicos de H&S, Jefes de Mantenimiento, Supervisores Operativos."
   },
   {
     "id": 3,
     "title": "Prevención de Riesgos Laborales",
-    "description": "Diseñamos estrategias integrales para identificar peligros, evaluar riesgos y establecer controles efectivos y matriz IPER. Desde diagnósticos hasta planes de acción, fortalecemos la cultura preventiva en tu organización."
+    "description": "Diseñamos estrategias integrales para Identificar Peligros, Evaluar Riesgos y Establecer Controles Efectivos y Matriz IPER.",
+    "duration": "8 Horas",
+    "objective": "Fortalecer la <strong>identificación de peligros y la evaluación de riesgos</strong> para minimizar accidentes.",
+    "modality": "Presencial",
+    "audience": "Supervisores, Jefes de Producción, Personal Clave de H&S."
   },
   {
     "id": 4,
     "title": "Prevención de Riesgos Químicos y Biológicos",
-    "description": "Brindamos formación técnica sobre el manejo seguro de sustancias peligrosas, incluyendo etiquetado SGA, almacenamiento, Hojas de Seguridad, rutas de exposición y protocolos ante accidentes."
+    "description": "Brindamos formación técnica sobre el manejo seguro de sustancias peligrosas, incluyendo etiquetado SGA, almacenamiento, Hojas de Seguridad, rutas de exposición y protocolos ante accidentes.",
+    "duration": "6 Horas",
+    "objective": "Gestionar el <strong>manejo seguro de las sustancias quimicas peligrosas</strong>.",
+    "modality": "Presencial",
+    "audience": "Encargados de Bodega, Personal Operativo, Personal de Mantenimiento."
   },
   {
     "id": 5,
     "title": "Prevención de Riesgos Ergonómicos y Psicosociales",
-    "description": "Capacitamos en la identificación de factores ergonómicos (posturas, movimientos repetitivos, carga física) y psicosociales (estrés, acoso, clima organizacional) que afectan el desarrollo laboral."
+    "description": "Capacitamos en la identificación de factores ergonómicos (posturas, movimientos repetitivos, carga física) y psicosociales (estrés, clima organizacional) que afectan el desarrollo laboral.",
+    "duration": "4 Horas",
+    "objective": "Identificar los <strong>factores de riesgo ergonómico y psicosocial</strong> para mejorar el desempeño laboral.",
+    "modality": "Presencia o Virtual",
+    "audience": "Jefes de Área, RRHH, Personal Administrativo, Supervisores."
   },
   {
     "id": 6,
     "title": "Brigadas de Emergencia",
-    "description": "Fortalecemos las capacidades de las brigadas en primeros auxilios, evaluación, incendio y respuesta ante desastres naturales o tecnológicos."
+    "description": "Fortalecer las capacidades de respuestas de las brigadas de emergencias de primeros auxilios, evacuación y control de incendios para una respuesta efectiva.",
+    "duration": "8 Horas",
+    "objective": "Certificar a las brigadas de emergencia para una respuesta óptima.",
+    "modality": "Presencial (Alta Práctica)",
+    "audience": "Miembros de Brigadas, Jefes de Seguridad, Coordinadores de Emergencia."
   },
   {
     "id": 7,
     "title": "Primeros Auxilios",
-    "description": "Ofrecemos cursos teórico - prácticos en primeros auxilios, dirigidos a personal operativo, brigadas y personal de seguridad. Atención de heridas, reanimación y manejo de fracturas."
+    "description": "Ofrecemos cursos teórico - prácticos en primeros auxilios, dirigidos a personal operativo, brigadas y personal de seguridad. Atención de heridas, reanimación y manejo de fracturas.",
+    "duration": "8 Horas",
+    "objective": "Capacitar al personal involucrado en la <strong>gestion de primeros auxilios</strong> de forma eficiente.",
+    "modality": "Presencial (Énfasis Práctico)",
+    "audience": "Todo el Personal, Brigadas de Emergencia, Personal Operativo."
   },
   {
     "id": 8,
     "title": "Protección Respiratoria",
-    "description": "Capacitamos en la selección, uso y mantenimiento de equipos de protección respiratoria (EPR) según el tipo de contaminante, normas técnicas y condiciones laborales."
+    "description": "Capacitamos en la selección, uso y chequeos de los Equipos de Protección Respiratorios (EPR) según el tipo de contaminante y condiciones laborales.",
+    "duration": "4 Horas",
+    "objective": "Realizar la correcta <strong>selección, uso y chequeo de los Equipos de Protección Respiratorios (EPR)</strong>.",
+    "modality": "Presencial",
+    "audience": "Personal expuesto a contaminantes respiratorios."
   }
 ]

@@ -13,9 +13,9 @@
   --color-primary: #0C2E4A;
   --color-accent: #e67300;
   --color-accent-dark: #ce6700;
-  --accent-rgba: rgba(230, 115, 0, 0.6);
+  --color-accent-rgba: rgba(230, 115, 0, 0.6);
   /* #e67300 */
-  --accent-dark-rgba: rgba(206, 103, 0, 0.8);
+  --color-accent-dark-rgba: rgba(206, 103, 0, 0.8);
   /* #ce6700 */
   --font-heading: 'Montserrat', sans-serif;
   --font-body: 'Roboto', sans-serif;
@@ -433,7 +433,6 @@ nav ul.mainmenu>li>a:hover {
 
   .submenu_training {
     position: relative;
-    /* para que el dropdown se posicione respecto a este */
     overflow: visible;
   }
 
@@ -740,6 +739,10 @@ nav ul.mainmenu>li>a:hover {
     padding-left: 2rem;
   }
 
+  /*  ======================
+    Benefits right side moved to center CSS
+    ====================== */
+
   .procedures_service_benefits {
     display: flex;
     flex-direction: column;
@@ -800,6 +803,10 @@ nav ul.mainmenu>li>a:hover {
   gap: 2rem;
 }
 
+/*  ======================
+    Main consulting title CSS
+    ====================== */
+
 .consulting_title {
   display: flex;
   flex-direction: column;
@@ -809,7 +816,6 @@ nav ul.mainmenu>li>a:hover {
   padding-bottom: 4rem;
 }
 
-/* Título y descripción */
 .consulting_title h2 {
   font-family: var(--font-heading);
   font-size: 2rem;
@@ -824,7 +830,10 @@ nav ul.mainmenu>li>a:hover {
   color: var(--color-dark);
 }
 
-/* Contenedor de tarjetas */
+/*  ======================
+    Card container CSS
+    ====================== */
+
 .cards_section {
   display: flex;
   flex-direction: row;
@@ -836,7 +845,10 @@ nav ul.mainmenu>li>a:hover {
   box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.4);
 }
 
-/* Tarjeta principal */
+/*  ======================
+    Main card CSS
+    ====================== */
+
 .main_card {
   background-color: var(--color-bg);
   padding: 0;
@@ -916,7 +928,9 @@ nav ul.mainmenu>li>a:hover {
   background-color: var(--color-accent-dark);
 }
 
-/* Imagen principal */
+/*  ======================
+    Main card Figure CSS
+    ====================== */
 
 .main_card figure {
   width: 100%;
@@ -935,7 +949,10 @@ nav ul.mainmenu>li>a:hover {
   display: block;
 }
 
-/* Tarjetas secundarias dinámicas */
+/*  ======================
+    Secondary cards CSS
+    ====================== */
+
 .secondary_cards_section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1rem));
@@ -972,7 +989,10 @@ nav ul.mainmenu>li>a:hover {
   background-color: var(--color-accent-dark);
 }
 
-/* Tarjeta secundaria */
+/*  ======================
+    Single secondary card CSS
+    ====================== */
+
 .secondary_card {
   display: flex;
   flex-direction: column;
@@ -1006,7 +1026,9 @@ nav ul.mainmenu>li>a:hover {
   gap: 0.5rem;
 }
 
-/* Imagen secundaria */
+/*  ======================
+    Single secondary card img CSS
+    ====================== */
 
 .secondary_card figure {
   width: 100%;
@@ -1039,19 +1061,6 @@ nav ul.mainmenu>li>a:hover {
   animation: trophyGlow 1.2s infinite ease-in-out;
 }
 
-@keyframes trophyGlow {
-  0% {
-    box-shadow: 0 0 12px var(--accent-rgba);
-  }
-
-  50% {
-    box-shadow: 0 0 24px var(--accent-dark-rgba);
-  }
-
-  100% {
-    box-shadow: 0 0 12px var(--accent-rgba);
-  }
-}
 
 
 .secondary_card h3 {
@@ -1093,6 +1102,28 @@ nav ul.mainmenu>li>a:hover {
   background-color: var(--color-accent-dark);
 }
 
+/*  ======================
+    Animation when main card is active and secondary card is selected CSS
+    ====================== */
+
+@keyframes trophyGlow {
+  0% {
+    box-shadow: 0 0 12px var(--color-accent-rgba);
+  }
+
+  50% {
+    box-shadow: 0 0 24px var(--color-accent-dark-rgba);
+  }
+
+  100% {
+    box-shadow: 0 0 12px var(--color-accent-rgba);
+  }
+}
+
+/*  ======================
+    Phone responsive CSS
+    ====================== */
+
 @media (max-width: 768px) {
   .consulting_section {
     padding: 2rem 1rem;
@@ -1113,6 +1144,10 @@ nav ul.mainmenu>li>a:hover {
     max-height: none;
   }
 
+  /*  ======================
+    Main title section CSS
+    ====================== */
+
   .consulting_title h2 {
     width: 100%;
     text-align: center;
@@ -1125,6 +1160,10 @@ nav ul.mainmenu>li>a:hover {
     margin: 0;
     padding: 0.5rem 0;
   }
+
+  /*  ======================
+    Cards CSS: this section changes the layout to a horizontal scroll for secondary cards and turn off main card because every secondary card will show its info description on mobile
+    ====================== */
 
   .cards_section {
     flex-direction: column;
@@ -1159,6 +1198,10 @@ nav ul.mainmenu>li>a:hover {
     background-color: var(--color-accent);
     border-radius: 4px;
   }
+
+  /*  ======================
+    Single secondary card CSS
+    ====================== */
 
   .secondary_card {
     width: 100%;
@@ -1218,6 +1261,7 @@ nav ul.mainmenu>li>a:hover {
   align-items: flex-start;
   flex: 1 1 300px;
   max-width: 400px;
+  height: 417px;
   background: var(--color-bg);
   border-radius: 12px;
   padding: 1rem;
@@ -1243,7 +1287,7 @@ nav ul.mainmenu>li>a:hover {
   align-items: center;
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 200px;
+  max-height: 315px;
   scroll-behavior: smooth;
   background-color: var(--color-bg);
   border-radius: 8px;
@@ -1304,22 +1348,54 @@ nav ul.mainmenu>li>a:hover {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
   padding: 2rem;
   transition: box-shadow 0.3s ease;
+  height: 385px;
 }
 
 .training_text_description p {
   font-size: 1rem;
-  margin-bottom: 1rem;
+  justify-self: flex-start;
+  padding-left: 0;
   color: #333;
 }
 
-.training_text_description aside {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  color: #666;
+.fadde-out {
+  display: none;
 }
 
-.training_text_description i {
+.fadde-in  {
+  display: grid;
+  grid-template-columns: 2.5rem auto;
+  grid-template-rows: repeat(3, 3rem);
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+#training_objective{
+  margin: 0 ;
+  padding-top: 0;
+  align-self: flex-start;
+}
+
+.training_text_focuspoint i {
   color: var(--color-accent-dark);
+  align-self: center;
+  font-size: 2rem;
+}
+
+/*  ======================
+    Phone responsive CSS
+    ====================== */
+
+@media (max-width: 768px){
+  .training_text_description {
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .training_text_focuspoint{
+    display: grid;
+    grid-template-rows: 6rem auto auto;
+  }
 }
