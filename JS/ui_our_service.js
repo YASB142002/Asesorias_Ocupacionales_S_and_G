@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Responsive button text in navbar in mobile view  
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //                                                                                    THIS SECTION WILL BE DELETED IN FUTURE VERSIONS
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   // const ajustTextButton = () => {
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ajustTextButton();
   // window.addEventListener("resize", ajustTextButton);
 
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //                                                                                    THIS SECTION WILL BE DELETED IN FUTURE VERSIONS
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -122,6 +122,10 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".secondary_card").forEach(card => {
           card.classList.remove("active_card");
           card.style.transform = "";
+          const cardPElement = card.querySelector("p")
+          if (cardPElement) {
+            cardPElement.textContent = consultData.find(c => c.id === parseInt(card.getAttribute("data-id").split("_")[1])).short_description;
+          }
           card.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
           mainCard.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
         });
@@ -153,12 +157,21 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const selectedCard = e.target.closest(".secondary_card");
+      let lastSelectedCard = null;
+
       if (isMobile) {
-        cleanSelectedCard();
         document.addEventListener("mousedown", (e) => {
-          const clickedInsideSelectedCard = selectedCard.contains(e.target);
-          if (!clickedInsideSelectedCard) {
-            cleanSelectedCard();
+          if (!selectedCard.contains(e.target)) {
+            if (lastSelectedCard) {
+              lastSelectedCard.classList.add("secondary_fade_out");
+              setTimeout(() => {
+                lastSelectedCard.classList.remove("active_card");
+                lastSelectedCard.querySelector('p').textContent = consultData.find(c => c.id === parseInt(lastSelectedCard.getAttribute("data-id").split("_")[1])).short_description;
+                lastSelectedCard.classList.remove("secondary_fade_out");
+                lastSelectedCard = null;
+                cleanSelectedCard();
+              }, 300);
+            }
             return;
           }
         });
@@ -168,6 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
           selectedCard.querySelector('p').textContent = consult.big_description;
           selectedCard.classList.remove("secondary_fade_out");
         }, 300);
+        lastSelectedCard = selectedCard;
         return;
       } else {
         //This is for clean every selected status
@@ -209,34 +223,76 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Event delegation for training courses in training section to know which course the user was clicked
-  document.addEventListener("click", e => {
-    if (e.target.parentElement.classList.contains("training_cylinder")) {
-      const id = parseInt(e.target.dataset.id.split("_")[1]);
-      const course = trainingData.find(searchedCourse => searchedCourse.id === id);
-      const focusPointContainer = document.querySelector(".training_text_focuspoint");
-      
-      
-      // Update main title and description of training_text_focuspoint, still missing the objetives, the way how course will be imparted and how will be focused to train, this will be added in future versions
-      const trainingDescriptionTitle = document.querySelector(".training_text_description h2");
-      const trainingDescription = document.querySelector(".training_text_description p");
-      const trainingObjective = document.getElementById("training_objective");
-      const trainingModality = document.getElementById("training_modality");
-      const trainingAudience = document.getElementById("training_audience");
+  const container = document.querySelector('.training_cylinder');
+  const descriptionBox = document.querySelector('.training_text_description');
+  const descriptionTitle = descriptionBox.querySelector('h2');
+  const descriptionParagraph = descriptionBox.querySelector('p');
+  const focusPoint = document.getElementById('training_text_focuspoint');
 
-      trainingDescriptionTitle.textContent = course.title;
-      trainingDescription.textContent = course.description;
-      trainingObjective.innerHTML = course.objective; //This line will update the objective section with the data from the JSON file is good idea add a validation to check if the objetive exist in the JSON file
-      trainingModality.textContent = course.modality;
-      trainingAudience.textContent = course.audience;
+  function applyDescriptionFaddeOut(...documentElement) {
+    documentElement.forEach(el => {
+      el.classList.remove('fadde-in');
+      el.classList.add('fadde-out');
+    });
+  }
+  function applyDescriptionFaddeIn(...documentElement) {
+    documentElement.forEach(el => {
+      el.classList.remove('fadde-out');
+      el.classList.add('fadde-in');
+    });
+  }
 
-      // Fade-in effect for focus points
-      focusPointContainer.classList.add("fadde-in");
+  document.addEventListener('click', e => {
+    const clicked = e.target;
+
+    // Verifica si el clic fue en un <p> dentro del cilindro
+    if (container.contains(clicked) && clicked.tagName === 'P') {
+      const id = parseInt(clicked.dataset.id?.split("_")[1]);
+      const course = trainingData.find(c => c.id === id);
+      if (!course) return;
+
+
+      setTimeout(() => {
+        // Fade out
+        applyDescriptionFaddeOut(descriptionTitle, descriptionParagraph, focusPoint);
+        // Actualiza contenido
+        document.querySelector(".training_text_description h2").textContent = course.title;
+        document.querySelector(".training_text_description p").textContent = course.description;
+        document.getElementById("training_objective").innerHTML = course.objective;
+        document.getElementById("training_modality").textContent = course.modality;
+        document.getElementById("training_audience").textContent = course.audience;
+
+        // Fadde in
+        applyDescriptionFaddeIn(descriptionTitle, descriptionParagraph, focusPoint);
+      }, 500);
+
+      // Estado visual activo
+      container.querySelectorAll('p').forEach(el => el.classList.remove('active'));
+      clicked.classList.add('active');
+
+      e.stopPropagation();
     }
   });
 
+  // Clic fuera del cilindro
+  document.addEventListener('click', e => {
+    if (!container.contains(e.target)) {
+      container.querySelectorAll('p').forEach(el => el.classList.remove('active'));
 
+      setTimeout(() => {
+        // Fadde out
+        applyDescriptionFaddeOut(descriptionTitle, descriptionParagraph, focusPoint);
+        //Default content
+        document.querySelector(".training_text_description h2").textContent = "Descubra el Valor de la Prevención Especializada";
+        document.querySelector(".training_text_description p").textContent = "Seleccione una de nuestras Capacitaciones Técnicas en el menú para conocer el enfoque y los beneficios específicos que aportará a la protección de su personal y al cumplimiento legal de su empresa. Todos nuestros programas están diseñados para ser aplicables de inmediato en su entorno laboral.";
+        document.getElementById("training_objective").innerHTML = "Objetivos del curso";
+        document.getElementById("training_modality").textContent = "Modalidad";
+        document.getElementById("training_audience").textContent = "Público objetivo";
 
-
+        // Fadde in
+        applyDescriptionFaddeIn(descriptionTitle, descriptionParagraph);
+      }, 400);
+    }
+  });
 
 });
