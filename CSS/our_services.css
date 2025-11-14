@@ -1514,7 +1514,9 @@ nav ul.mainmenu>li>a:hover {
   font-family: var(--font-heading);
   justify-self: center;
 }
-.manual_development_header_text h2, .manual_development_header_text p {
+
+.manual_development_header_text h2,
+.manual_development_header_text p {
   transition: opacity 0.4s ease-in-out;
   opacity: 1;
 }
@@ -1673,6 +1675,7 @@ nav ul.mainmenu>li>a:hover {
     gap: auto;
     margin-inline: 1rem;
   }
+
   .manual_development_header {
     margin-block: 1rem;
     padding: 1rem;
@@ -1680,7 +1683,525 @@ nav ul.mainmenu>li>a:hover {
     max-height: 400px;
     height: auto;
   }
+
   .manual_development_description_container {
     justify-content: flex-start !important;
   }
 }
+
+/*======================================================
+   END SECTION #6: manual_development_section CSS
+   ====================================================== */
+
+/*======================================================
+   SECTION #7: SGA_section CSS
+   ====================================================== */
+
+.SGA_section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8rem 10rem;
+  background-color: var(--color-bg);
+  gap: 2rem;
+  flex-wrap: wrap;
+  /* Responsive fallback */
+}
+
+.sga_text_content {
+  flex: 1;
+  min-width: 280px;
+  max-width: 600px;
+  font-family: var(--font-body);
+}
+
+.sga_text_content h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-heading);
+}
+
+.sga_text_content h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 1rem;
+  font-family: var(--font-heading);
+}
+
+.sga_text_content p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-dark);
+  font-family: var(--font-body);
+}
+
+.sga_image {
+  flex: 1;
+  min-width: 280px;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sga_image img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  background-color: var(--color-light);
+  transition: var(--transition-fast);
+}
+
+@media (max-width: 768px) {
+  .SGA_section {
+    flex-direction: column;
+    text-align: center;
+    padding: 6rem 2rem;
+  }
+
+  .sga_text_content h2 {
+    font-size: 1.6rem;
+  }
+
+  .sga_image img {
+    max-width: 100%;
+  }
+}
+
+
+
+/*======================================================
+   END SECTION #7: SGA_section CSS
+   ====================================================== */
+
+/*======================================================
+   SECTION #8: Cta_section CSS
+   ====================================================== */
+
+
+.Cta_section {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  gap: 0.2rem;
+  padding: 8rem 0rem;
+  color: var(--color-light);
+  display: flex;
+  justify-content: center;
+}
+
+.cta_content {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  background-image: url("/ASSETS/IMG/img_no_found.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding: 4rem;
+  border-radius: 8px;
+  max-width: 90%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta_content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.cta_content>* {
+  position: relative;
+  z-index: 1;
+}
+
+.cta_header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: transparent;
+  padding-right: 4rem;
+  height: auto;
+  justify-content: center;
+}
+
+/*  ======================
+    CTA title and content CSS
+    ====================== */
+
+.cta_title {
+  font-size: 2.2rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-light);
+  margin-bottom: 0.5rem;
+}
+
+.cta_description {
+  font-size: 1.2rem;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: var(--color-light);
+}
+
+/*  ======================
+    CTA buttons CSS
+    ====================== */
+
+.cta_buttons {
+  display: flex;
+  gap: 3rem;
+  flex-direction: row;
+  align-items: center;
+}
+
+.btn_schedule,
+.btn_questions {
+  font-size: 1rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+  display: inline-block;
+  text-align: center;
+  width: 220px;
+  height: 48px;
+  padding: 0;
+  line-height: 48px;
+}
+
+.btn_schedule {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.btn_schedule:hover {
+  background-color: #e66c00;
+  color: var(--color-light);
+}
+
+.btn_questions {
+  background-color: transparent;
+  border: 2px solid var(--color-light);
+  color: var(--color-light);
+}
+
+.btn_questions:hover {
+  background-color: var(--color-light);
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .Cta_section {
+    padding: 4rem 1rem;
+    display: flex;
+    flex-direction: column;
+    max-height: none;
+    height: auto;
+  }
+
+  .cta_content {
+    display: flex;
+    flex-direction: column;
+    max-height: none;
+    height: auto;
+    padding: 2rem;
+    gap: 4rem;
+    text-align: center;
+    width: 100%;
+    max-width: none;
+  }
+
+  .cta_header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 0;
+    flex-wrap: unset;
+  }
+
+  .cta_title {
+    font-size: 1.8rem;
+  }
+
+  .cta_description {
+    font-size: 1rem;
+  }
+
+  .cta_buttons {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+  }
+
+  .btn_schedule,
+  .btn_questions {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+/*======================================================
+   END SECTION #8: Cta_section CSS
+   ====================================================== */
+
+/*======================================================
+   Footer CSS
+   ====================================================== */
+#site_footer {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  font-family: var(--font-body);
+  border-top: none;
+  position: relative;
+}
+
+#site_footer::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-accent);
+  margin-bottom: 2rem;
+}
+
+.main_footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* ======================
+   Logo CSS
+====================== */
+
+.footer_logo {
+  flex: 1 1 120px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0%;
+  padding: 0%;
+  gap: 0.5rem;
+  max-width: 150px;
+}
+
+.footer_logo img {
+  height: 110px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 4rem;
+}
+
+/* ======================
+   Contact info CSS
+====================== */
+
+.footer_info {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.95rem;
+}
+
+.footer_info p {
+  margin: 0.2rem 0;
+  line-height: 1.4;
+}
+
+.footer_info a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.footer_info a:hover {
+  text-decoration: underline;
+}
+
+/* ======================
+   Social media CSS
+====================== */
+
+.footer_navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 10rem;
+  height: auto;
+  padding-right: 2rem;
+}
+
+.footer_social {
+  flex: 1 1 160px;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
+
+}
+
+.footer_social a {
+  color: white;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.footer_social a:hover {
+  color: var(--color-accent);
+}
+
+/* ======================
+   Links CSS
+====================== */
+.footer_links {
+  flex: 1 1 160px;
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  margin-top: 1rem;
+}
+
+.footer_links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.footer_links a:hover {
+  color: var(--color-accent);
+}
+
+.footer_logo,
+.footer_info,
+.footer_social,
+.footer_links {
+  flex: 1 1 200px;
+}
+
+.footer_legal {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #c0c0c0;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+
+  #site_footer {
+    display: block;
+    width: 100%;
+    max-width: 768px;
+    box-sizing: border-box;
+    padding: 3rem 1rem;
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .main_footer {
+    flex: unset;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    gap: 0.5rem;
+  }
+
+  .footer_logo,
+  .footer_info,
+  .footer_social,
+  .footer_links {
+    flex: none;
+    max-width: 100%;
+    align-items: flex-start;
+    text-align: center;
+  }
+
+  .footer_logo {
+    padding: 0;
+    max-width: 120px;
+  }
+
+  .footer_logo img {
+    height: 120px;
+    border-radius: 3rem;
+  }
+
+  .footer_info {
+    font-size: 0.9rem;
+    flex-direction: column;
+  }
+
+  .footer_navigation {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .footer_navigation>* {
+    display: block;
+    min-height: 1rem;
+    flex-shrink: 0;
+    position: relative;
+    float: none;
+
+  }
+
+  .footer_social {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .footer_social a {
+    font-weight: 400px;
+  }
+
+  .footer_links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .footer_links a {
+    font-size: 1rem;
+  }
+
+  .footer_legal {
+    height: 20rem;
+    display: block;
+    width: 100%;
+    font-size: 0.8rem;
+    margin-top: 1.5rem;
+  }
+}
+
+/* ======================================================
+   END Footer CSS
+   ====================================================== */
