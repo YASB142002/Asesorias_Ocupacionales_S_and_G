@@ -22,9 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     toggle.setAttribute("aria-expanded", nav.classList.contains("expanded") ? "true" : "false");
   });
 
-
-
-
   function handleToggle(toggleButton, dropdownElement) {
     toggleButton.addEventListener("click", (e) => {
       e.preventDefault();
@@ -38,20 +35,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Global click handler -> this will close menus in navbar (mobile view) when clicking outside
   document.addEventListener("mousedown", (e) => {
-    const clickedInsideNav = nav.contains(e.target);
-    const clickedServiceToggle = toggleServices.contains(e.target);
-    const clickedTrainingToggle = toggleTraining.contains(e.target);
-    const clickedMenuToggle = toggle.contains(e.target);
+    const { target } = e;
 
-    const clickedInsideAnyToggle = clickedMenuToggle || clickedServiceToggle || clickedTrainingToggle;
+    // Clicks on toggles are handled by their own listeners, so we ignore them here.
+    if (toggle.contains(target) || toggleServices.contains(target) || toggleTraining.contains(target)) {
+      return;
+    }
 
-    if (clickedInsideNav && !clickedInsideAnyToggle) {
-      // Clicked on menu items like "Inicio", "Nosotros", etc.
+    // If the click is outside the navigation area, close everything.
+    if (!nav.contains(target)) {
+      nav.classList.remove("expanded");
+      toggle.setAttribute("aria-expanded", "false");
       dropdownServices.classList.remove("expanded");
       dropdownTraining.classList.remove("expanded");
-    } else if (!clickedInsideNav && !clickedInsideAnyToggle) {
-      // Clicked outside everything
-      nav.classList.remove("expanded");
+      return;
+    }
+
+    // If the click is inside the nav, but not within an open dropdown, close the dropdowns.
+    // This allows clicks on other nav items to close the submenus.
+    if (!dropdownServices.contains(target) && !dropdownTraining.contains(target)) {
       dropdownServices.classList.remove("expanded");
       dropdownTraining.classList.remove("expanded");
     }
@@ -62,10 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
   //    This handle the consult funtionality
   //===========================================================================================================================================================================================================================================
 
-
-  //This part is to load the consulting_section information (main and secondary cards) 
-
+  //This part is to load the consulting_section information (main and secondary cards)
   let consultData = []; //This array will store the data loaded from the JSON file
+  let lastSelectedCard = null; // Keep track of the active card across clicks
 
   async function loadAndRenderConsults() {
     try {
@@ -108,100 +109,183 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  loadAndRenderConsults();
+  /**
+   * Resets all secondary cards to their default appearance.
+   * Applies a fade effect on mobile view.
+   */
+  function cleanSelectedCard() {
+    const mainCard = document.querySelector(".main_card");
+    const isMobile = window.innerWidth < 932;
 
-
-  // Event delegation for secondary cards in consulting section
-
-  document.addEventListener("click", e => {
-    if (e.target.classList.contains("btn_moreInfo")) {
-      if (e.target.dataset.type !== "consult") return; // Only handle consult buttons
-
-      const id = parseInt(e.target.dataset.id); //This line extract the id selected for the user in the frontend
-      const consult = consultData.find(searchedConsult => searchedConsult.id === id); //This line consult that id if exist in the main consult array
-      const mainCard = document.querySelector(".main_card");
-
-
-      const isMobile = window.innerWidth < 932;
-
-      //This function will clean every selected card style
-      function cleanSelectedCard() { //Need to add the event when user click outside the card to clean the selected status and return main card to default
-        document.querySelectorAll(".secondary_card").forEach(card => {
-          card.classList.remove("active_card");
-          card.style.transform = "";
-          const cardPElement = card.querySelector("p")
-          if (cardPElement) {
-            cardPElement.textContent = consultData.find(c => c.id === parseInt(card.getAttribute("data-id").split("_")[1])).short_description;
-          }
-          card.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
-          mainCard.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
-        });
-      }
-
-      function applyStyleSecondaryCard(selectedCard) {
-        selectedCard.classList.add("active_card");
-        selectedCard.style.transform = "translateY(-4px)";
-        selectedCard.style.boxShadow = "0 0 12px var(--color-accent-dark)";
-      }
-
-      const mainTextContainer = mainCard.querySelector(".main_card_text");
-      const mainTitle = mainTextContainer.querySelector("h3");
-      const mainText = mainTextContainer.querySelector("p");
-
-      function updateMainCardContent(title, description) {
-        // Apply fade-out
-        mainTextContainer.classList.add("fade_out");
-
-        setTimeout(() => {
-          //Update content while maincard text is out
-          mainTitle.textContent = title;
-          mainText.textContent = description;
-          mainCard.style.boxShadow = "0 0 12px var(--color-accent-dark)";
-          // remove fade-out to show up main card text
-          mainTextContainer.classList.remove("fade_out");
-          mainCard.classList.add("active_main_card");
-        }, 300);
-      }
-
-      const selectedCard = e.target.closest(".secondary_card");
-      let lastSelectedCard = null;
+    document.querySelectorAll(".secondary_card.active_card").forEach(card => {
+      const cardPElement = card.querySelector("p");
+      const consultId = parseInt(card.getAttribute("data-id").split("_")[1]);
+      const originalConsult = consultData.find(c => c.id === consultId);
 
       if (isMobile) {
-        document.addEventListener("mousedown", (e) => {
-          if (!selectedCard.contains(e.target)) {
-            if (lastSelectedCard) {
-              lastSelectedCard.classList.add("secondary_fade_out");
-              setTimeout(() => {
-                lastSelectedCard.classList.remove("active_card");
-                lastSelectedCard.querySelector('p').textContent = consultData.find(c => c.id === parseInt(lastSelectedCard.getAttribute("data-id").split("_")[1])).short_description;
-                lastSelectedCard.classList.remove("secondary_fade_out");
-                lastSelectedCard = null;
-                cleanSelectedCard();
-              }, 300);
-            }
-            return;
-          }
-        });
-        applyStyleSecondaryCard(selectedCard);
-        selectedCard.classList.add("secondary_fade_out");
+        // Animate for mobile
+        card.classList.add("secondary_fade_out");
         setTimeout(() => {
-          selectedCard.querySelector('p').textContent = consult.big_description;
-          selectedCard.classList.remove("secondary_fade_out");
+          card.classList.remove("active_card");
+          card.style.transform = "";
+          card.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
+          if (cardPElement && originalConsult) {
+            cardPElement.textContent = originalConsult.short_description;
+          }
+          card.classList.remove("secondary_fade_out");
         }, 300);
-        lastSelectedCard = selectedCard;
-        return;
       } else {
-        //This is for clean every selected status
-        cleanSelectedCard();
-        //This is to change and select the currect secondary card
-        applyStyleSecondaryCard(selectedCard);
-
-        //This is to change text in main card
-        updateMainCardContent(consult.title, consult.big_description);
+        // No animation for desktop
+        card.classList.remove("active_card");
+        card.style.transform = "";
+        card.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
+        if (cardPElement && originalConsult) {
+          cardPElement.textContent = originalConsult.short_description;
+        }
       }
+    });
+
+    if (mainCard) {
+      mainCard.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
+      mainCard.classList.remove("active_main_card");
+    }
+    lastSelectedCard = null;
+  }
+
+  /**
+   * Applies active styling to a selected card.
+   * @param {HTMLElement} selectedCard The card to style.
+   */
+  function applyStyleSecondaryCard(selectedCard) {
+    selectedCard.classList.add("active_card");
+    selectedCard.style.transform = "translateY(-4px)";
+    selectedCard.style.boxShadow = "0 0 12px var(--color-accent-dark)";
+  }
+
+  /**
+   * Updates the main card's content with a fade effect.
+   * @param {string} title The new title.
+   * @param {string} description The new description.
+   */
+  function updateMainCardContent(title, description) {
+    const mainCard = document.querySelector(".main_card");
+    if (!mainCard) return;
+
+    const mainTextContainer = mainCard.querySelector(".main_card_text");
+    const mainTitle = mainTextContainer.querySelector("h3");
+    const mainText = mainTextContainer.querySelector("p");
+
+    mainTextContainer.classList.add("fade_out");
+
+    setTimeout(() => {
+      mainTitle.textContent = title;
+      mainText.textContent = description;
+      mainCard.style.boxShadow = "0 0 12px var(--color-accent-dark)";
+      mainTextContainer.classList.remove("fade_out");
+      mainCard.classList.add("active_main_card");
+    }, 300);
+  }
+
+  /**
+   * Resets the main card to its default content.
+   */
+  function resetMainCardToDefault() {
+    const mainCard = document.querySelector(".main_card");
+    if (!mainCard || !mainCard.classList.contains("active_main_card")) return;
+
+    const mainTextContainer = mainCard.querySelector(".main_card_text");
+    const mainTitle = mainTextContainer.querySelector("h3");
+    const mainText = mainTextContainer.querySelector("p");
+
+    mainTextContainer.classList.add("fade_out");
+
+    setTimeout(() => {
+      mainTitle.textContent = "Selecciona una consultoría"; // Default text
+      mainText.textContent = "Haz clic en 'Detalles' para ver la información completa aquí."; // Default text
+      mainCard.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
+      mainTextContainer.classList.remove("fade_out");
+      mainCard.classList.remove("active_main_card");
+    }, 300);
+  }
+
+  /**
+   * Handles card clicks on mobile: toggles description in-place with animation.
+   * @param {HTMLElement} selectedCard The clicked card.
+   * @param {object} consult The corresponding consult data.
+   */
+  function handleMobileCardClick(selectedCard, consult) {
+    const isAlreadyActive = selectedCard.classList.contains("active_card");
+
+    // Clean up any other active card first
+    if (lastSelectedCard && lastSelectedCard !== selectedCard) {
+      cleanSelectedCard();
+    }
+
+    if (isAlreadyActive) {
+      // Deactivate the card
+      cleanSelectedCard();
+    } else {
+      // Activate the new card
+      const cardPElement = selectedCard.querySelector("p");
+      // Add fade out class to apply animation
+      selectedCard.classList.add("secondary_fade_out");
+
+      setTimeout(() => {
+        applyStyleSecondaryCard(selectedCard);
+        cardPElement.textContent = consult.big_description;
+        // Remove fade out class after animation to show new content
+        selectedCard.classList.remove("secondary_fade_out");
+        lastSelectedCard = selectedCard;
+      }, 300);
+    }
+  }
+
+  /**
+   * Handles card clicks on desktop: updates the main card.
+   * @param {HTMLElement} selectedCard The clicked card.
+   * @param {object} consult The corresponding consult data.
+   */
+  function handleDesktopCardClick(selectedCard, consult) {
+    // If the same card is clicked again, do nothing.
+    if (lastSelectedCard === selectedCard) return;
+
+    cleanSelectedCard();
+    applyStyleSecondaryCard(selectedCard);
+    updateMainCardContent(consult.title, consult.big_description);
+    lastSelectedCard = selectedCard;
+  }
+
+  // --- EVENT LISTENERS ---
+
+  // Load consults when the page is ready
+  loadAndRenderConsults();
+
+  // Main event listener for "Detalles" button clicks
+  document.addEventListener("click", e => {
+    if (!e.target.matches(".btn_moreInfo[data-type='consult']")) return;
+
+    const selectedCard = e.target.closest(".secondary_card");
+    const id = parseInt(e.target.dataset.id);
+    const consult = consultData.find(c => c.id === id);
+
+    if (!consult || !selectedCard) return;
+
+    const isMobile = window.innerWidth < 932;
+    if (isMobile) {
+      handleMobileCardClick(selectedCard, consult);
+    } else {
+      handleDesktopCardClick(selectedCard, consult);
     }
   });
 
+  // Listener for clicks outside the cards to reset the view
+  document.addEventListener("mousedown", e => {
+    // If a card is selected and the click is outside of any secondary card
+    if (lastSelectedCard && !e.target.closest(".secondary_card")) {
+      cleanSelectedCard();
+      resetMainCardToDefault();
+    }
+  });
 
   //===========================================================================================================================================================================================================================================
   //    This handle the training funtionality
