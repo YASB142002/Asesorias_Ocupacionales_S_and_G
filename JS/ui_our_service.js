@@ -200,8 +200,8 @@ document.addEventListener("DOMContentLoaded", () => {
     mainTextContainer.classList.add("fade_out");
 
     setTimeout(() => {
-      mainTitle.textContent = "Selecciona una consultoría"; // Default text
-      mainText.textContent = "Haz clic en 'Detalles' para ver la información completa aquí."; // Default text
+      mainTitle.textContent = "Continuidad Operativa Garantizada"; // Default text
+      mainText.textContent = "Evaluación proactiva y diseño de sistemas que aseguran la respuesta inmediata y la protección total ante cualquier crisis"; // Default text
       mainCard.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
       mainTextContainer.classList.remove("fade_out");
       mainCard.classList.remove("active_main_card");
@@ -260,6 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Load consults when the page is ready
   loadAndRenderConsults();
 
+
   // Main event listener for "Detalles" button clicks
   document.addEventListener("click", e => {
     if (!e.target.matches(".btn_moreInfo[data-type='consult']")) return;
@@ -282,8 +283,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("mousedown", e => {
     // If a card is selected and the click is outside of any secondary card
     if (lastSelectedCard && !e.target.closest(".secondary_card")) {
+      resetMainCardToDefault(); // Reset main card first to allow animation
       cleanSelectedCard();
-      resetMainCardToDefault();
     }
   });
 
@@ -296,20 +297,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let trainingData = [];
 
-  fetch("../ASSETS/DATA/training.json")
-    .then(res => res.json())
-    .then(data => {
+  async function loadAndRenderTraining() {
+    try {
+      const res = await fetch("ASSETS/DATA/training.json");
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      const data = await res.json();
       if (Array.isArray(data)) {
         trainingData = data;
         renderTrainingInCilinder(trainingData);
       } else {
         console.error("Invalid training data format");
       }
-    })
-    .catch(error => console.error("Error loading training courses:", error));
+    } catch (error) {
+      console.error("Error loading training courses:", error);
+    }
+  }
+
+
+  // Call the function to load training data
+  loadAndRenderTraining();
 
   function renderTrainingInCilinder(courses) {
     const container = document.querySelector(".training_cylinder");
+    if (!container) return;
     container.innerHTML = "";
     courses.forEach(course => {
       const courseItem = document.createElement("p");
@@ -319,75 +331,74 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const container = document.querySelector('.training_cylinder');
+  const trainingContainer = document.querySelector('.training_cylinder');
   const descriptionBox = document.querySelector('.training_text_description');
   const descriptionTitle = descriptionBox.querySelector('h2');
   const descriptionParagraph = descriptionBox.querySelector('p');
+  const objectiveEl = document.getElementById("training_objective");
+  const modalityEl = document.getElementById("training_modality");
+  const audienceEl = document.getElementById("training_audience");
   const focusPoint = document.getElementById('training_text_focuspoint');
 
-  function applyDescriptionFaddeOut(...documentElement) {
-    documentElement.forEach(el => {
-      el.classList.remove('fadde-in');
-      el.classList.add('fadde-out');
+  const defaultTrainingContent = {
+    title: "Descubra el Valor de la Prevención Especializada",
+    description: "Seleccione una de nuestras Capacitaciones Técnicas en el menú para conocer el enfoque y los beneficios específicos que aportará a la protección de su personal y al cumplimiento legal de su empresa. Todos nuestros programas están diseñados para ser aplicables de inmediato en su entorno laboral.",
+    objective: "Objetivos del curso",
+    modality: "Modalidad",
+    audience: "Público objetivo"
+  };
+
+  function toggleFadeClasses(elements, addClass, removeClass) {
+    elements.forEach(el => {
+      if (el) {
+        el.classList.add(addClass);
+        el.classList.remove(removeClass);
+      }
     });
   }
-  function applyDescriptionFaddeIn(...documentElement) {
-    documentElement.forEach(el => {
-      el.classList.remove('fadde-out');
-      el.classList.add('fadde-in');
-    });
+
+  function updateTrainingDescription(course) {
+    const elementsToAnimate = [descriptionTitle, descriptionParagraph, focusPoint];
+    toggleFadeClasses(elementsToAnimate, 'fadde-out', 'fadde-in');
+
+    setTimeout(() => {
+      descriptionTitle.textContent = course.title;
+      descriptionParagraph.textContent = course.description;
+      objectiveEl.innerHTML = course.objective;
+      modalityEl.textContent = course.modality;
+      audienceEl.textContent = course.audience;
+      toggleFadeClasses(elementsToAnimate, 'fadde-in', 'fadde-out');
+    }, 400);
+  }
+
+  function resetTrainingDescription() {
+    updateTrainingDescription(defaultTrainingContent);
   }
 
   document.addEventListener('click', e => {
     const clicked = e.target;
+    const isInsideCylinder = trainingContainer.contains(clicked);
+    const activeCourseP = trainingContainer.querySelector('p.active');
 
-    // Click on training cylinder paragraph <p>
-    if (container.contains(clicked) && clicked.tagName === 'P') {
+    if (isInsideCylinder && clicked.tagName === 'P') {
+      e.stopPropagation(); // Prevent the click from being treated as an "outside" click
+
+      if (clicked.classList.contains('active')) return; // Do nothing if the active item is clicked again
+
       const id = parseInt(clicked.dataset.id?.split("_")[1]);
       const course = trainingData.find(c => c.id === id);
       if (!course) return;
 
-
-      setTimeout(() => {
-        // Fade out
-        applyDescriptionFaddeOut(descriptionTitle, descriptionParagraph, focusPoint);
-        // Update content
-        document.querySelector(".training_text_description h2").textContent = course.title;
-        document.querySelector(".training_text_description p").textContent = course.description;
-        document.getElementById("training_objective").innerHTML = course.objective;
-        document.getElementById("training_modality").textContent = course.modality;
-        document.getElementById("training_audience").textContent = course.audience;
-
-        // Fadde in
-        applyDescriptionFaddeIn(descriptionTitle, descriptionParagraph, focusPoint);
-      }, 500);
-
-      // Highlight active paragraph
-      container.querySelectorAll('p').forEach(el => el.classList.remove('active'));
+      if (activeCourseP) {
+        activeCourseP.classList.remove('active');
+      }
       clicked.classList.add('active');
+      updateTrainingDescription(course);
 
-      e.stopPropagation();
-    }
-  });
-
-  // Click outside cylinder to reset description
-  document.addEventListener('click', e => {
-    if (!container.contains(e.target)) {
-      container.querySelectorAll('p').forEach(el => el.classList.remove('active'));
-
-      setTimeout(() => {
-        // Fadde out
-        applyDescriptionFaddeOut(descriptionTitle, descriptionParagraph, focusPoint);
-        //Default content
-        document.querySelector(".training_text_description h2").textContent = "Descubra el Valor de la Prevención Especializada";
-        document.querySelector(".training_text_description p").textContent = "Seleccione una de nuestras Capacitaciones Técnicas en el menú para conocer el enfoque y los beneficios específicos que aportará a la protección de su personal y al cumplimiento legal de su empresa. Todos nuestros programas están diseñados para ser aplicables de inmediato en su entorno laboral.";
-        document.getElementById("training_objective").innerHTML = "Objetivos del curso";
-        document.getElementById("training_modality").textContent = "Modalidad";
-        document.getElementById("training_audience").textContent = "Público objetivo";
-
-        // Fadde in
-        applyDescriptionFaddeIn(descriptionTitle, descriptionParagraph);
-      }, 400);
+    } else if (activeCourseP && !isInsideCylinder) {
+      // Clicked outside and there is an active course
+      activeCourseP.classList.remove('active');
+      resetTrainingDescription();
     }
   });
 
@@ -397,54 +408,90 @@ document.addEventListener("DOMContentLoaded", () => {
   //===========================================================================================================================================================================================================================================
 
 
-  //This section will handle the manual development cards loading and rendering from a JSON file
+   //This section will handle the manual development cards loading and rendering from a JSON file
 
   let manualData = []; //This array will store the data loaded from the JSON file
 
+  /**
+   * Fetches manual data from the JSON file.
+   * @returns {Promise<Array>} A promise that resolves with the manual data.
+   */
   async function fetchManuals() {
     try {
-      const response = await fetch('ASSETS/DATA/manuals.json'); // Ruta al archivo JSON
-      manualData = await response.json();
-
-      if (!Array.isArray(manualData)) return;
-
-      const container = document.querySelector('.manual_development_description_container');
-      if (!container) return;
-
-      manualData.forEach(manual => {
-        const card = document.createElement('article');
-        card.className = 'manual_development_card';
-        card.dataset.id = `manual_${manual.id}`;
-
-        card.innerHTML = `
-        <article class="manual_development_description_text">
-          <h5>${manual.title}</h5>
-        </article>
-
-        <aside>
-          <button class="btn_moreInfo" data-type="manual" data-id="manual_${manual.id}">Detalles</button>
-        </aside>
-
-        <figure class="manual_development_image">
-          <img src="${manual.img}" alt="Imagen representativa del manual" />
-        </figure>
-      `;
-
-        container.appendChild(card);
-      }); //const id = parseInt(rawId.split("_")[2]); // 3 to search any button id
-
-      alignManualCards();
+      const response = await fetch('ASSETS/DATA/manuals.json');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return await response.json();
     } catch (error) {
       console.error('Error al cargar los manuales:', error);
+      return []; // Return empty array on error
     }
   }
-  fetchManuals();
+
+  /**
+   * Creates a single manual card element.
+   * @param {object} manual - The manual data object.
+   * @returns {HTMLElement} The created card element.
+   */
+  function createManualCard(manual) {
+    const card = document.createElement('article');
+    card.className = 'manual_development_card';
+    card.dataset.id = `manual_${manual.id}`;
+
+    card.innerHTML = `
+      <article class="manual_development_description_text">
+        <h5>${manual.title}</h5>
+      </article>
+      <aside>
+        <button class="btn_moreInfo" data-type="manual" data-id="manual_${manual.id}">Detalles</button>
+      </aside>
+      <figure class="manual_development_image">
+        <img src="${manual.img}" alt="Imagen representativa del manual" />
+      </figure>
+    `;
+    return card;
+  }
+
+  /**
+   * Renders the manual cards into the container.
+   * @param {Array} manuals - An array of manual data objects.
+   */
+  function renderManuals(manuals) {
+    const container = document.querySelector('.manual_development_description_container');
+    if (!container) {
+      console.error('El contenedor de manuales no fue encontrado.');
+      return;
+    }
+
+    container.innerHTML = ''; // Clear existing content
+    manuals.forEach(manual => {
+      const card = createManualCard(manual);
+      container.appendChild(card);
+    });
+
+    alignManualCards();
+  }
+
+  /**
+   * Initializes the manual development section by fetching and rendering the data.
+   */
+  async function initManuals() {
+    manualData = await fetchManuals();
+    if (Array.isArray(manualData) && manualData.length > 0) {
+      renderManuals(manualData);
+    }
+  }
+
+  // Initialize the manuals section when the script loads
+  initManuals();
 
   //This section will handle the manual development cards scroll behavior
   function alignManualCards() {
     const manualDevelopmentContainer = document.querySelector('.manual_development_description_container');
-    const manualDevelopmentCards = manualDevelopmentContainer.querySelectorAll('.manual_development_card');
+    if (!manualDevelopmentContainer) return;
 
+    const manualDevelopmentCards = manualDevelopmentContainer.querySelectorAll('.manual_development_card');
     if (manualDevelopmentCards.length === 0) return;
 
     const gapPx = 24; // 1.5rem
@@ -492,65 +539,65 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 300);
   }
 
-  // Handles click events on the document
-  document.addEventListener("click", e => {
-    // Validate that the clicked element is a manual info button
-    const btn = e.target.closest(".btn_moreInfo");
-    if (!btn || btn.dataset.type !== "manual") return;
+  /**
+   * Resets the manual display to its default state with a fade-out animation.
+   */
+  function resetManualDisplay() {
+    if (!lastManualSelected) return;
 
-    // Extract manual ID from button and find corresponding manual data
-    const manualId = btn.dataset.id; // e.g., "manual_1"
-    const manual = manualData.find(m => m.id === parseInt(manualId.split("_")[1])); // Extract numeric ID
-    if (!manual) return; // Manual not found
-
-    // Get DOM elements for header and content
     const headerEl = document.querySelector('.manual_development_header_text');
     const titleEl = headerEl?.querySelector('h2');
     const descEl = headerEl?.querySelector('p');
-    const cardEl = document.querySelector(`.manual_development_card[data-id="${manualId}"]`);
-    if (!headerEl || !titleEl || !descEl || !cardEl) return;
-
-    // Avoid reloading the same manual info
-    if (titleEl.textContent === manual.title && descEl.textContent === manual.description) return;
-    if (lastManualSelected?.id === manual.id) return;
-
-    // Apply active styles to the selected manual card
-    applyActiveManualCardStyle({ titleEl, descEl, headerEl, cardEl, manual });
-  });
-
-  // Handles mousedown events to detect clicks outside manual cards
-  document.addEventListener("mousedown", e => {
-    if (!lastManualSelected) return; // No manual selected yet
-
-    // Check if the clicked element is inside any manual card
-    const clickedCard = e.target.closest('.manual_development_card');
-    if (clickedCard) return; // Clicked inside a manual card, do nothing
-
-    // Get DOM elements for header and content
-    const headerEl = document.querySelector('.manual_development_header_text');
-    const titleEl = headerEl?.querySelector('h2');
-    const descEl = headerEl?.querySelector('p');
-    const cardEl = document.querySelector('.manual_development_card');
-    if (!headerEl || !titleEl || !descEl || !cardEl) return;
+    if (!headerEl || !titleEl || !descEl) return;
 
     // Apply fade-out effect before resetting content
     titleEl.classList.add('manual_fade_out');
     descEl.classList.add('manual_fade_out');
 
-    // Remove active styles from the last manual card
-    const lastId = lastManualSelected?.id;
+    // Remove active styles from the last selected card
+    const lastId = lastManualSelected.id;
     const lastContainer = document.querySelector(`.manual_development_card[data-id="manual_${lastId}"]`);
     lastContainer?.classList.remove("active_manual_card");
 
     // Reset content to default after fade-out
     setTimeout(() => {
       headerEl.classList.remove("active_header_manual");
-      cardEl.classList.remove("active_manual_card");
       titleEl.textContent = "Elaboración de manuales operativos y procedimientos de trabajos seguros";
       descEl.textContent = "Description del servicio";
       titleEl.classList.remove('manual_fade_out');
       descEl.classList.remove('manual_fade_out');
       lastManualSelected = null; // Clear selection
     }, 300);
+  }
+
+  // Handles all click events for the manual section using event delegation
+  document.addEventListener("click", e => {
+    const target = e.target;
+    const manualButton = target.closest(".btn_moreInfo[data-type='manual']");
+    const clickedCard = target.closest('.manual_development_card');
+
+    // Case 1: A manual "Detalles" button was clicked
+    if (manualButton) {
+      const manualId = manualButton.dataset.id;
+      const manual = manualData.find(m => m.id === parseInt(manualId.split("_")[1]));
+      if (!manual) return;
+
+      const headerEl = document.querySelector('.manual_development_header_text');
+      const titleEl = headerEl?.querySelector('h2');
+      const descEl = headerEl?.querySelector('p');
+      const cardEl = document.querySelector(`.manual_development_card[data-id="${manualId}"]`);
+      if (!headerEl || !titleEl || !descEl || !cardEl) return;
+
+      // Avoid reloading if the same manual is already selected
+      if (lastManualSelected?.id === manual.id) return;
+
+      applyActiveManualCardStyle({ titleEl, descEl, headerEl, cardEl, manual });
+      return; // Action taken, no need to proceed
+    }
+
+    // Case 2: A click occurred outside of any manual card, and a manual is selected
+    if (!clickedCard && lastManualSelected) {
+      resetManualDisplay();
+    }
   });
 });
