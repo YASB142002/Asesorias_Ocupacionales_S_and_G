@@ -511,93 +511,169 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  let lastManualSelected = null; // Stores the last manual card selected by the user
+  const manualHeaderEl = document.querySelector('.manual_development_header_text');
+  const manualTitleEl = manualHeaderEl?.querySelector('h2');
+  const manualDescEl = manualHeaderEl?.querySelector('p');
 
-  // Applies active styles to the selected manual card and removes them from the previously selected one
-  function applyActiveManualCardStyle({ titleEl, descEl, headerEl, cardEl, manual }) {
-    // Remove active styles from the last manual card if one was selected
-    const lastId = lastManualSelected?.id;
-    const lastContainer = document.querySelector(`.manual_development_card[data-id="manual_${lastId}"]`);
-    lastContainer?.classList.remove("active_manual_card");
+  const MANUAL_DEFAULTS = {
+    TITLE: "Elaboración de manuales operativos y procedimientos de trabajos seguros",
+    DESCRIPTION: "Description del servicio"
+  };
+  const FADE_DURATION = 300;
 
-    // Validate required elements before applying styles
-    if (!titleEl || !descEl || !headerEl || !cardEl || !manual) return;
+  let lastManualSelected = null;
 
-    // Apply fade-out effect before updating content
-    titleEl.classList.add('manual_fade_out');
-    descEl.classList.add('manual_fade_out');
+  /**
+   * Fades elements, runs a callback, and then fades them back in.
+   * @param {HTMLElement[]} elements - The DOM elements to apply the fade effect to.
+   * @param {Function} callback - The function to run after the fade-out.
+   */
+  function runFadeTransition(elements, callback) {
+    const validElements = elements.filter(el => el);
+    validElements.forEach(el => el.classList.add('manual_fade_out'));
 
-    // Update content and apply active styles after fade-out
     setTimeout(() => {
-      titleEl.textContent = manual.title;
-      descEl.textContent = manual.description;
-      headerEl.classList.add("active_header_manual");
-      cardEl.classList.add("active_manual_card");
-      titleEl.classList.remove('manual_fade_out');
-      descEl.classList.remove('manual_fade_out');
-      lastManualSelected = manual; // Store the current manual as the last selected
-    }, 300);
+      callback();
+      validElements.forEach(el => el.classList.remove('manual_fade_out'));
+    }, FADE_DURATION);
   }
 
   /**
-   * Resets the manual display to its default state with a fade-out animation.
+   * Updates the manual header with the content of the selected manual.
+   * @param {object} manual - The manual object to display.
    */
-  function resetManualDisplay() {
-    if (!lastManualSelected) return;
-
-    const headerEl = document.querySelector('.manual_development_header_text');
-    const titleEl = headerEl?.querySelector('h2');
-    const descEl = headerEl?.querySelector('p');
-    if (!headerEl || !titleEl || !descEl) return;
-
-    // Apply fade-out effect before resetting content
-    titleEl.classList.add('manual_fade_out');
-    descEl.classList.add('manual_fade_out');
-
-    // Remove active styles from the last selected card
-    const lastId = lastManualSelected.id;
-    const lastContainer = document.querySelector(`.manual_development_card[data-id="manual_${lastId}"]`);
-    lastContainer?.classList.remove("active_manual_card");
-
-    // Reset content to default after fade-out
-    setTimeout(() => {
-      headerEl.classList.remove("active_header_manual");
-      titleEl.textContent = "Elaboración de manuales operativos y procedimientos de trabajos seguros";
-      descEl.textContent = "Description del servicio";
-      titleEl.classList.remove('manual_fade_out');
-      descEl.classList.remove('manual_fade_out');
-      lastManualSelected = null; // Clear selection
-    }, 300);
-  }
-
-  // Handles all click events for the manual section using event delegation
-  document.addEventListener("click", e => {
-    const target = e.target;
-    const manualButton = target.closest(".btn_moreInfo[data-type='manual']");
-    const clickedCard = target.closest('.manual_development_card');
-
-    // Case 1: A manual "Detalles" button was clicked
-    if (manualButton) {
-      const manualId = manualButton.dataset.id;
-      const manual = manualData.find(m => m.id === parseInt(manualId.split("_")[1]));
-      if (!manual) return;
-
-      const headerEl = document.querySelector('.manual_development_header_text');
-      const titleEl = headerEl?.querySelector('h2');
-      const descEl = headerEl?.querySelector('p');
-      const cardEl = document.querySelector(`.manual_development_card[data-id="${manualId}"]`);
-      if (!headerEl || !titleEl || !descEl || !cardEl) return;
-
-      // Avoid reloading if the same manual is already selected
-      if (lastManualSelected?.id === manual.id) return;
-
-      applyActiveManualCardStyle({ titleEl, descEl, headerEl, cardEl, manual });
-      return; // Action taken, no need to proceed
+  function updateManualDisplay(manual) {
+    if (!manualHeaderEl || !manualTitleEl || !manualDescEl || lastManualSelected?.id === manual.id) {
+      return;
     }
 
-    // Case 2: A click occurred outside of any manual card, and a manual is selected
-    if (!clickedCard && lastManualSelected) {
+    const cardEl = document.querySelector(`.manual_development_card[data-id="manual_${manual.id}"]`);
+    if (!cardEl) return;
+
+    const updateContent = () => {
+      manualTitleEl.textContent = manual.title;
+      manualDescEl.textContent = manual.description;
+      manualHeaderEl.classList.add("active_header_manual");
+      cardEl.classList.add("active_manual_card");
+
+      if (lastManualSelected) {
+        const lastCardEl = document.querySelector(`.manual_development_card[data-id="manual_${lastManualSelected.id}"]`);
+        lastCardEl?.classList.remove("active_manual_card");
+      }
+      lastManualSelected = manual;
+    };
+
+    runFadeTransition([manualTitleEl, manualDescEl], updateContent);
+  }
+
+  /**
+   * Resets the manual display to its default state.
+   */
+  function resetManualDisplay() {
+    if (!lastManualSelected || !manualHeaderEl || !manualTitleEl || !manualDescEl) {
+      return;
+    }
+
+    const lastCardEl = document.querySelector(`.manual_development_card[data-id="manual_${lastManualSelected.id}"]`);
+
+    const resetContent = () => {
+      manualTitleEl.textContent = MANUAL_DEFAULTS.TITLE;
+      manualDescEl.textContent = MANUAL_DEFAULTS.DESCRIPTION;
+      manualHeaderEl.classList.remove("active_header_manual");
+      lastCardEl?.classList.remove("active_manual_card");
+      lastManualSelected = null;
+    };
+
+    runFadeTransition([manualTitleEl, manualDescEl], resetContent);
+  }
+
+  // Combined event listener for the document
+  document.addEventListener("click", e => {
+    const target = e.target;
+
+    // --- Manual Section Logic ---
+    const manualButton = target.closest(".btn_moreInfo[data-type='manual']");
+    const clickedInManualCard = target.closest('.manual_development_card');
+
+    if (manualButton) {
+      const manualId = manualButton.dataset.id.split("_")[1];
+      const manual = manualData.find(m => m.id === parseInt(manualId, 10));
+      if (manual) {
+        updateManualDisplay(manual);
+      }
+      return; // Stop further processing
+    }
+
+    if (!clickedInManualCard && lastManualSelected) {
       resetManualDisplay();
+    }
+
+    // --- Consult Section Logic ---
+    if (target.matches(".btn_moreInfo[data-type='consult']")) {
+      const selectedCard = target.closest(".secondary_card");
+      const id = parseInt(target.dataset.id, 10);
+      const consult = consultData.find(c => c.id === id);
+
+      if (!consult || !selectedCard) return;
+
+      const isMobile = window.innerWidth < 932;
+      if (isMobile) {
+        handleMobileCardClick(selectedCard, consult);
+      } else {
+        handleDesktopCardClick(selectedCard, consult);
+      }
+    }
+
+    // --- Training Section Logic ---
+    const isInsideCylinder = trainingContainer?.contains(target);
+    const activeCourseP = trainingContainer?.querySelector('p.active');
+
+    if (isInsideCylinder && target.tagName === 'P') {
+      e.stopPropagation();
+
+      if (target.classList.contains('active')) return;
+
+      const id = parseInt(target.dataset.id?.split("_")[1], 10);
+      const course = trainingData.find(c => c.id === id);
+      if (!course) return;
+
+      if (activeCourseP) {
+        activeCourseP.classList.remove('active');
+      }
+      target.classList.add('active');
+      updateTrainingDescription(course);
+
+    } else if (activeCourseP && !isInsideCylinder) {
+      activeCourseP.classList.remove('active');
+      resetTrainingDescription();
+    }
+  });
+
+  document.addEventListener("mousedown", e => {
+    const { target } = e;
+
+    // --- Navbar Logic ---
+    if (toggle?.contains(target) || toggleServices?.contains(target) || toggleTraining?.contains(target)) {
+      return;
+    }
+
+    if (nav && !nav.contains(target)) {
+      nav.classList.remove("expanded");
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
+      dropdownServices?.classList.remove("expanded");
+      dropdownTraining?.classList.remove("expanded");
+      return;
+    }
+
+    if (dropdownServices && dropdownTraining && !dropdownServices.contains(target) && !dropdownTraining.contains(target)) {
+      dropdownServices.classList.remove("expanded");
+      dropdownTraining.classList.remove("expanded");
+    }
+
+    // --- Consult Reset Logic ---
+    if (lastSelectedCard && !e.target.closest(".secondary_card")) {
+      resetMainCardToDefault();
+      cleanSelectedCard();
     }
   });
 });
