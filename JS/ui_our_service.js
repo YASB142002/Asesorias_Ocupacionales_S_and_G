@@ -1,95 +1,161 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-
-
   //===========================================================================================================================================================================================================================================
-  //    This handle the navbar funtionality
+  //    Configuration and Constants
   //===========================================================================================================================================================================================================================================
 
-  const toggle = document.getElementById("menu_toggle");
-  const nav = document.getElementById("main_nav");
-  const button = document.getElementById("first_button_navbar");
+  const CONSTANTS = {
+    PATHS: {
+      CONSULTS: "ASSETS/DATA/consults.json",
+      TRAINING: "ASSETS/DATA/training.json",
+      MANUALS: "ASSETS/DATA/manuals.json",
+    },
+    BREAKPOINTS: {
+      MOBILE: 932,
+    },
+    GAPS: {
+      MANUAL_CARDS_PX: 24,
+    },
+    ANIMATION_DURATIONS: {
+      FADE: 300,
+      TRAINING_FADE: 400,
+    },
+    MANUAL_DEFAULTS: {
+      TITLE: "Elaboración de manuales operativos y procedimientos de trabajos seguros",
+      DESCRIPTION: "Description del servicio",
+    },
+    TRAINING_DEFAULTS: {
+      title: "Descubra el Valor de la Prevención Especializada",
+      description: "Seleccione una de nuestras Capacitaciones Técnicas en el menú para conocer el enfoque y los beneficios específicos que aportará a la protección de su personal y al cumplimiento legal de su empresa. Todos nuestros programas están diseñados para ser aplicables de inmediato en su entorno laboral.",
+      objective: "Objetivos del curso",
+      modality: "Modalidad",
+      audience: "Público objetivo",
+    },
+    CONSULT_DEFAULTS: {
+      TITLE: "Continuidad Operativa Garantizada",
+      DESCRIPTION: "Evaluación proactiva y diseño de sistemas que aseguran la respuesta inmediata y la protección total ante cualquier crisis",
+    },
+  };
+
+  //===========================================================================================================================================================================================================================================
+  //    Cached DOM Elements
+  //===========================================================================================================================================================================================================================================
+
+  // Navbar
+  const menuToggle = document.getElementById("menu_toggle");
+  const mainNav = document.getElementById("main_nav");
   const toggleTraining = document.querySelector(".toggle_submenu");
   const dropdownTraining = document.querySelector(".dropdown_training");
   const toggleServices = document.querySelector(".toggle_mainmenu");
   const dropdownServices = document.querySelector(".dropdown_services");
 
-  // Toggle main menu navbar in mobile view
-  toggle.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    nav.classList.toggle("expanded");
-    toggle.setAttribute("aria-expanded", nav.classList.contains("expanded") ? "true" : "false");
-  });
+  // Consults Section
+  const consultsContainer = document.getElementById("secondary_cards_section");
+  const mainCard = document.querySelector(".main_card");
+  const mainCardTextContainer = mainCard?.querySelector(".main_card_text");
+  const mainCardTitle = mainCardTextContainer?.querySelector("h3");
+  const mainCardText = mainCardTextContainer?.querySelector("p");
 
-  function handleToggle(toggleButton, dropdownElement) {
-    toggleButton.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      dropdownElement.classList.toggle("expanded");
+  // Training Section
+  const trainingContainer = document.querySelector('.training_cylinder');
+  const descriptionBox = document.querySelector('.training_text_description');
+  const descriptionTitle = descriptionBox?.querySelector('h2');
+  const descriptionParagraph = descriptionBox?.querySelector('p');
+  const objectiveEl = document.getElementById("training_objective");
+  const modalityEl = document.getElementById("training_modality");
+  const audienceEl = document.getElementById("training_audience");
+  const focusPoint = document.getElementById('training_text_focuspoint');
+
+  // Manuals Section
+  const manualsContainer = document.querySelector('.manual_development_description_container');
+  const manualHeaderEl = document.querySelector('.manual_development_header_text');
+  const manualTitleEl = manualHeaderEl?.querySelector('h2');
+  const manualDescEl = manualHeaderEl?.querySelector('p');
+
+
+  //===========================================================================================================================================================================================================================================
+  //    Global State
+  //===========================================================================================================================================================================================================================================
+
+  let consultData = [];
+  let trainingData = [];
+  let manualData = [];
+  let lastSelectedConsultCard = null;
+  let lastSelectedManual = null;
+
+  //===========================================================================================================================================================================================================================================
+  //    Utility Functions
+  //===========================================================================================================================================================================================================================================
+
+  /**
+   * Executes a callback after a CSS transition ends.
+   * @param {HTMLElement} element - The element to listen on.
+   * @param {Function} callback - The function to execute after the transition.
+   */
+  function runAfterTransition(element, callback) {
+    if (!element) return;
+    element.addEventListener('transitionend', callback, {
+      once: true
     });
   }
 
-  handleToggle(toggleServices, dropdownServices);
-  handleToggle(toggleTraining, dropdownTraining);
-
-  // Global click handler -> this will close menus in navbar (mobile view) when clicking outside
-  document.addEventListener("mousedown", (e) => {
-    const { target } = e;
-
-    // Clicks on toggles are handled by their own listeners, so we ignore them here.
-    if (toggle.contains(target) || toggleServices.contains(target) || toggleTraining.contains(target)) {
-      return;
-    }
-
-    // If the click is outside the navigation area, close everything.
-    if (!nav.contains(target)) {
-      nav.classList.remove("expanded");
-      toggle.setAttribute("aria-expanded", "false");
-      dropdownServices.classList.remove("expanded");
-      dropdownTraining.classList.remove("expanded");
-      return;
-    }
-
-    // If the click is inside the nav, but not within an open dropdown, close the dropdowns.
-    // This allows clicks on other nav items to close the submenus.
-    if (!dropdownServices.contains(target) && !dropdownTraining.contains(target)) {
-      dropdownServices.classList.remove("expanded");
-      dropdownTraining.classList.remove("expanded");
-    }
-  });
-
-
-  //===========================================================================================================================================================================================================================================
-  //    This handle the consult funtionality
-  //===========================================================================================================================================================================================================================================
-
-  //This part is to load the consulting_section information (main and secondary cards)
-  let consultData = []; //This array will store the data loaded from the JSON file
-  let lastSelectedCard = null; // Keep track of the active card across clicks
-
-  async function loadAndRenderConsults() {
+  /**
+   * Fetches JSON data from a given path.
+   * @param {string} path - The path to the JSON file.
+   * @returns {Promise<Array>} - A promise that resolves with the data array.
+   */
+  async function fetchData(path) {
     try {
-      const response = await fetch("ASSETS/DATA/consults.json");
-      const consults = await response.json();
-
-      if (!Array.isArray(consults)) {
-        console.error("Invalid data format");
-        return;
+      const response = await fetch(path);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+      return await response.json();
+    } catch (error) {
+      console.error(`Error loading data from ${path}:`, error);
+      return []; // Return empty array on error
+    }
+  }
 
-      consultData = consults; // Store data in the global array
-      const container = document.getElementById("secondary_cards_section");
-      if (!container) return;
+  //===========================================================================================================================================================================================================================================
+  //    Navbar Logic
+  //===========================================================================================================================================================================================================================================
 
-      container.innerHTML = "";
+  function setupNavbar() {
+    if (menuToggle) {
+      menuToggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        mainNav?.classList.toggle("expanded");
+        menuToggle.setAttribute("aria-expanded", mainNav?.classList.contains("expanded") ? "true" : "false");
+      });
+    }
 
-      consults.forEach(consult => {
-        const card = document.createElement("section");
-        card.classList.add("secondary_card");
-        card.setAttribute("data-id", `course_${consult.id}`);
+    const handleToggle = (toggleButton, dropdownElement) => {
+      if (toggleButton && dropdownElement) {
+        toggleButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropdownElement.classList.toggle("expanded");
+        });
+      }
+    };
 
-        card.innerHTML = `
+    handleToggle(toggleServices, dropdownServices);
+    handleToggle(toggleTraining, dropdownTraining);
+  }
+
+  //===========================================================================================================================================================================================================================================
+  //    Consults Section Logic
+  //===========================================================================================================================================================================================================================================
+
+  function renderConsults(consults) {
+    if (!consultsContainer) return;
+    consultsContainer.innerHTML = "";
+    consults.forEach(consult => {
+      const card = document.createElement("section");
+      card.className = "secondary_card";
+      card.setAttribute("data-id", `consult_${consult.id}`);
+      card.innerHTML = `
         <article class="secondary_card_information">
           <aside class="secondary_card_text">
             <h3>${consult.title}</h3>
@@ -99,346 +165,179 @@ document.addEventListener("DOMContentLoaded", () => {
         </article>
         <figure>
           <img src="${consult.img}" alt="Imagen de ${consult.title}" />
-        </figure>
-      `;
-
-        container.appendChild(card);
-      });
-    } catch (error) {
-      console.error("Error loading consults:", error);
-    }
+        </figure>`;
+      consultsContainer.appendChild(card);
+    });
   }
 
-  /**
-   * Resets all secondary cards to their default appearance.
-   * Applies a fade effect on mobile view.
-   */
-  function cleanSelectedCard() {
-    const mainCard = document.querySelector(".main_card");
-    const isMobile = window.innerWidth < 932;
+  function cleanSelectedConsultCard() {
+    const activeCard = document.querySelector(".secondary_card.active_card");
+    if (!activeCard) return;
 
-    document.querySelectorAll(".secondary_card.active_card").forEach(card => {
-      const cardPElement = card.querySelector("p");
-      const consultId = parseInt(card.getAttribute("data-id").split("_")[1]);
-      const originalConsult = consultData.find(c => c.id === consultId);
+    const isMobile = window.innerWidth < CONSTANTS.BREAKPOINTS.MOBILE;
+    const cardPElement = activeCard.querySelector("p");
+    const consultId = Number.parseInt(activeCard.dataset.id.split("_")[1], 10);
+    const originalConsult = consultData.find(c => c.id === consultId);
 
-      if (isMobile) {
-        // Animate for mobile
-        card.classList.add("secondary_fade_out");
-        setTimeout(() => {
-          card.classList.remove("active_card");
-          card.style.transform = "";
-          card.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
-          if (cardPElement && originalConsult) {
-            cardPElement.textContent = originalConsult.short_description;
-          }
-          card.classList.remove("secondary_fade_out");
-        }, 300);
-      } else {
-        // No animation for desktop
-        card.classList.remove("active_card");
-        card.style.transform = "";
-        card.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
-        if (cardPElement && originalConsult) {
-          cardPElement.textContent = originalConsult.short_description;
-        }
+    const resetCardState = () => {
+      activeCard.classList.remove("active_card", "secondary_fade_out");
+      activeCard.style.transform = "";
+      activeCard.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
+      if (cardPElement && originalConsult) {
+        cardPElement.textContent = originalConsult.short_description;
       }
-    });
+    };
+
+    if (isMobile) {
+      runAfterTransition(activeCard, resetCardState);
+      activeCard.classList.add("secondary_fade_out");
+    } else {
+      resetCardState();
+    }
 
     if (mainCard) {
       mainCard.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
       mainCard.classList.remove("active_main_card");
     }
-    lastSelectedCard = null;
+    lastSelectedConsultCard = null;
   }
 
-  /**
-   * Applies active styling to a selected card.
-   * @param {HTMLElement} selectedCard The card to style.
-   */
   function applyStyleSecondaryCard(selectedCard) {
     selectedCard.classList.add("active_card");
     selectedCard.style.transform = "translateY(-4px)";
     selectedCard.style.boxShadow = "0 0 12px var(--color-accent-dark)";
   }
 
-  /**
-   * Updates the main card's content with a fade effect.
-   * @param {string} title The new title.
-   * @param {string} description The new description.
-   */
   function updateMainCardContent(title, description) {
-    const mainCard = document.querySelector(".main_card");
-    if (!mainCard) return;
+    if (!mainCard || !mainCardTextContainer || !mainCardTitle || !mainCardText) return;
 
-    const mainTextContainer = mainCard.querySelector(".main_card_text");
-    const mainTitle = mainTextContainer.querySelector("h3");
-    const mainText = mainTextContainer.querySelector("p");
-
-    mainTextContainer.classList.add("fade_out");
-
-    setTimeout(() => {
-      mainTitle.textContent = title;
-      mainText.textContent = description;
+    runAfterTransition(mainCardTextContainer, () => {
+      mainCardTitle.textContent = title;
+      mainCardText.textContent = description;
       mainCard.style.boxShadow = "0 0 12px var(--color-accent-dark)";
-      mainTextContainer.classList.remove("fade_out");
       mainCard.classList.add("active_main_card");
-    }, 300);
+      mainCardTextContainer.classList.remove("fade_out");
+    });
+
+    mainCardTextContainer.classList.add("fade_out");
   }
 
-  /**
-   * Resets the main card to its default content.
-   */
   function resetMainCardToDefault() {
-    const mainCard = document.querySelector(".main_card");
-    if (!mainCard || !mainCard.classList.contains("active_main_card")) return;
+    if (!mainCard?.classList.contains("active_main_card")) return;
 
-    const mainTextContainer = mainCard.querySelector(".main_card_text");
-    const mainTitle = mainTextContainer.querySelector("h3");
-    const mainText = mainTextContainer.querySelector("p");
-
-    mainTextContainer.classList.add("fade_out");
-
-    setTimeout(() => {
-      mainTitle.textContent = "Continuidad Operativa Garantizada"; // Default text
-      mainText.textContent = "Evaluación proactiva y diseño de sistemas que aseguran la respuesta inmediata y la protección total ante cualquier crisis"; // Default text
+    runAfterTransition(mainCardTextContainer, () => {
+      mainCardTitle.textContent = CONSTANTS.CONSULT_DEFAULTS.TITLE;
+      mainCardText.textContent = CONSTANTS.CONSULT_DEFAULTS.DESCRIPTION;
       mainCard.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
-      mainTextContainer.classList.remove("fade_out");
       mainCard.classList.remove("active_main_card");
-    }, 300);
+      mainCardTextContainer.classList.remove("fade_out");
+    });
+
+    mainCardTextContainer.classList.add("fade_out");
   }
 
-  /**
-   * Handles card clicks on mobile: toggles description in-place with animation.
-   * @param {HTMLElement} selectedCard The clicked card.
-   * @param {object} consult The corresponding consult data.
-   */
-  function handleMobileCardClick(selectedCard, consult) {
+  function handleMobileConsultClick(selectedCard, consult) {
     const isAlreadyActive = selectedCard.classList.contains("active_card");
 
-    // Clean up any other active card first
-    if (lastSelectedCard && lastSelectedCard !== selectedCard) {
-      cleanSelectedCard();
+    if (lastSelectedConsultCard && lastSelectedConsultCard !== selectedCard) {
+      cleanSelectedConsultCard();
     }
 
     if (isAlreadyActive) {
-      // Deactivate the card
-      cleanSelectedCard();
+      cleanSelectedConsultCard();
     } else {
-      // Activate the new card
       const cardPElement = selectedCard.querySelector("p");
-      // Add fade out class to apply animation
-      selectedCard.classList.add("secondary_fade_out");
-
-      setTimeout(() => {
+      runAfterTransition(selectedCard, () => {
         applyStyleSecondaryCard(selectedCard);
         cardPElement.textContent = consult.big_description;
-        // Remove fade out class after animation to show new content
         selectedCard.classList.remove("secondary_fade_out");
-        lastSelectedCard = selectedCard;
-      }, 300);
+        lastSelectedConsultCard = selectedCard;
+      });
+      selectedCard.classList.add("secondary_fade_out");
     }
   }
 
-  /**
-   * Handles card clicks on desktop: updates the main card.
-   * @param {HTMLElement} selectedCard The clicked card.
-   * @param {object} consult The corresponding consult data.
-   */
-  function handleDesktopCardClick(selectedCard, consult) {
-    // If the same card is clicked again, do nothing.
-    if (lastSelectedCard === selectedCard) return;
-
-    cleanSelectedCard();
+  function handleDesktopConsultClick(selectedCard, consult) {
+    if (lastSelectedConsultCard === selectedCard) return;
+    cleanSelectedConsultCard();
     applyStyleSecondaryCard(selectedCard);
     updateMainCardContent(consult.title, consult.big_description);
-    lastSelectedCard = selectedCard;
+    lastSelectedConsultCard = selectedCard;
   }
 
-  // --- EVENT LISTENERS ---
-
-  // Load consults when the page is ready
-  loadAndRenderConsults();
-
-
-  // Main event listener for "Detalles" button clicks
-  document.addEventListener("click", e => {
-    if (!e.target.matches(".btn_moreInfo[data-type='consult']")) return;
-
-    const selectedCard = e.target.closest(".secondary_card");
-    const id = parseInt(e.target.dataset.id);
-    const consult = consultData.find(c => c.id === id);
-
-    if (!consult || !selectedCard) return;
-
-    const isMobile = window.innerWidth < 932;
-    if (isMobile) {
-      handleMobileCardClick(selectedCard, consult);
-    } else {
-      handleDesktopCardClick(selectedCard, consult);
-    }
-  });
-
-  // Listener for clicks outside the cards to reset the view
-  document.addEventListener("mousedown", e => {
-    // If a card is selected and the click is outside of any secondary card
-    if (lastSelectedCard && !e.target.closest(".secondary_card")) {
-      resetMainCardToDefault(); // Reset main card first to allow animation
-      cleanSelectedCard();
-    }
-  });
-
   //===========================================================================================================================================================================================================================================
-  //    This handle the training funtionality
+  //    Training Section Logic
   //===========================================================================================================================================================================================================================================
 
-
-  //This section will fech the training courses information and load it into the training section
-
-  let trainingData = [];
-
-  async function loadAndRenderTraining() {
-    try {
-      const res = await fetch("ASSETS/DATA/training.json");
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-      const data = await res.json();
-      if (Array.isArray(data)) {
-        trainingData = data;
-        renderTrainingInCilinder(trainingData);
-      } else {
-        console.error("Invalid training data format");
-      }
-    } catch (error) {
-      console.error("Error loading training courses:", error);
-    }
-  }
-
-
-  // Call the function to load training data
-  loadAndRenderTraining();
-
-  function renderTrainingInCilinder(courses) {
-    const container = document.querySelector(".training_cylinder");
-    if (!container) return;
-    container.innerHTML = "";
+  function renderTrainingInCylinder(courses) {
+    if (!trainingContainer) return;
+    trainingContainer.innerHTML = "";
     courses.forEach(course => {
       const courseItem = document.createElement("p");
       courseItem.setAttribute("data-id", `course_${course.id}`);
       courseItem.innerHTML = `${course.title}`;
-      container.appendChild(courseItem);
+      trainingContainer.appendChild(courseItem);
     });
   }
 
-  const trainingContainer = document.querySelector('.training_cylinder');
-  const descriptionBox = document.querySelector('.training_text_description');
-  const descriptionTitle = descriptionBox.querySelector('h2');
-  const descriptionParagraph = descriptionBox.querySelector('p');
-  const objectiveEl = document.getElementById("training_objective");
-  const modalityEl = document.getElementById("training_modality");
-  const audienceEl = document.getElementById("training_audience");
-  const focusPoint = document.getElementById('training_text_focuspoint');
+  function updateTrainingDescription(course, isReset = false) {
+    const elementsToAnimate = [descriptionTitle, descriptionParagraph, focusPoint].filter(el => el);
 
-  const defaultTrainingContent = {
-    title: "Descubra el Valor de la Prevención Especializada",
-    description: "Seleccione una de nuestras Capacitaciones Técnicas en el menú para conocer el enfoque y los beneficios específicos que aportará a la protección de su personal y al cumplimiento legal de su empresa. Todos nuestros programas están diseñados para ser aplicables de inmediato en su entorno laboral.",
-    objective: "Objetivos del curso",
-    modality: "Modalidad",
-    audience: "Público objetivo"
-  };
+    const updateContent = () => {
+      // Update text content
+      if (descriptionTitle) descriptionTitle.textContent = course.title;
+      if (descriptionParagraph) descriptionParagraph.textContent = course.description;
+      if (objectiveEl) objectiveEl.innerHTML = course.objective;
+      if (modalityEl) modalityEl.textContent = course.modality;
+      if (audienceEl) audienceEl.textContent = course.audience;
 
-  function toggleFadeClasses(elements, addClass, removeClass) {
-    elements.forEach(el => {
-      if (el) {
-        el.classList.add(addClass);
-        el.classList.remove(removeClass);
+      // Fade in main description elements
+      [descriptionTitle, descriptionParagraph].forEach(el => {
+        if (el) {
+          el.classList.remove('fadde-out');
+          el.classList.add('fadde-in');
+        }
+      });
+
+      // Handle visibility of the focus point details
+      if (focusPoint) {
+        if (isReset) {
+          // Hide if resetting
+          focusPoint.classList.remove('fadde-in');
+          focusPoint.classList.add('fadde-out');
+        } else {
+          // Show if a course is selected
+          focusPoint.classList.remove('fadde-out');
+          focusPoint.classList.add('fadde-in');
+        }
       }
+    };
+
+    if (elementsToAnimate.length === 0) {
+      updateContent();
+      return;
+    }
+
+    // Animate all elements out together
+    runAfterTransition(elementsToAnimate[0], updateContent);
+    elementsToAnimate.forEach(el => {
+      el.classList.remove('fadde-in');
+      el.classList.add('fadde-out');
     });
-  }
-
-  function updateTrainingDescription(course) {
-    const elementsToAnimate = [descriptionTitle, descriptionParagraph, focusPoint];
-    toggleFadeClasses(elementsToAnimate, 'fadde-out', 'fadde-in');
-
-    setTimeout(() => {
-      descriptionTitle.textContent = course.title;
-      descriptionParagraph.textContent = course.description;
-      objectiveEl.innerHTML = course.objective;
-      modalityEl.textContent = course.modality;
-      audienceEl.textContent = course.audience;
-      toggleFadeClasses(elementsToAnimate, 'fadde-in', 'fadde-out');
-    }, 400);
   }
 
   function resetTrainingDescription() {
-    updateTrainingDescription(defaultTrainingContent);
+    updateTrainingDescription(CONSTANTS.TRAINING_DEFAULTS, true);
   }
 
-  document.addEventListener('click', e => {
-    const clicked = e.target;
-    const isInsideCylinder = trainingContainer.contains(clicked);
-    const activeCourseP = trainingContainer.querySelector('p.active');
-
-    if (isInsideCylinder && clicked.tagName === 'P') {
-      e.stopPropagation(); // Prevent the click from being treated as an "outside" click
-
-      if (clicked.classList.contains('active')) return; // Do nothing if the active item is clicked again
-
-      const id = parseInt(clicked.dataset.id?.split("_")[1]);
-      const course = trainingData.find(c => c.id === id);
-      if (!course) return;
-
-      if (activeCourseP) {
-        activeCourseP.classList.remove('active');
-      }
-      clicked.classList.add('active');
-      updateTrainingDescription(course);
-
-    } else if (activeCourseP && !isInsideCylinder) {
-      // Clicked outside and there is an active course
-      activeCourseP.classList.remove('active');
-      resetTrainingDescription();
-    }
-  });
-
-
   //===========================================================================================================================================================================================================================================
-  //    This handle the manual developing funtionality
+  //    Manuals Section Logic
   //===========================================================================================================================================================================================================================================
 
-
-   //This section will handle the manual development cards loading and rendering from a JSON file
-
-  let manualData = []; //This array will store the data loaded from the JSON file
-
-  /**
-   * Fetches manual data from the JSON file.
-   * @returns {Promise<Array>} A promise that resolves with the manual data.
-   */
-  async function fetchManuals() {
-    try {
-      const response = await fetch('ASSETS/DATA/manuals.json');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return await response.json();
-    } catch (error) {
-      console.error('Error al cargar los manuales:', error);
-      return []; // Return empty array on error
-    }
-  }
-
-  /**
-   * Creates a single manual card element.
-   * @param {object} manual - The manual data object.
-   * @returns {HTMLElement} The created card element.
-   */
   function createManualCard(manual) {
     const card = document.createElement('article');
     card.className = 'manual_development_card';
     card.dataset.id = `manual_${manual.id}`;
-
     card.innerHTML = `
       <article class="manual_development_description_text">
         <h5>${manual.title}</h5>
@@ -448,232 +347,183 @@ document.addEventListener("DOMContentLoaded", () => {
       </aside>
       <figure class="manual_development_image">
         <img src="${manual.img}" alt="Imagen representativa del manual" />
-      </figure>
-    `;
+      </figure>`;
     return card;
   }
 
-  /**
-   * Renders the manual cards into the container.
-   * @param {Array} manuals - An array of manual data objects.
-   */
   function renderManuals(manuals) {
-    const container = document.querySelector('.manual_development_description_container');
-    if (!container) {
-      console.error('El contenedor de manuales no fue encontrado.');
-      return;
-    }
-
-    container.innerHTML = ''; // Clear existing content
+    if (!manualsContainer) return;
+    manualsContainer.innerHTML = '';
     manuals.forEach(manual => {
       const card = createManualCard(manual);
-      container.appendChild(card);
+      manualsContainer.appendChild(card);
     });
-
     alignManualCards();
   }
 
-  /**
-   * Initializes the manual development section by fetching and rendering the data.
-   */
-  async function initManuals() {
-    manualData = await fetchManuals();
-    if (Array.isArray(manualData) && manualData.length > 0) {
-      renderManuals(manualData);
-    }
-  }
-
-  // Initialize the manuals section when the script loads
-  initManuals();
-
-  //This section will handle the manual development cards scroll behavior
   function alignManualCards() {
-    const manualDevelopmentContainer = document.querySelector('.manual_development_description_container');
-    if (!manualDevelopmentContainer) return;
+    if (!manualsContainer) return;
+    const cards = manualsContainer.querySelectorAll('.manual_development_card');
+    if (cards.length === 0) return;
 
-    const manualDevelopmentCards = manualDevelopmentContainer.querySelectorAll('.manual_development_card');
-    if (manualDevelopmentCards.length === 0) return;
+    const totalCardWidth = [...cards].reduce((acc, card) => acc + card.offsetWidth, 0);
+    const totalGapWidth = (cards.length - 1) * CONSTANTS.GAPS.MANUAL_CARDS_PX;
+    const shouldCenter = (totalCardWidth + totalGapWidth) <= manualsContainer.offsetWidth;
 
-    const gapPx = 24; // 1.5rem
-    const totalCardWidth = [...manualDevelopmentCards].reduce((acc, card) => acc + card.offsetWidth, 0);
-    const totalGapWidth = (manualDevelopmentCards.length - 1) * gapPx;
-    const totalWidth = totalCardWidth + totalGapWidth;
-    const containerWidth = manualDevelopmentContainer.offsetWidth;
-
-    // Determine if we should center or align left
-    const shouldCenter = totalWidth <= containerWidth;
-
-    manualDevelopmentContainer.style.justifyContent = shouldCenter ? 'center' : 'flex-start';
-
-    // make sure scrollLeft is 0 when centered
+    manualsContainer.style.justifyContent = shouldCenter ? 'center' : 'flex-start';
     if (shouldCenter) {
-      manualDevelopmentContainer.scrollLeft = 0;
+      manualsContainer.scrollLeft = 0;
     }
   }
 
-  const manualHeaderEl = document.querySelector('.manual_development_header_text');
-  const manualTitleEl = manualHeaderEl?.querySelector('h2');
-  const manualDescEl = manualHeaderEl?.querySelector('p');
-
-  const MANUAL_DEFAULTS = {
-    TITLE: "Elaboración de manuales operativos y procedimientos de trabajos seguros",
-    DESCRIPTION: "Description del servicio"
-  };
-  const FADE_DURATION = 300;
-
-  let lastManualSelected = null;
-
-  /**
-   * Fades elements, runs a callback, and then fades them back in.
-   * @param {HTMLElement[]} elements - The DOM elements to apply the fade effect to.
-   * @param {Function} callback - The function to run after the fade-out.
-   */
-  function runFadeTransition(elements, callback) {
-    const validElements = elements.filter(el => el);
-    validElements.forEach(el => el.classList.add('manual_fade_out'));
-
-    setTimeout(() => {
+  function runManualFadeTransition(callback) {
+    const elements = [manualTitleEl, manualDescEl].filter(el => el);
+    if (elements.length === 0) {
       callback();
-      validElements.forEach(el => el.classList.remove('manual_fade_out'));
-    }, FADE_DURATION);
-  }
-
-  /**
-   * Updates the manual header with the content of the selected manual.
-   * @param {object} manual - The manual object to display.
-   */
-  function updateManualDisplay(manual) {
-    if (!manualHeaderEl || !manualTitleEl || !manualDescEl || lastManualSelected?.id === manual.id) {
       return;
     }
+    runAfterTransition(elements[0], () => {
+      callback();
+      elements.forEach(el => el.classList.remove('manual_fade_out'));
+    });
+    elements.forEach(el => el.classList.add('manual_fade_out'));
+  }
+
+  function updateManualDisplay(manual) {
+    if (!manualHeaderEl || lastSelectedManual?.id === manual.id) return;
 
     const cardEl = document.querySelector(`.manual_development_card[data-id="manual_${manual.id}"]`);
     if (!cardEl) return;
 
-    const updateContent = () => {
+    runManualFadeTransition(() => {
       manualTitleEl.textContent = manual.title;
       manualDescEl.textContent = manual.description;
       manualHeaderEl.classList.add("active_header_manual");
       cardEl.classList.add("active_manual_card");
 
-      if (lastManualSelected) {
-        const lastCardEl = document.querySelector(`.manual_development_card[data-id="manual_${lastManualSelected.id}"]`);
+      if (lastSelectedManual) {
+        const lastCardEl = document.querySelector(`.manual_development_card[data-id="manual_${lastSelectedManual.id}"]`);
         lastCardEl?.classList.remove("active_manual_card");
       }
-      lastManualSelected = manual;
-    };
-
-    runFadeTransition([manualTitleEl, manualDescEl], updateContent);
+      lastSelectedManual = manual;
+    });
   }
 
-  /**
-   * Resets the manual display to its default state.
-   */
   function resetManualDisplay() {
-    if (!lastManualSelected || !manualHeaderEl || !manualTitleEl || !manualDescEl) {
+    if (!lastSelectedManual || !manualHeaderEl) return;
+
+    const lastCardEl = document.querySelector(`.manual_development_card[data-id="manual_${lastSelectedManual.id}"]`);
+
+    runManualFadeTransition(() => {
+      manualTitleEl.textContent = CONSTANTS.MANUAL_DEFAULTS.TITLE;
+      manualDescEl.textContent = CONSTANTS.MANUAL_DEFAULTS.DESCRIPTION;
+      manualHeaderEl.classList.remove("active_header_manual");
+      lastCardEl?.classList.remove("active_manual_card");
+      lastSelectedManual = null;
+    });
+  }
+
+  //===========================================================================================================================================================================================================================================
+  //    Global Event Listeners and Initialization
+  //===========================================================================================================================================================================================================================================
+
+  function handleGlobalClicks(e) {
+    const {
+      target
+    } = e;
+
+    // --- Consults Section ---
+    const consultButton = target.closest(".btn_moreInfo[data-type='consult']");
+    if (consultButton) {
+      const selectedCard = target.closest(".secondary_card");
+      const id = Number.parseInt(consultButton.dataset.id, 10);
+      const consult = consultData.find(c => c.id === id);
+      if (consult && selectedCard) {
+        const isMobile = window.innerWidth < CONSTANTS.BREAKPOINTS.MOBILE;
+        isMobile ? handleMobileConsultClick(selectedCard, consult) : handleDesktopConsultClick(selectedCard, consult);
+      }
       return;
     }
 
-    const lastCardEl = document.querySelector(`.manual_development_card[data-id="manual_${lastManualSelected.id}"]`);
-
-    const resetContent = () => {
-      manualTitleEl.textContent = MANUAL_DEFAULTS.TITLE;
-      manualDescEl.textContent = MANUAL_DEFAULTS.DESCRIPTION;
-      manualHeaderEl.classList.remove("active_header_manual");
-      lastCardEl?.classList.remove("active_manual_card");
-      lastManualSelected = null;
-    };
-
-    runFadeTransition([manualTitleEl, manualDescEl], resetContent);
-  }
-
-  // Combined event listener for the document
-  document.addEventListener("click", e => {
-    const target = e.target;
-
-    // --- Manual Section Logic ---
-    const manualButton = target.closest(".btn_moreInfo[data-type='manual']");
-    const clickedInManualCard = target.closest('.manual_development_card');
-
-    if (manualButton) {
-      const manualId = manualButton.dataset.id.split("_")[1];
-      const manual = manualData.find(m => m.id === parseInt(manualId, 10));
-      if (manual) {
-        updateManualDisplay(manual);
-      }
-      return; // Stop further processing
-    }
-
-    if (!clickedInManualCard && lastManualSelected) {
-      resetManualDisplay();
-    }
-
-    // --- Consult Section Logic ---
-    if (target.matches(".btn_moreInfo[data-type='consult']")) {
-      const selectedCard = target.closest(".secondary_card");
-      const id = parseInt(target.dataset.id, 10);
-      const consult = consultData.find(c => c.id === id);
-
-      if (!consult || !selectedCard) return;
-
-      const isMobile = window.innerWidth < 932;
-      if (isMobile) {
-        handleMobileCardClick(selectedCard, consult);
-      } else {
-        handleDesktopCardClick(selectedCard, consult);
-      }
-    }
-
-    // --- Training Section Logic ---
+    // --- Training Section ---
     const isInsideCylinder = trainingContainer?.contains(target);
     const activeCourseP = trainingContainer?.querySelector('p.active');
-
     if (isInsideCylinder && target.tagName === 'P') {
       e.stopPropagation();
-
       if (target.classList.contains('active')) return;
 
-      const id = parseInt(target.dataset.id?.split("_")[1], 10);
+      const id = Number.parseInt(target.dataset.id?.split("_")[1], 10);
       const course = trainingData.find(c => c.id === id);
-      if (!course) return;
-
-      if (activeCourseP) {
-        activeCourseP.classList.remove('active');
+      if (course) {
+        activeCourseP?.classList.remove('active');
+        target.classList.add('active');
+        updateTrainingDescription(course);
       }
-      target.classList.add('active');
-      updateTrainingDescription(course);
-
-    } else if (activeCourseP && !isInsideCylinder) {
+      return;
+    }
+    if (activeCourseP && !isInsideCylinder) {
       activeCourseP.classList.remove('active');
       resetTrainingDescription();
     }
-  });
 
-  document.addEventListener("mousedown", e => {
-    const { target } = e;
+    // --- Manuals Section ---
+    const manualButton = target.closest(".btn_moreInfo[data-type='manual']");
+    if (manualButton) {
+      const manualId = Number.parseInt(manualButton.dataset.id.split("_")[1], 10);
+      const manual = manualData.find(m => m.id === manualId);
+      if (manual) {
+        updateManualDisplay(manual);
+      }
+      return;
+    }
+    if (!target.closest('.manual_development_card') && lastSelectedManual) {
+      resetManualDisplay();
+    }
+  }
+
+  function handleGlobalMousedown(e) {
+    const {
+      target
+    } = e;
 
     // --- Navbar Logic ---
-    if (toggle?.contains(target) || toggleServices?.contains(target) || toggleTraining?.contains(target)) {
+    if (menuToggle?.contains(target) || toggleServices?.contains(target) || toggleTraining?.contains(target)) {
       return;
     }
-
-    if (nav && !nav.contains(target)) {
-      nav.classList.remove("expanded");
-      if (toggle) toggle.setAttribute("aria-expanded", "false");
+    if (mainNav && !mainNav.contains(target)) {
+      mainNav.classList.remove("expanded");
+      if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
       dropdownServices?.classList.remove("expanded");
       dropdownTraining?.classList.remove("expanded");
-      return;
-    }
-
-    if (dropdownServices && dropdownTraining && !dropdownServices.contains(target) && !dropdownTraining.contains(target)) {
+    } else if (dropdownServices && !dropdownServices.contains(target) && dropdownTraining && !dropdownTraining.contains(target)) {
       dropdownServices.classList.remove("expanded");
       dropdownTraining.classList.remove("expanded");
     }
 
-    // --- Consult Reset Logic ---
-    if (lastSelectedCard && !e.target.closest(".secondary_card")) {
+    // --- Consults Reset Logic ---
+    if (lastSelectedConsultCard && !target.closest(".secondary_card")) {
       resetMainCardToDefault();
-      cleanSelectedCard();
+      cleanSelectedConsultCard();
     }
-  });
+  }
+
+  async function initialize() {
+    setupNavbar();
+
+    [consultData, trainingData, manualData] = await Promise.all([
+      fetchData(CONSTANTS.PATHS.CONSULTS),
+      fetchData(CONSTANTS.PATHS.TRAINING),
+      fetchData(CONSTANTS.PATHS.MANUALS),
+    ]);
+
+    if (consultData.length > 0) renderConsults(consultData);
+    if (trainingData.length > 0) renderTrainingInCylinder(trainingData);
+    if (manualData.length > 0) renderManuals(manualData);
+
+    document.addEventListener("click", handleGlobalClicks);
+    document.addEventListener("mousedown", handleGlobalMousedown);
+    window.addEventListener('resize', alignManualCards);
+  }
+
+  initialize();
 });
