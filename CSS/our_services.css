@@ -127,9 +127,7 @@ nav ul.mainmenu>li>a:hover {
   justify-content: center;
   padding: 0 1rem;
   height: 2.6rem;
-  /* ← evita que se estire verticalmente sin control */
   min-height: 100%;
-  /* ← asegura que tenga altura suficiente */
   box-sizing: border-box;
   box-shadow: none;
 }
@@ -148,27 +146,6 @@ nav ul.mainmenu>li>a:hover {
   transform: rotate(-90deg);
 }
 
-.submenu_training:hover>a,
-.submenu_training:hover>.toggle_submenu {
-  background-color: var(--color-accent);
-  color: var(--color-light);
-  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.4);
-  transform: translateY(-2px);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-/* .toggle_submenu:hover{
-  box-shadow: 10px 3px 9px rgba(0, 0, 0, 0.4);
-  background-color: var(--color-accent);
-  color: var(--color-light);
-  transform: translateY(-2px);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-} */
-
-
-/* ====================
-   Submenu: Services
-==================== */
 .submenu_services {
   position: relative;
 }
@@ -618,6 +595,9 @@ nav ul.mainmenu>li>a:hover {
 /*  ======================
     Intro text CSS
     ====================== */
+.procedures_text_content {
+  max-width: 800px;
+}
 
 .procedures_text_content p:first-child {
   font-size: 1.2rem;
@@ -698,6 +678,7 @@ nav ul.mainmenu>li>a:hover {
   height: 100%;
   background-color: var(--color-light);
   margin-bottom: 1rem;
+  margin-left: 1rem;
 }
 
 /*  ======================
@@ -828,6 +809,7 @@ nav ul.mainmenu>li>a:hover {
   font-size: 1rem;
   line-height: 1.6;
   color: var(--color-dark);
+  max-width: 700px;
 }
 
 /*  ======================
@@ -1325,12 +1307,6 @@ nav ul.mainmenu>li>a:hover {
   color: var(--color-light);
 }
 
-.training_cylinder p.active_course {
-  background-color: var(--color-accent-dark);
-  box-shadow: 0 0 12px rgba(230, 115, 0, 0.8);
-  transform: translateX(6px);
-}
-
 .training_cylinder::-webkit-scrollbar {
   width: 6px;
   /*vertical scroll width*/
@@ -1558,6 +1534,8 @@ nav ul.mainmenu>li>a:hover {
   margin-bottom: 2rem;
   font-family: var(--font-body);
   justify-self: center;
+  max-width: 700px;
+  text-align: center
 }
 
 .active_header_manual {
@@ -2091,6 +2069,10 @@ nav ul.mainmenu>li>a:hover {
   font-size: 0.95rem;
 }
 
+.footer_info h2 {
+  font-style: normal;
+}
+
 .footer_info p {
   margin: 0.2rem 0;
   line-height: 1.4;
@@ -2153,6 +2135,7 @@ nav ul.mainmenu>li>a:hover {
   color: white;
   text-decoration: none;
   font-size: 1.1rem;
+  font-family: var(--font-heading);
   transition: color 0.3s ease;
 }
 

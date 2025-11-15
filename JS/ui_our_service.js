@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     MANUAL_DEFAULTS: {
       TITLE: "Elaboración de manuales operativos y procedimientos de trabajos seguros",
-      DESCRIPTION: "Description del servicio",
+      DESCRIPTION: "Definimos paso a paso los métodos de trabajo más seguros para tareas de alto riesgo, eliminando la improvisación y elevando la eficiencia sin comprometer la protección física de su equipo",
     },
     TRAINING_DEFAULTS: {
       title: "Descubra el Valor de la Prevención Especializada",
@@ -109,7 +109,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      return await response.json();
+      // Read as text and remove // comments to tolerate the current files
+      const text = await response.text();
+      const cleaned = text.replace(/\/\/.*$/gm, '').trim();
+      if (!cleaned) return [];
+      return JSON.parse(cleaned);
     } catch (error) {
       console.error(`Error loading data from ${path}:`, error);
       return []; // Return empty array on error
