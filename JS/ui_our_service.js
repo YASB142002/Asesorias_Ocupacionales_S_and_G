@@ -50,10 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Consults Section
   const consultsContainer = document.getElementById("secondary_cards_section");
-  const mainCard = document.querySelector(".main_card");
-  const mainCardTextContainer = mainCard?.querySelector(".main_card_text");
-  const mainCardTitle = mainCardTextContainer?.querySelector("h3");
-  const mainCardText = mainCardTextContainer?.querySelector("p");
 
   // Training Section
   const trainingContainer = document.querySelector('.training_cylinder');
@@ -81,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let manualData = [];
   let lastSelectedConsultCard = null;
   let lastSelectedManual = null;
+  let isCardAnimating = false;
 
   //===========================================================================================================================================================================================================================================
   //    Utility Functions
@@ -175,35 +172,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function cleanSelectedConsultCard() {
-    const activeCard = document.querySelector(".secondary_card.active_card");
-    if (!activeCard) return;
+    const cardToClean = lastSelectedConsultCard;
+    if (!cardToClean) return;
 
-    const isMobile = window.innerWidth < CONSTANTS.BREAKPOINTS.MOBILE;
-    const cardPElement = activeCard.querySelector("p");
-    const consultId = Number.parseInt(activeCard.dataset.id.split("_")[1], 10);
+    lastSelectedConsultCard = null;
+
+    const cardPElement = cardToClean.querySelector("p");
+    const consultId = Number.parseInt(cardToClean.dataset.id.split("_")[1], 10);
     const originalConsult = consultData.find(c => c.id === consultId);
 
     const resetCardState = () => {
-      activeCard.classList.remove("active_card", "secondary_fade_out");
-      activeCard.style.transform = "";
-      activeCard.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
+      cardToClean.classList.remove("active_card", "secondary_fade_out");
+      cardToClean.style.transform = "";
+      cardToClean.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
       if (cardPElement && originalConsult) {
         cardPElement.textContent = originalConsult.short_description;
       }
     };
 
-    if (isMobile) {
-      runAfterTransition(activeCard, resetCardState);
-      activeCard.classList.add("secondary_fade_out");
-    } else {
-      resetCardState();
-    }
-
-    if (mainCard) {
-      mainCard.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
-      mainCard.classList.remove("active_main_card");
-    }
-    lastSelectedConsultCard = null;
+    runAfterTransition(cardToClean, resetCardState);
+    cardToClean.classList.add("secondary_fade_out");
+    void cardToClean.offsetWidth;
   }
 
   function applyStyleSecondaryCard(selectedCard) {
@@ -212,61 +201,25 @@ document.addEventListener("DOMContentLoaded", () => {
     selectedCard.style.boxShadow = "0 0 12px var(--color-accent-dark)";
   }
 
-  function updateMainCardContent(title, description) {
-    if (!mainCard || !mainCardTextContainer || !mainCardTitle || !mainCardText) return;
+  function handleConsultClick(selectedCard, consult) {
+    if (lastSelectedConsultCard === selectedCard) {
+      cleanSelectedConsultCard();
+      return;
+    }
 
-    runAfterTransition(mainCardTextContainer, () => {
-      mainCardTitle.textContent = title;
-      mainCardText.textContent = description;
-      mainCard.style.boxShadow = "0 0 12px var(--color-accent-dark)";
-      mainCard.classList.add("active_main_card");
-      mainCardTextContainer.classList.remove("fade_out");
-    });
-
-    mainCardTextContainer.classList.add("fade_out");
-  }
-
-  function resetMainCardToDefault() {
-    if (!mainCard?.classList.contains("active_main_card")) return;
-
-    runAfterTransition(mainCardTextContainer, () => {
-      mainCardTitle.textContent = CONSTANTS.CONSULT_DEFAULTS.TITLE;
-      mainCardText.textContent = CONSTANTS.CONSULT_DEFAULTS.DESCRIPTION;
-      mainCard.style.boxShadow = "0px 3px 9px rgba(0, 0, 0, 0.4)";
-      mainCard.classList.remove("active_main_card");
-      mainCardTextContainer.classList.remove("fade_out");
-    });
-
-    mainCardTextContainer.classList.add("fade_out");
-  }
-
-  function handleMobileConsultClick(selectedCard, consult) {
-    const isAlreadyActive = selectedCard.classList.contains("active_card");
-
-    if (lastSelectedConsultCard && lastSelectedConsultCard !== selectedCard) {
+    if (lastSelectedConsultCard) {
       cleanSelectedConsultCard();
     }
 
-    if (isAlreadyActive) {
-      cleanSelectedConsultCard();
-    } else {
-      const cardPElement = selectedCard.querySelector("p");
-      runAfterTransition(selectedCard, () => {
-        applyStyleSecondaryCard(selectedCard);
-        cardPElement.textContent = consult.big_description;
-        selectedCard.classList.remove("secondary_fade_out");
-        lastSelectedConsultCard = selectedCard;
-      });
-      selectedCard.classList.add("secondary_fade_out");
-    }
-  }
-
-  function handleDesktopConsultClick(selectedCard, consult) {
-    if (lastSelectedConsultCard === selectedCard) return;
-    cleanSelectedConsultCard();
-    applyStyleSecondaryCard(selectedCard);
-    updateMainCardContent(consult.title, consult.big_description);
     lastSelectedConsultCard = selectedCard;
+    const cardPElement = selectedCard.querySelector("p");
+    runAfterTransition(selectedCard, () => {
+      applyStyleSecondaryCard(selectedCard);
+      cardPElement.textContent = consult.big_description;
+      selectedCard.classList.remove("secondary_fade_out");
+    });
+    selectedCard.classList.add("secondary_fade_out");
+    void selectedCard.offsetWidth;
   }
 
   //===========================================================================================================================================================================================================================================
@@ -294,6 +247,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (objectiveEl) objectiveEl.innerHTML = course.objective;
       if (modalityEl) modalityEl.textContent = course.modality;
       if (audienceEl) audienceEl.textContent = course.audience;
+      if (focusPoint) focusPoint.style.display = "grid";
+      if (descriptionBox) {
+        if (!window.innerWidth > CONSTANTS.BREAKPOINTS.MOBILE) descriptionBox.style.alignSelf = "flex-start";
+      };
+
+
+
 
       // Fade in main description elements
       [descriptionTitle, descriptionParagraph].forEach(el => {
@@ -309,6 +269,8 @@ document.addEventListener("DOMContentLoaded", () => {
           // Hide if resetting
           focusPoint.classList.remove('fadde-in');
           focusPoint.classList.add('fadde-out');
+          focusPoint.style.display = "none";
+          if (window.innerWidth > CONSTANTS.BREAKPOINTS.MOBILE) descriptionBox.style.alignSelf = "center";
         } else {
           // Show if a course is selected
           focusPoint.classList.remove('fadde-out');
@@ -443,8 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = Number.parseInt(consultButton.dataset.id, 10);
       const consult = consultData.find(c => c.id === id);
       if (consult && selectedCard) {
-        const isMobile = window.innerWidth < CONSTANTS.BREAKPOINTS.MOBILE;
-        isMobile ? handleMobileConsultClick(selectedCard, consult) : handleDesktopConsultClick(selectedCard, consult);
+        handleConsultClick(selectedCard, consult);
       }
       return;
     }
@@ -506,7 +467,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Consults Reset Logic ---
     if (lastSelectedConsultCard && !target.closest(".secondary_card")) {
-      resetMainCardToDefault();
       cleanSelectedConsultCard();
     }
   }
