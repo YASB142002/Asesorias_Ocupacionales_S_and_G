@@ -8,13 +8,15 @@
 
 :root {
     --color-bg: #FFFFFF;
-    --color-light: #F5F5F5;
+    --color-light: #F1F0EC;
     --color-dark: #333333;
-    --color-primary: #0C2D4A;
-    --color-accent: #F57C00;
-    --color-alert: #D32F2F;
-    --color-green: #388E3C;
-    --color-purple: #9C27B0;
+    --color-primary: #0C2E4A;
+    --color-accent: #e67300;
+    --color-accent-dark: #ce6700;
+    --color-accent-rgba: rgba(230, 115, 0, 0.6);
+    /* #e67300 */
+    --color-accent-dark-rgba: rgba(206, 103, 0, 0.8);
+    /* #ce6700 */
     --font-heading: 'Montserrat', sans-serif;
     --font-body: 'Roboto', sans-serif;
     --font-main: 'Roboto', sans-serif;
@@ -59,17 +61,23 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 2rem;
-    max-height: 100px;
+    max-height: 130px;
     font-family: var(--font-main);
 }
 
+/* ====================
+   Logo
+==================== */
 .logo img {
-    height: 110px;
+    height: 150px;
     width: auto;
     object-fit: contain;
-    border-radius: 4rem
+    border-radius: 4rem;
 }
 
+/* ====================
+   Menu
+==================== */
 nav ul.mainmenu {
     list-style: none;
     display: flex;
@@ -81,105 +89,391 @@ nav ul.mainmenu {
 nav ul.mainmenu>li>a {
     color: var(--color-light);
     text-decoration: none;
-    transition: var(--transition-fast);
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: 600;
     font-family: var(--font-heading);
-
+    transition: var(--transition-fast);
 }
 
-nav ul.mainmenu>li>a:hover {
+nav ul.mainmenu>li:hover>a,
+nav ul.mainmenu>li:hover .arrow.arrow_services {
     color: var(--color-accent);
 }
 
-/*  ====================
-    SubMenu Services CSS
-    ==================== */
 
-.submenu_Services {
-    position: relative;
+
+/* ====================
+   Submenu arrows
+==================== */
+
+.toggle_mainmenu {
+    background: none;
+    border: none;
+    color: var(--color-light);
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
 }
 
-.dropdown_Services {
+.toggle_submenu {
+    background: none;
+    border: none;
+    color: var(--color-dark);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    height: 2.6rem;
+    min-height: 100%;
+    box-sizing: border-box;
+    box-shadow: none;
+}
+
+.arrow {
+    margin-left: 0.3rem;
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+}
+
+.submenu_services:hover .arrow.arrow_services {
+    transform: rotate(180deg);
+}
+
+.submenu_training:hover .arrow.arrow_training {
+    transform: rotate(-90deg);
+}
+
+.submenu_services {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown_services {
     position: absolute;
     top: 100%;
     left: 0;
+    display: none;
     background-color: var(--color-light);
     color: var(--color-dark);
     list-style: none;
-    padding: 0.5rem 0;
+    padding: 0;
     margin: 0;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     opacity: 0;
     transform: translateY(10px);
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    border-radius: 1rem;
+    min-width: 200px;
 }
 
-.submenu_Services:hover .dropdown_Services {
+.submenu_services:hover .arrow_services {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+    color: var(--color-light);
+    /* mantiene el color original */
+}
+
+.toggle_mainmenu:hover+.dropdown_services,
+.toggle_mainmenu:focus+.dropdown_services {
+    display: block;
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
 }
 
-.dropdown_Services li a {
+.submenu_services:hover .dropdown_services {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* ====================
+   Submenu: Training
+==================== */
+.submenu_training {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 3rem;
+    padding: 0 1rem;
+}
+
+.submenu_training a {
+    flex: 1;
+    padding: 0.75rem 0;
+    text-decoration: none;
+    color: var(--color-dark);
+}
+
+.submenu_training>a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    color: var(--color-light);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-family: var(--font-heading);
+    flex: 1;
+    padding-right: 0.5rem;
+}
+
+.dropdown_training {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    display: none;
+    background-color: var(--color-light);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1010;
+    min-width: 200px;
+}
+
+.submenu_training:hover .dropdown_training {
+    display: block;
+}
+
+/* ====================
+   Submenu links
+==================== */
+.dropdown_services li {
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown_training li {
+    margin: 0;
+}
+
+.dropdown_services li a,
+.dropdown_training li a {
     display: block;
     padding: 0.5rem 1rem;
     color: var(--color-dark);
     text-decoration: none;
-    transition: var(--transition-medium);
+    font-size: 1rem;
+    font-family: var(--font-heading);
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.dropdown_Services li a:hover {
+.dropdown_services li a:hover,
+.dropdown_training li a:hover {
     background-color: var(--color-accent);
     color: var(--color-light);
-    text-shadow: 0 0 1px #FFFFFF, 0 0 2px #FFFFFF;
-    transition-duration: 0.5s;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.arrow {
-    transition: transform 0.3s ease;
-    margin-left: 0.3rem;
-    font-size: 0.7rem;
+.submenu_training:hover>a,
+.submenu_training:hover .toggle_submenu {
+    background-color: var(--color-accent);
+    color: var(--color-light);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.submenu_Services:hover .arrow {
-    transform: rotate(180deg);
+
+.dropdown_services li:first-child a,
+.dropdown_training li:first-child a {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1em;
+}
+
+.dropdown_services li:last-child a,
+.dropdown_training li:last-child a {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1em;
 }
 
 /*  ======================
     Contact now button CSS
     ====================== */
 
-.boton_contact {
+#first_button_navbar {
     background-color: var(--color-accent);
     color: var(--color-light);
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    font-weight: 600;
-    font-family: var(--font-heading);
-    transition: var(--transition-fast);
-    display: inline-block;
-    text-align: center;
-}
-
-#first_button_navbar {
-    background-color: white;
-    color: var(--color-primary);
-    border: 2px solid var(--color-accent);
+    border: 2px solid var(--color-accent-dark);
     padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
+    border-radius: 4px;
     text-decoration: none;
-    font-weight: 600;
+    font-family: var(--font-body);
+    font-weight: 400;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #first_button_navbar:hover {
-    background-color: var(--color-accent);
-    color: white;
+    background-color: var(--color-accent-dark);
+    color: var(--color-dark);
+}
+
+/* ====================
+   Responsive Header
+==================== */
+
+#menu_toggle {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--color-light);
+    cursor: pointer;
+    display: none;
+    /* visible solo en móviles */
+}
+
+@media (max-width: 768px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 1rem;
+        position: relative;
+        z-index: 20;
+    }
+
+    .logo img {
+        height: 80px;
+    }
+
+    #menu_toggle {
+        font-size: 2rem;
+        background: none;
+        border: none;
+        color: var(--color-light);
+        cursor: pointer;
+        display: block;
+    }
+
+    #first_button_navbar {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        background-color: var(--color-accent);
+        color: var(--color-light);
+        border-radius: 4px;
+        text-decoration: none;
+    }
+
+    #main_nav {
+        background-color: var(--color-primary);
+        border-top: 1px solid var(--color-accent);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        transition: max-height 0.4s ease, opacity 0.4s ease;
+        padding: 1rem 0;
+        z-index: 30;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+    }
+
+    #main_nav:not(.expanded) .mainmenu {
+        pointer-events: none;
+        opacity: 0;
+    }
+
+    #main_nav.expanded .mainmenu {
+        pointer-events: auto;
+        opacity: 1;
+    }
+
+
+    #main_nav.expanded {
+        max-height: 1000px;
+        opacity: 1;
+        overflow: visible;
+    }
+
+    #main_nav:not(.hidden) {
+        display: block;
+    }
+
+    nav ul.mainmenu {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    nav ul.mainmenu>li>a {
+        font-size: 1.2rem;
+        text-align: center;
+        color: var(--color-light);
+        text-decoration: none;
+    }
+
+    .dropdown_services {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, opacity 0.3s ease;
+    }
+
+    .dropdown_services.expanded {
+        max-height: 1000px;
+        opacity: 1;
+        z-index: 30;
+        overflow: visible;
+        display: block;
+    }
+
+    .submenu_training {
+        position: relative;
+        overflow: visible;
+    }
+
+    .dropdown_training {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+        max-height: 0;
+        overflow-y: auto;
+        transform: scaleY(0);
+        transform-origin: top;
+        z-index: 40;
+        /* background-color: var(--color-primary); */
+    }
+
+    .dropdown_training.expanded {
+        max-height: 1000px;
+        opacity: 1;
+        transform: scaleY(1);
+        display: block;
+    }
+
+    .dropdown_training::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .dropdown_training::-webkit-scrollbar-thumb {
+        background-color: var(--color-accent);
+        border-radius: 3px;
+    }
+
+    .submenu_training:hover .arrow.arrow_training {
+        transform: rotate(-180deg);
+    }
+
+
 }
 
 /* ======================================================
@@ -198,8 +492,7 @@ nav ul.mainmenu>li>a:hover {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
     font-family: var(--font-body);
     color: var(--color-dark);
     background-color: transparent;
@@ -217,14 +510,16 @@ nav ul.mainmenu>li>a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('../ASSETS/IMG/mecano_aimplas.jpg');
+    background-image: url('../ASSETS/IMG/INDEX/mecano_aimplas.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-color: rgba(0, 0, 0, 0.819);
     z-index: -1;
-    opacity: 0.7;
+    opacity: 1;
+    filter: brightness(40%);
+    background-color: rgba(0, 0, 0, 0.6);
+    mix-blend-mode: multiply;
 }
 
 #welcome_intruction>* {
@@ -233,26 +528,55 @@ nav ul.mainmenu>li>a:hover {
 }
 
 #welcome_intruction h2 {
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-size: 2.4rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    color: var(--color-primary);
+    color: var(--color-light);
 }
 
 #welcome_intruction p {
     font-size: 1.2rem;
     line-height: 1.6;
-    color: var(--color-dark);
-
+    color: var(--color-bg);
+    font-family: var(--font-body);
 }
 
 #welcome_intruction .text_box {
-    background-color: rgba(255, 255, 255, 0.85);
     padding: 2rem 3rem;
     border-radius: 1rem;
     max-width: 800px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    #welcome_intruction {
+        padding: 3rem 1rem;
+        align-items: center;
+        text-align: center;
+    }
+
+    #welcome_intruction h2 {
+        font-size: 1.8rem;
+        margin-bottom: 0.75rem;
+    }
+
+    #welcome_intruction p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    #welcome_intruction .text_box {
+        padding: 1.5rem 1rem;
+        max-width: 100%;
+        box-shadow: none;
+    }
+
+    #welcome_intruction::before {
+        background-attachment: scroll;
+        /* evita bugs en móviles */
+        background-position: center;
+    }
 }
 
 /* ======================================================
@@ -264,10 +588,21 @@ nav ul.mainmenu>li>a:hover {
    ====================================================== */
 
 #about_Services {
-    background-color: white;
-    text-align: center;
-    padding: 5rem 2rem;
+    background-color: var(--color-bg);
+    padding: 12rem 2rem;
     font-family: var(--font-body);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    justify-content: space-around;
+    gap: 2rem;
+    flex-wrap: nowrap;
+}
+
+.about_services_text {
+    max-width: 600px;
+    flex: 1 1 400px;
 }
 
 #about_Services h3 {
@@ -296,44 +631,68 @@ nav ul.mainmenu>li>a:hover {
 }
 
 /*  ======================
-    Contact buttons CSS
+    Service IMG CSS
     ====================== */
 
-.intro_service_buttons {
+.about_services_img {
+    flex: 0 0 auto;
+    width: 400px;
+    height: auto;
+    margin: 0;
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
 }
 
-.boton_services {
-    background-color: var(--color-primary);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
+.about_services_img img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    /* Mantiene proporción cuadrada */
+    object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.boton_services:hover {
-    background-color: var(--color-accent);
-}
+@media (max-width: 768px) {
+    #about_Services {
+        flex-direction: column;
+        text-align: center;
+        padding: 3rem 1rem;
+        gap: 2rem;
+    }
 
-.boton_contact {
-    background-color: white;
-    color: var(--color-primary);
-    border: 2px solid var(--color-accent);
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+    .about_services_text {
+        max-width: 100%;
+        flex: 1 1 auto;
+    }
 
-.boton_contact:hover {
-    background-color: var(--color-accent);
-    color: white;
+    #about_Services h2 {
+        font-size: 1.8rem;
+    }
+
+    #about_Services h3 {
+        font-size: 1rem;
+    }
+
+    #about_Services p {
+        font-size: 1rem;
+        margin: 0 0 2rem 0;
+    }
+
+    .about_services_img {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .about_services_img img {
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 1 / 1;
+        height: auto;
+    }
 }
 
 /* ======================================================
@@ -345,26 +704,33 @@ nav ul.mainmenu>li>a:hover {
    ====================================================== */
 
 #our_little_services {
-    background-color: #0f1a2c;
+    background-color: var(--color-primary);
     padding: 5rem 2rem;
     display: flex;
     flex-direction: column;
     gap: 4rem;
+    align-items: center;
 }
 
 .service_item {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.2fr 1fr;
+    grid-template-rows: auto 0.7fr;
     gap: 0.1rem;
     align-items: center;
+    width: 100%;
     max-width: 1500px;
-    margin-bottom: 5rem;
+    margin: 0 auto 5rem auto;
     /*This can control the distance between every service_item*/
-    color: white;
 
 }
 
+/*  ======================
+    Text content in every service CSS
+    ====================== */
+
 .service_number_and_title {
+    all: unset;
     grid-column: 1 / -1;
     display: flex;
     gap: 1rem;
@@ -375,9 +741,9 @@ nav ul.mainmenu>li>a:hover {
     margin-bottom: 7rem;
 }
 
-/*  ======================
-    Text content in every service CSS
-    ====================== */
+.service_text_content_title {
+    all: unset;
+}
 
 .service_text_content {
     display: flex;
@@ -396,47 +762,108 @@ nav ul.mainmenu>li>a:hover {
     font-size: 1.8rem;
     font-weight: 700;
     margin: 0;
-    color: white;
+    color: var(--color-bg);
 }
 
 .service_Description {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #d0d0d0;
+    color: var(--color-bg);
 }
 
 /*  ======================
     Image in every service CSS
     ====================== */
 
-.service_image img {
+.service_image {
+    margin: 0;
     width: 100%;
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    height: 100%;
+    overflow: hidden;
 }
 
-.our_little_service_button {
-    grid-column: 1 / -1;
-    margin-top: 1rem;
-    text-align: left;
+.service_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /*  ======================
     Info button CSS
     ====================== */
 
-.boton_More_Info {
+
+.our_little_service_button a {
+    display: inline-block;
+    font-family: var(--font-body);
     background-color: var(--color-primary);
-    color: white;
+    color: var(--color-bg);
     padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
+    border-radius: 4px;
     font-weight: 600;
-    transition: background-color 0.3s ease;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.boton_More_Info:hover {
+.our_little_service_button a:hover {
     background-color: var(--color-accent);
+    color: var(--color-light);
+}
+
+
+@media (max-width: 768px) {
+    .service_item {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 2rem;
+        margin-bottom: 3rem;
+        text-align: left;
+    }
+
+    .service_number_and_title {
+        justify-content: center;
+        margin-bottom: 2rem;
+        font-size: 0.9rem;
+        flex-wrap: wrap;
+    }
+
+    .service_text_content {
+        align-items: center;
+    }
+
+    .service_text_content h2 {
+        font-size: 1.5rem;
+    }
+
+    .service_text_content h3 {
+        font-size: 1.2rem;
+    }
+
+    .service_Description {
+        font-size: 1rem;
+        line-height: 1.5;
+        max-width: 90%;
+    }
+
+    .service_image {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
+    .service_image img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+    }
+
+    .our_little_service_button {
+        text-align: center;
+    }
 }
 
 /* ======================================================
@@ -444,7 +871,7 @@ nav ul.mainmenu>li>a:hover {
    ====================================================== */
 
 /* ======================================================
-   SECTION #5: our_little_services CSS
+   SECTION #5: Why_Us CSS
    ====================================================== */
 
 #why_Us {
@@ -521,8 +948,54 @@ nav ul.mainmenu>li>a:hover {
     margin-top: -1.5rem;
 }
 
+@media (max-width: 768px) {
+    #why_Us {
+        padding: 3rem 1rem;
+    }
+
+    .Why_Us_Question h2 {
+        font-size: 1.8rem;
+    }
+
+    .why_Us_Content {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .why_Us_Image {
+        width: 100%;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
+    .why_Us_Image img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        aspect-ratio: 4 / 3;
+    }
+
+    .why_Us_Benefits {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+
+    .why_Us_Benefits h3 {
+        font-size: 1.2rem;
+        margin-top: 0.5rem;
+    }
+
+    .why_Us_Benefits p {
+        font-size: 1rem;
+        margin-top: 0;
+        max-width: 90%;
+    }
+}
+
 /* ======================================================
-   END SECTION #5: our_little_services CSS
+   END SECTION #5: Why_Us CSS
    ====================================================== */
 
 /* ======================================================
@@ -530,73 +1003,175 @@ nav ul.mainmenu>li>a:hover {
    ====================================================== */
 
 #contact_Us_Now {
-    background-color: #f7f8f9;
-    padding: 5rem;
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    gap: 0.2rem;
+    padding: 8rem 0rem;
+    color: var(--color-light);
     display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    align-items: center;
     justify-content: center;
-    margin: 0 auto;
 }
 
-.contact_Us_Content {
-    flex: 1 1 50%;
+.cta_content {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    background-image: url("../ASSETS/IMG/INDEX/CTA.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding: 4rem;
+    border-radius: 8px;
+    max-width: 90%;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta_content::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+}
+
+.cta_content>* {
+    position: relative;
+    z-index: 1;
+}
+
+.cta_header {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    align-items: flex-start;
+    background-color: transparent;
+    padding-right: 4rem;
+    height: auto;
+    justify-content: center;
 }
 
 /*  ======================
-    Contact Us text CSS
+    CTA title and content CSS
     ====================== */
 
-.contact_Us_Content h2 {
-    font-size: 2rem;
+.cta_title {
+    font-size: 2.2rem;
+    font-family: var(--font-heading);
     font-weight: 700;
+    color: var(--color-light);
+    margin-bottom: 0.5rem;
+}
+
+.cta_description {
+    font-size: 1.2rem;
+    font-family: var(--font-body);
+    line-height: 1.6;
+    color: var(--color-light);
+}
+
+/*  ======================
+    CTA buttons CSS
+    ====================== */
+
+.cta_buttons {
+    display: flex;
+    gap: 3rem;
+    flex-direction: row;
+    align-items: center;
+}
+
+.btn_schedule,
+.btn_questions {
+    font-size: 1rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+    display: inline-block;
+    text-align: center;
+    width: 220px;
+    height: 48px;
+    padding: 0;
+    line-height: 48px;
+}
+
+.btn_schedule {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+}
+
+.btn_schedule:hover {
+    background-color: #e66c00;
+    color: var(--color-light);
+}
+
+.btn_questions {
+    background-color: transparent;
+    border: 2px solid var(--color-light);
+    color: var(--color-light);
+}
+
+.btn_questions:hover {
+    background-color: var(--color-light);
     color: var(--color-primary);
 }
 
-.contact_Us_Content p {
-    font-size: 1.1rem;
-    color: var(--color-dark);
-    line-height: 1.6;
-    margin-top: -2.5rem;
-}
+@media (max-width: 768px) {
+    #contact_Us_Now {
+        padding: 8rem 1rem;
+        display: flex;
+        flex-direction: column;
+        max-height: none;
+        height: auto;
+    }
 
-/*  ======================
-    Contact button CSS
+    .cta_content {
+        display: flex;
+        flex-direction: column;
+        max-height: none;
+        height: auto;
+        padding: 4rem;
+        gap: 4rem;
+        text-align: center;
+        width: 100%;
+        max-width: none;
+    }
+
+    .cta_header {
+        max-height: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-right: 0;
+        flex-wrap: unset;
+    }
+
+    .cta_title {
+        font-size: 1.8rem;
+    }
+
+    .cta_description {
+        font-size: 1rem;
+    }
+
+    /*  ======================
+    CTA contact button CSS
     ====================== */
 
-.boton_contact {
-    background-color: var(--color-primary);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-    width: fit-content;
-}
+    .cta_buttons {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        align-items: center;
+    }
 
-.boton_contact:hover {
-    background-color: var(--color-accent);
-}
-
-/*  ======================
-    Conctact Us Img CSS
-    ====================== */
-
-.contact_Us_Img {
-    flex: 1 1 40%;
-}
-
-.contact_Us_Img img {
-    width: 100%;
-    max-width: 700px;
-    border-radius: 1rem;
-    object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    .btn_schedule,
+    .btn_questions {
+        width: 100%;
+        max-width: 280px;
+    }
 }
 
 /* ======================================================
@@ -606,17 +1181,16 @@ nav ul.mainmenu>li>a:hover {
 /* ======================================================
    Footer CSS
    ====================================================== */
-
 #site_footer {
-    background-color: #0f1a2c;
+    background-color: var(--color-primary);
     color: white;
-    padding: 4rem 2rem;
+    padding: 4rem 0;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between;
-    /* gap: 2rem; */
+    gap: 2rem;
     font-family: var(--font-body);
-    border-top: 1px solid #ffffff33;
+    border-top: none;
     position: relative;
 }
 
@@ -629,21 +1203,40 @@ nav ul.mainmenu>li>a:hover {
     margin-bottom: 2rem;
 }
 
-
-/*  ======================
-    Footer logo img CSS
-    ====================== */
-
-.footer_logo img {
-    width: 120px;
-    height: auto;
-    border-radius: 0.5rem;
-    margin-right: 2rem;
+.main_footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    width: 100%;
 }
 
-/*  ======================
-    Footer Text info CSS
-    ====================== */
+/* ======================
+  Footer Logo CSS
+====================== */
+
+.footer_logo {
+    flex: 1 1 120px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0%;
+    padding: 0%;
+    gap: 0.5rem;
+    max-width: 150px;
+}
+
+.footer_logo img {
+    height: 110px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 4rem;
+}
+
+/* ======================
+   Contact info CSS
+====================== */
 
 .footer_info {
     flex: 1 1 200px;
@@ -651,24 +1244,47 @@ nav ul.mainmenu>li>a:hover {
     flex-direction: column;
     gap: 0.3rem;
     font-size: 0.95rem;
-    /* margin-top: -3rem; */
+}
+
+.footer_info h2 {
+    font-style: normal;
 }
 
 .footer_info p {
     margin: 0.2rem 0;
-    /* decrease the vertical space */
     line-height: 1.4;
-    /* Just in case */
 }
 
-/*  ======================
-    Footer Social Media CSS
-    ====================== */
+.footer_info a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.footer_info a:hover {
+    text-decoration: underline;
+}
+
+/* ======================
+   Social media CSS
+====================== */
+
+.footer_navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 10rem;
+    height: auto;
+    padding-right: 2rem;
+}
 
 .footer_social {
+    flex: 1 1 160px;
     display: flex;
     gap: 1rem;
+    justify-content: flex-end;
+    align-items: center;
     margin-top: 1rem;
+
 }
 
 .footer_social a {
@@ -681,22 +1297,22 @@ nav ul.mainmenu>li>a:hover {
     color: var(--color-accent);
 }
 
-/*  ======================
-    Footer Links CSS
-    ====================== */
-
+/* ======================
+   Links CSS
+====================== */
 .footer_links {
-    flex: 1 1 200px;
+    flex: 1 1 160px;
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 1rem, 2rem;
+    flex-direction: row;
+    gap: 4rem;
+    margin-top: 1rem;
 }
 
 .footer_links a {
     color: white;
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
+    font-family: var(--font-heading);
     transition: color 0.3s ease;
 }
 
@@ -704,18 +1320,146 @@ nav ul.mainmenu>li>a:hover {
     color: var(--color-accent);
 }
 
+.footer_logo,
+.footer_info,
+.footer_social,
+.footer_links {
+    flex: 1 1 200px;
+}
+
 /*  ======================
-    Footer Legal CSS
+    Footer Legal Section CSS
     ====================== */
 
 .footer_legal {
-    width: 100%;
     text-align: center;
-    margin-top: 2rem;
     font-size: 0.85rem;
     color: #c0c0c0;
+    margin-top: 2rem;
 }
 
+/*  ======================
+    Phone responsive CSS
+    ====================== */
+
+@media (max-width: 768px) {
+
+    #site_footer {
+        display: block;
+        width: 100%;
+        max-width: 768px;
+        box-sizing: border-box;
+        padding: 3rem 1rem;
+        background-color: var(--color-primary);
+        color: var(--color-light);
+        height: auto;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .main_footer {
+        flex: unset;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .footer_logo,
+    .footer_info,
+    .footer_social,
+    .footer_links {
+        flex: none;
+        max-width: 100%;
+        align-items: flex-start;
+        text-align: center;
+    }
+
+    /*  ======================
+    Footer logo CSS
+    ====================== */
+
+    .footer_logo {
+        padding: 0;
+        max-width: 120px;
+    }
+
+    .footer_logo img {
+        height: 120px;
+        border-radius: 3rem;
+    }
+
+    /*  ======================
+    Footer information CSS
+    ====================== */
+
+    .footer_info {
+        font-size: 0.9rem;
+        flex-direction: column;
+    }
+
+    .footer_navigation {
+        height: auto;
+        max-height: none;
+        overflow: visible;
+    }
+
+    /*  ======================
+    Links and social container CSS
+    ====================== */
+
+    .footer_navigation>* {
+        display: block;
+        min-height: 1rem;
+        flex-shrink: 0;
+        position: relative;
+        float: none;
+
+    }
+
+    /*  ======================
+    Footer social media CSS
+    ====================== */
+
+    .footer_social {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .footer_social a {
+        font-weight: 400px;
+    }
+
+    /*  ======================
+    Footer links CSS
+    ====================== */
+
+    .footer_links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .footer_links a {
+        font-size: 1rem;
+    }
+
+    /*  ======================
+    Footer legal Section CSS
+    ====================== */
+
+    .footer_legal {
+        height: 20rem;
+        display: block;
+        width: 100%;
+        font-size: 0.8rem;
+        margin-top: 1.5rem;
+    }
+}
 
 /* ======================================================
    END Footer CSS
