@@ -1,33 +1,281 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Inicio del sitio institucional de S&G Asesorías Ocupacionales" />
-  <title>Servicios | S&G Asesorías</title>
-  <link rel="stylesheet" href="css/estilos.css" />
+  <title>Asesorías S&G | Servicios</title>
+  <link rel="stylesheet" href="css/our_services.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
   <header>
-    <nav>
-      <ul>
+    <figure class="logo">
+      <a href="index.html">
+        <img src="ASSETS/IMG/BRANDING/Logo_200x200.png" alt="Logo de S&G Asesorías Ocupacionales" />
+      </a>
+    </figure>
+
+    <button id="menu_toggle" aria-label="Abrir menú">☰</button>
+
+    <nav id="main_nav">
+      <ul class="mainmenu">
         <li><a href="index.html">Inicio</a></li>
-        <li><a href="nosotros.html">Nosotros</a></li>
-        <li><a href="servicios.html">Servicios</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="about_Us.html">Nosotros</a></li>
+
+        <li class="submenu_services">
+          <a href="our_services.html">Servicios</a>
+
+          <button class="toggle_mainmenu" aria-label="Mostrar menú">
+            <i class="fas fa-chevron-down arrow arrow_services"></i>
+          </button>
+
+          <ul class="dropdown_services">
+            <li><a href="our_Services.html">Trámites</a></li>
+            <li><a href="our_Services.html">Asesorías</a></li>
+
+            <li class="submenu_training">
+              <a href="our_Services.html">Capacitaciones</a>
+
+              <button class="toggle_submenu" aria-label="Mostrar submenú">
+                <i class="fas fa-chevron-down arrow arrow_training"></i>
+              </button>
+
+              <ul class="dropdown_training">
+                <li><a href="our_Services.html">Ley 618 y su Reglamento </a></li>
+                <li><a href="our_Services.html">Higiene Ocupacional</a></li>
+                <li><a href="our_Services.html">Prevención de Riesgos Laborales</a></li>
+                <li><a href="our_Services.html">Prevención de Riesgos Químicos y Biológicos</a></li>
+                <li><a href="our_Services.html">Prevención de Riesgos Ergonómicos y Psicosociales</a></li>
+                <li><a href="our_Services.html">Brigadas de Emergencia</a></li>
+              </ul>
+            </li>
+
+            <li><a href="our_Services.html">Elaboración de Manuales</a></li>
+            <li><a href="our_Services.html">Sistema Globalmente Armonizado - SGA</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
+
+    <aside class="contact_cta">
+      <a href="contact_Us.html" class="boton_contact" id="first_button_navbar"> Contactar</a>
+    </aside>
   </header>
 
   <main>
-    <section>
-      <h1>Bienvenido a S&G Asesorías Ocupacionales</h1>
-      <p>Soluciones técnicas en higiene, seguridad química y gestión ocupacional.</p>
+    <section class="intro_services">
+      <article class="intro_text_services">
+        <h1>Seguridad y Gestión Ocupacional con precisión</h1>
+        <p>En Asesorías Ocupacionales S&G, convertimos el cumplimiento normativo en una ventaja estratégica. Nos
+          especializamos en brindar soluciones integrales de Higiene y Seguridad Ocupacional, con un enfoque experto en
+          la Gestión Responsable de Sustancias Químicas.</p>
+        <aside class="btn_contact_us">
+          <a href="contact_Us.html" class="boton_contact" id="btn_intro_contact">Contactanos!</a>
+        </aside>
+      </article>
+      <figure class="intro_image_services">
+        <img src="../ASSETS/IMG/OURSERVICESIMG/IntroIMG.png" id="img0"
+          alt="Imagen representativa de servicios ocupacionales" />
+        <!-- <img src="ASSETS/IMG/img_no_found.jpg" id="img1" alt="2da imagen representativa de servicios ocupacionales" /> -->
+      </figure>
     </section>
+
+    <section class="procedures_service">
+      <article class="procedures_text_content">
+        <p>Trámites</p>
+        <h2>Licencia de Higiene y Seguridad.</h2>
+        <p>Nuestro servicio está enfocado en la preparación y revisión exhaustiva de toda la documentación requerida, la
+          gestión directa del expediente y el seguimiento continuo del proceso, asegurando el cumplimiento de la
+          Ley 618 y su Reglamento. Con nuestras asesorías usted podrá minimizar los plazos de cumplimiento y evitar
+          rechazos de su documentación, permitiendo que su empresa opere con la tranquilidad y legalidad que exige el
+          marco normativo nacional.</p>
+      </article>
+
+      <section class="procedures_service_benefits">
+        <article class="benefit_item">
+          <div class="benefit_icon" aria-hidden="true">
+            <i class="fa-solid fa-clipboard-list" aria-hidden="true"></i>
+          </div>
+
+          <h3>
+            Trámites Legales y Permisos
+          </h3>
+
+          <div class="decoration_line" aria-hidden="true"></div>
+          <p>
+            Obtención de la licencia de Higiene y Seguridad (Solicitudes nuevas o renovaciones).
+          </p>
+        </article>
+
+        <article class="benefit_item">
+          <div class="benefit_icon" aria-hidden="true">
+            <i class="fa-solid fa-file-circle-question" aria-hidden="true"></i>
+          </div>
+
+          <h3>
+            Comisión Mixta (CMHST)
+          </h3>
+
+          <div class="decoration_line" aria-hidden="true"></div>
+          <p>
+            Garantizamos la conformación de la Comisión Mixta de acuerdo al numero de empleados de su empresa.
+          </p>
+        </article>
+
+        <article class="benefit_item">
+          <div class="benefit_icon" aria-hidden="true">
+            <i class="fa-solid fa-certificate" aria-hidden="true"></i>
+          </div>
+
+          <h3>
+            Reglamento Técnico Organizativo (RTO)
+          </h3>
+
+          <div aria-hidden="true"></div>
+          <p>Elaboramos su reglamento interno de acuerdo a lo establecido en el Art. 18 de la Ley 618.</p>
+        </article>
+      </section>
+    </section>
+
+    <section class="consulting_section">
+      <header class="consulting_title">
+        <h2>Asesorías en Higiene y Seguridad Ocupacional</h2>
+        <p>Ofrecemos soluciones Técnicas y Gestión documental para garantizar la protección continua de sus
+          trabajadores y el cumplimiento de la legislación laboral.</p>
+      </header>
+
+      <section class="cards_section">
+        <section class="secondary_cards_section" id="secondary_cards_section">
+          <!-- This is the container where all secondary consulting service will be add with js -->
+        </section>
+      </section>
+    </section>
+
+    <section class="training_section">
+      <article class="training_text_cylinder">
+        <h3>Capacitaciones Técnicas</h3>
+        <section class="training_cylinder">
+          <!-- In this container is where all training courser will be adde with js -->
+        </section>
+      </article>
+      <article class="training_text_description">
+        <h2>Descubra el Valor de la Prevención Especializada</h2>
+        <p>
+          Seleccione una de nuestras Capacitaciones Técnicas en el menú para conocer el enfoque y los
+          beneficios específicos que aportará a la protección de su personal y al cumplimiento legal de su empresa.
+          Todos nuestros programas están diseñados para ser aplicables de inmediato en su entorno laboral.
+        </p>
+
+        <aside class="training_text_focuspoint fadde-out" id="training_text_focuspoint">
+
+          <i class="fa-solid fa-bullseye" aria-hidden="true"></i>
+          <p id="training_objective">Objetivos del curso</p>
+
+          <i class="fa-solid fa-chalkboard" aria-hidden="true"></i>
+          <p id="training_modality">Modalidad de la capacitación</p>
+
+          <i class="fa-solid fa-users" aria-hidden="true"></i>
+          <p id="training_audience">Dirigido a</p>
+        </aside>
+      </article>
+    </section>
+
+    <section class="manual_development_section">
+      <header class="manual_development_header">
+        <article class="manual_development_header_text">
+          <h3>Manuales</h3>
+          <h2>Elaboración de Manuales Operativos y Procedimientos de Trabajos Seguros</h2>
+          <p id="manual_development_description_tag">Definimos paso a paso los métodos de trabajo más seguros para
+            tareas de alto riesgo, eliminando la improvisación y elevando la eficiencia sin comprometer la protección
+            física de su equipo</p>
+        </article>
+      </header>
+
+      <section class="manual_development_description_container">
+        <!-- This section will include all manual dynamically article.class="manual_development_card"-->
+      </section>
+    </section>
+
+    <section class="SGA_section">
+
+      <article class="sga_text_content">
+        <h3>SGA</h3>
+        <h2>Implementación del Sistema Globalmente Armonizado</h2>
+        <p>Alinee su operación con la normativa química mundial. Brindamos la asesoría técnica para el etiquetado y la
+          documentación conforme al SGA, facilitando el comercio, la inspección y, sobre todo, la comunicación clara de
+          los peligros a todos sus colaboradores</p>
+      </article>
+
+      <figure class="sga_image">
+        <img src="ASSETS/IMG/OURSERVICESIMG/SGA.jpg" alt="Imagen representativa del SGA" />
+      </figure>
+    </section>
+
+    <section class="Cta_section">
+      <article class="cta_content">
+        <header class="cta_header">
+          <h2 class="cta_title">Transforma tu seguridad</h2>
+          <p class="cta_description">
+            Conecta con nuestro experto en higiene y seguridad ocupacional para una evaluación integral.
+          </p>
+        </header>
+
+        <nav class="cta_buttons">
+          <a href="contact_Us.html" class="btn_schedule">Agendar Asesoria Directa</a>
+        </nav>
+      </article>
+    </section>
+
   </main>
 
-  <footer>
-    <p>&copy; 2025 S&G Asesorías Ocupacionales. Todos los derechos reservados.</p>
+  <footer id="site_footer">
+    <section class="main_footer">
+      <figure class="footer_logo">
+        <img src="ASSETS/IMG/BRANDING/Logo_200x200.png" alt="Logo de S&G Asesorías Ocupacionales" />
+      </figure>
+
+      <address class="footer_info">
+        <h2>Asesorías Ocupacionales S&G</h2>
+        <p>Managua, Nicaragua</p>
+        <p>Correo: <a href="mailto:contacto@sgasesorias.com">contacto@asesoriassg.com</a></p>
+        <p>Teléfono: <a href="tel:+50588042988">+505 8804 2988</a></p>
+      </address>
+
+      <section class="footer_navigation">
+        <nav class="footer_links">
+          <a href="index.html">Inicio</a>
+          <a href="about_Us.html">Nosotros</a>
+          <a href="our_Services.html">Servicios</a>
+          <a href="contact_Us.html">Contacto</a>
+        </nav>
+
+        <nav class="footer_social">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook" rel="noopener">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram" rel="noopener">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn" rel="noopener">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube" rel="noopener">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </nav>
+      </section>
+    </section>
+
+    <small class="footer_legal">
+      &copy; 2025 Asesorías Ocupacionales S&G. Todos los derechos reservados.
+    </small>
   </footer>
+  <script src="JS/ui_our_service.js"></script>
 </body>
+
 </html>

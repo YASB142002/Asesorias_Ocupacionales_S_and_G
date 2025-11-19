@@ -1,0 +1,2319 @@
+/* ==========================================================================
+   Proyect: S&G Seguridad Ocupacional
+   Page: Our Services (our_Services.html)
+   Autor: YASB
+   Date: 03/11/2025
+   Description: Base CSS stylesheet for the our service page of S&G Seguridad Ocupacional
+   ========================================================================== */
+
+:root {
+  --color-bg: #FFFFFF;
+  --color-light: #F1F0EC;
+  --color-dark: #333333;
+  --color-primary: #0C2E4A;
+  --color-accent: #e67300;
+  --color-accent-dark: #ce6700;
+  --color-accent-rgba: rgba(230, 115, 0, 0.6);
+  /* #e67300 */
+  --color-accent-dark-rgba: rgba(206, 103, 0, 0.8);
+  /* #ce6700 */
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+  --font-main: 'Roboto', sans-serif;
+  --transition-fast: 0.3s ease-in-out;
+  --transition-medium: 0.5s ease-in-out;
+}
+
+
+/*  ===========================
+    Applying global font styles
+    =========================== */
+body {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-dark);
+  background-color: var(--color-bg);
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin-top: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/*  ======================================================
+    SECTION #1: NavBar CSS
+    ====================================================== */
+
+header {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+  max-height: 130px;
+  font-family: var(--font-main);
+}
+
+/* ====================
+   Logo
+==================== */
+.logo img {
+  height: 150px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 4rem;
+}
+
+/* ====================
+   Menu
+==================== */
+nav ul.mainmenu {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul.mainmenu>li>a {
+  color: var(--color-light);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  transition: var(--transition-fast);
+}
+
+nav ul.mainmenu>li:hover>a,
+nav ul.mainmenu>li:hover .arrow.arrow_services {
+  color: var(--color-accent);
+}
+
+
+
+/* ====================
+   Submenu arrows
+==================== */
+
+.toggle_mainmenu {
+  background: none;
+  border: none;
+  color: var(--color-light);
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.toggle_submenu {
+  background: none;
+  border: none;
+  color: var(--color-dark);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  height: 2.6rem;
+  min-height: 100%;
+  box-sizing: border-box;
+  box-shadow: none;
+}
+
+.arrow {
+  margin-left: 0.3rem;
+  font-size: 0.7rem;
+  transition: transform 0.3s ease;
+}
+
+.submenu_services:hover .arrow.arrow_services {
+  transform: rotate(180deg);
+}
+
+.submenu_training:hover .arrow.arrow_training {
+  transform: rotate(-90deg);
+}
+
+.submenu_services {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown_services {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+  min-width: 200px;
+}
+
+.submenu_services:hover .arrow_services {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+  color: var(--color-light);
+  /* mantiene el color original */
+}
+
+.toggle_mainmenu:hover+.dropdown_services,
+.toggle_mainmenu:focus+.dropdown_services {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.submenu_services:hover .dropdown_services {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ====================
+   Submenu: Training
+==================== */
+.submenu_training {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 3rem;
+  padding: 0 1rem;
+}
+
+.submenu_training a {
+  flex: 1;
+  padding: 0.75rem 0;
+  text-decoration: none;
+  color: var(--color-dark);
+}
+
+.submenu_training>a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--color-light);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-family: var(--font-heading);
+  flex: 1;
+  padding-right: 0.5rem;
+}
+
+.dropdown_training {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  display: none;
+  background-color: var(--color-light);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1010;
+  min-width: 200px;
+}
+
+.submenu_training:hover .dropdown_training {
+  display: block;
+}
+
+/* ====================
+   Submenu links
+==================== */
+.dropdown_services li {
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown_training li {
+  margin: 0;
+}
+
+.dropdown_services li a,
+.dropdown_training li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--color-dark);
+  text-decoration: none;
+  font-size: 1rem;
+  font-family: var(--font-heading);
+  transition: background-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dropdown_services li a:hover,
+.dropdown_training li a:hover {
+  background-color: var(--color-accent);
+  color: var(--color-light);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.submenu_training:hover>a,
+.submenu_training:hover .toggle_submenu {
+  background-color: var(--color-accent);
+  color: var(--color-light);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+
+.dropdown_services li:first-child a,
+.dropdown_training li:first-child a {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1em;
+}
+
+.dropdown_services li:last-child a,
+.dropdown_training li:last-child a {
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1em;
+}
+
+/*  ======================
+    Contact now button CSS
+    ====================== */
+
+#first_button_navbar {
+  background-color: var(--color-accent);
+  color: var(--color-light);
+  border: 2px solid var(--color-accent-dark);
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 400;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#first_button_navbar:hover {
+  background-color: var(--color-accent-dark);
+  color: var(--color-dark);
+}
+
+/* ====================
+   Responsive Header
+==================== */
+
+#menu_toggle {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--color-light);
+  cursor: pointer;
+  display: none;
+  /* visible solo en móviles */
+}
+
+@media (max-width: 768px) {
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+    position: relative;
+    z-index: 20;
+  }
+
+  .logo img {
+    height: 80px;
+  }
+
+  #menu_toggle {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: var(--color-light);
+    cursor: pointer;
+    display: block;
+  }
+
+  #first_button_navbar {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: var(--color-accent);
+    color: var(--color-light);
+    border-radius: 4px;
+    text-decoration: none;
+  }
+
+  #main_nav {
+    background-color: var(--color-primary);
+    border-top: 1px solid var(--color-accent);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    padding: 1rem 0;
+    z-index: 30;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+
+  #main_nav:not(.expanded) .mainmenu {
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  #main_nav.expanded .mainmenu {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+
+  #main_nav.expanded {
+    max-height: 1000px;
+    opacity: 1;
+    overflow: visible;
+  }
+
+  #main_nav:not(.hidden) {
+    display: block;
+  }
+
+  nav ul.mainmenu {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  nav ul.mainmenu>li>a {
+    font-size: 1.2rem;
+    text-align: center;
+    color: var(--color-light);
+    text-decoration: none;
+  }
+
+  .dropdown_services {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+
+  .dropdown_services.expanded {
+    max-height: 1000px;
+    opacity: 1;
+    z-index: 30;
+    overflow: visible;
+    display: block;
+  }
+
+  .submenu_training {
+    position: relative;
+    overflow: visible;
+  }
+
+  .dropdown_training {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    max-height: 0;
+    overflow-y: auto;
+    transform: scaleY(0);
+    transform-origin: top;
+    z-index: 40;
+    /* background-color: var(--color-primary); */
+  }
+
+  .dropdown_training.expanded {
+    max-height: 1000px;
+    opacity: 1;
+    transform: scaleY(1);
+    display: block;
+  }
+
+  .dropdown_training::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .dropdown_training::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent);
+    border-radius: 3px;
+  }
+
+  .submenu_training:hover .arrow.arrow_training {
+    transform: rotate(-180deg);
+  }
+
+
+}
+
+/* ======================================================
+   END SECTION #1: NavBar CSS
+   ====================================================== */
+
+/* ======================================================
+   SECTION #2: intro_services CSS
+   ====================================================== */
+
+.intro_services {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4rem 2rem;
+  background-color: #f5f5f5;
+  gap: 6rem;
+  flex-wrap: wrap;
+}
+
+.intro_text_services {
+  flex: 1 1 400px;
+  max-width: 600px;
+  color: #1a1a1a;
+  align-items: center;
+}
+
+.intro_text_services h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.intro_text_services p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+/*  ======================
+    Contact now button CSS
+    ====================== */
+
+.btn_contact_us {
+  margin-top: 1rem;
+}
+
+.boton_contact {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-accent);
+  color: white;
+  text-decoration: none;
+  font-weight: 400;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.boton_contact:hover {
+  background-color: var(--color-accent-dark);
+  color: var(--color-dark);
+}
+
+/*  ======================
+    both img CSS
+    ====================== */
+
+.intro_image_services {
+  margin: 0;
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+}
+
+#img0 {
+  width: 100%;
+  /* max-width: 400px; */
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/*  ======================
+    Phone responsive CSS
+    ====================== */
+
+@media (max-width: 768px) {
+  .intro_services {
+    flex-direction: row;
+    text-align: center;
+  }
+
+  .intro_text_services h1 {
+    font-size: 2rem;
+  }
+
+  .intro_image_services {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+
+  #img0 {
+    max-width: 80%;
+  }
+
+  #img1 {
+    max-width: 45%;
+  }
+
+}
+
+/* ======================================================
+   END SECTION #2: intro_services CSS
+   ====================================================== */
+
+/* ======================================================
+   SECTION #3: procedures_service CSS
+   ====================================================== */
+
+.procedures_service {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  font-family: var(--font-body);
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
+
+/*  ======================
+    Intro text CSS
+    ====================== */
+.procedures_text_content {
+  max-width: 800px;
+}
+
+.procedures_text_content p:first-child {
+  font-size: 1.2rem;
+  color: var(--color-light);
+  margin-bottom: 0.5rem;
+}
+
+.procedures_text_content h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-light);
+  font-family: var(--font-heading);
+}
+
+.procedures_text_content p:last-child {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-light);
+}
+
+/*  ======================
+    Benefits CSS
+    ====================== */
+
+.procedures_service_benefits {
+  display: flex;
+  flex-direction: column;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.5rem;
+}
+
+/*  ======================
+    Benefit list CSS
+    ====================== */
+
+.benefit_item {
+  display: grid;
+  grid-template-columns: 60px 250px;
+  background-color: transparent;
+  border-radius: 0.75rem;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.benefit_item:hover {
+  transform: translateY(-4px);
+}
+
+/*  ======================
+    Benefit icons CSS
+    ====================== */
+
+.benefit_icon {
+  font-size: 2rem;
+  color: var(--color-light);
+  margin-bottom: 1rem;
+}
+
+/*  ======================
+    Benefits title CSS
+    ====================== */
+
+.benefit_item h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
+  color: var(--color-light);
+  font-family: var(--font-heading);
+}
+
+/*  ======================
+    Benefit decoration line CSS
+    ====================== */
+
+.decoration_line {
+  width: 3px;
+  height: 100%;
+  background-color: var(--color-light);
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+}
+
+/*  ======================
+    Benefit description CSS
+    ====================== */
+
+.benefit_item p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-light);
+}
+
+/*  ======================
+    Phone responsive CSS
+    ====================== */
+
+@media screen and (max-width: 768px) {
+  .procedures_service {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
+
+  .procedures_text_content p:first-child {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .procedures_text_content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    padding-left: 2rem;
+  }
+
+  .procedures_text_content p:last-child {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding-left: 2rem;
+  }
+
+  /*  ======================
+    Benefits right side moved to center CSS
+    ====================== */
+
+  .procedures_service_benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .benefit_item {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    padding-top: 0;
+    border-radius: 0.5rem;
+  }
+
+  .benefit_icon {
+    font-size: 1.8rem;
+    margin-bottom: 0;
+  }
+
+  .benefit_item h3 {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    justify-self: flex-start;
+  }
+
+  .benefit_item p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-inline: 0;
+    margin-block: 0.2rem;
+    justify-items: flex-start;
+  }
+
+  .decoration_line {
+    width: 2px;
+    height: 100%;
+    margin: 0.5rem 0;
+  }
+}
+
+/* ======================================================
+   END SECTION #3: procedures_service CSS
+   ====================================================== */
+
+/* ======================================================
+   SECTION #4: consulting_section CSS
+   ====================================================== */
+
+.consulting_section {
+  background-color: var(--color-bg);
+  color: var(--color-light);
+  font-family: var(--font-body);
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/*  ======================
+    Main consulting title CSS
+    ====================== */
+
+.consulting_title {
+  display: flex;
+  flex-direction: column;
+  padding: 8rem 2rem 4rem 2rem;
+  /* top right bottom left */
+  background-color: var(--color-bg);
+  padding-bottom: 4rem;
+}
+
+.consulting_title h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--color-primary);
+}
+
+.consulting_title p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-dark);
+  max-width: 700px;
+}
+
+/*  ======================
+    Card container CSS
+    ====================== */
+
+.cards_section {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding-inline: 7.6rem;
+  padding-block: 3rem;
+  background-color: var(--color-bg);
+  border-radius: 1rem;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.4);
+  justify-content: center;
+}
+
+/*  ======================
+    Main card CSS
+    ====================== */
+
+.main_card {
+  background-color: var(--color-bg);
+  padding: 0;
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  height: 632px;
+  width: 400px;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.4);
+}
+
+.active_main_card {
+  animation: trophyGlow 1.2s infinite ease-in-out;
+}
+
+.main_card_information {
+  padding: 1rem;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 400px;
+}
+
+.main_card_text {
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  align-items: flex-start;
+}
+
+.main_card h3 {
+  font-size: 1.5rem;
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.main_card p {
+  font-size: 1rem;
+  color: var(--color-dark);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.main_card_text h3,
+.main_card_text p {
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+.main_card_text.fade_out h3,
+.main_card_text.fade_out p {
+  opacity: 0;
+}
+
+
+.boton_contact {
+  display: inline-block;
+  background-color: var(--color-accent);
+  color: var(--color-light);
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--color-accent);
+  border-radius: 4px;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 400;
+  transition: background-color var(--transition-fast);
+}
+
+.boton_contact:hover {
+  background-color: var(--color-accent-dark);
+}
+
+/*  ======================
+    Main card Figure CSS
+    ====================== */
+
+.main_card figure {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.main_card figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/*  ======================
+    Secondary cards CSS
+    ====================== */
+
+.secondary_cards_section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1rem));
+  justify-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  overflow: hidden;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  background-color: var(--color-bg);
+  border-radius: 0.5rem;
+  height: 600px;
+  width: 1080px;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.4);
+}
+
+.secondary_cards_section::-webkit-scrollbar {
+  width: 10px;
+  /*horizontal scroll width*/
+}
+
+.secondary_cards_section::-webkit-scrollbar-track {
+  background: var(--color-bg);
+  border-radius: 4px;
+}
+
+.secondary_cards_section::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent);
+  border-radius: 4px;
+  border: 2px solid var(--color-bg);
+}
+
+.secondary_cards_section::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent-dark);
+}
+
+/*  ======================
+    Single secondary card CSS
+    ====================== */
+
+.secondary_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 510px;
+  /*FLAG: height: 500px; is almost enough to Simulacro de emergencia y/o autoprotección btn_moreinfo is not showing up complete yet*/
+  gap: 2rem;
+  align-items: flex-end;
+  width: 200px;
+  background-color: var(--color-bg);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.secondary_card_information {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 300px;
+  padding: 1rem;
+  padding-bottom: 0;
+  gap: 1rem;
+}
+
+.secondary_card_text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+/*  ======================
+    Single secondary card img CSS
+    ====================== */
+
+.secondary_card figure {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+.secondary_card figure img {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border-bottom-right-radius: 0.1rem;
+  border-bottom-left-radius: 0.1rem;
+  object-fit: cover;
+  display: block;
+}
+
+.secondary_card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 12px var(--color-accent-dark);
+}
+
+.secondary_card.active_card {
+  transform: translateY(-4px);
+  box-shadow: 0 0 12px var(--color-accent-dark);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: trophyGlow 1.2s infinite ease-in-out;
+}
+
+
+
+.secondary_card h3 {
+  font-size: 1.2rem;
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.secondary_card p {
+  font-size: 0.95rem;
+  color: var(--color-dark);
+  line-height: 1.4;
+  margin: 0;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.secondary_fade_out p {
+  opacity: 0;
+}
+
+.btn_moreInfo {
+  align-self: flex-start;
+  background-color: var(--color-accent);
+  color: var(--color-light);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: 2px solid var(--color-accent);
+  cursor: pointer;
+  font-weight: 400;
+  font-family: var(--font-body);
+  transition: background-color var(--transition-fast);
+}
+
+.btn_moreInfo:hover {
+  background-color: var(--color-accent-dark);
+}
+
+/*  ======================
+    Animation when main card is active and secondary card is selected CSS
+    ====================== */
+
+@keyframes trophyGlow {
+  0% {
+    box-shadow: 0 0 12px var(--color-accent-rgba);
+  }
+
+  50% {
+    box-shadow: 0 0 24px var(--color-accent-dark-rgba);
+  }
+
+  100% {
+    box-shadow: 0 0 12px var(--color-accent-rgba);
+  }
+}
+
+/*  ======================
+    Phone responsive CSS
+    ====================== */
+
+@media (max-width: 768px) {
+  .consulting_section {
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .consulting_title {
+    padding: 8rem 1rem 2rem 1rem;
+    /* top right bottom left */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 1rem;
+    max-height: none;
+  }
+
+  /*  ======================
+    Main title section CSS
+    ====================== */
+
+  .consulting_title h2 {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+  }
+
+  .consulting_title p {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding: 0.5rem 0;
+  }
+
+  /*  ======================
+    Cards CSS: this section changes the layout to a horizontal scroll for secondary cards and turn off main card because every secondary card will show its info description on mobile
+    ====================== */
+
+  .cards_section {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    gap: 2rem;
+    box-shadow: none;
+  }
+
+  .main_card {
+    display: none;
+  }
+
+  .secondary_cards_section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding: 1rem;
+    gap: 1rem;
+    height: 520px;
+  }
+
+  .secondary_cards_section::-webkit-scrollbar {
+    height: 12px;
+  }
+
+  .secondary_cards_section::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent);
+    border-radius: 4px;
+  }
+
+  /*  ======================
+    Single secondary card CSS
+    ====================== */
+
+  .secondary_card {
+    width: 100%;
+    min-width: 250px;
+    height: 475px;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .secondary_card_information {
+    height: auto;
+    gap: 0.75rem;
+  }
+
+  .secondary_card h3 {
+    font-size: 1.1rem;
+  }
+
+  .secondary_card p {
+    font-size: 0.9rem;
+  }
+
+  .secondary_card figure {
+    height: 140px;
+  }
+
+  .btn_moreInfo,
+  .boton_contact {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* ======================================================
+   END SECTION #4: consulting_section CSS
+   ====================================================== */
+
+/* ======================================================
+   SECTION #5: training_section CSS
+   ====================================================== */
+
+.training_section {
+  display: flex;
+  gap: 2rem;
+  padding: 14rem 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../ASSETS/IMG/OURSERVICESIMG/training_background.png) center/cover no-repeat;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+  z-index: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/*  ======================
+    Cylinder section CSS
+    ====================== */
+
+.training_text_cylinder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 1 300px;
+  max-width: 400px;
+  height: 417px;
+  background: var(--color-bg);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.4);
+}
+
+.training_text_cylinder h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+}
+
+.training_cylinder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 315px;
+  scroll-behavior: smooth;
+  background-color: var(--color-bg);
+  border-radius: 8px;
+  gap: 0;
+}
+
+.training_cylinder p {
+  background: var(--color-bg);
+  color: var(--color-primary);
+  width: 100%;
+  padding: 0.6rem 1rem;
+  box-sizing: border-box;
+  margin-block: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.training_cylinder p:hover {
+  background-color: var(--color-accent);
+  box-shadow: 0 0 12px rgba(230, 115, 0, 0.6);
+  transform: translateX(4px);
+  color: var(--color-light);
+}
+
+.training_cylinder p.active {
+  background-color: var(--color-accent-dark);
+  box-shadow: 0 0 12px rgba(230, 115, 0, 0.6);
+  transform: translateX(4px);
+  color: var(--color-light);
+}
+
+.training_cylinder::-webkit-scrollbar {
+  width: 6px;
+  /*vertical scroll width*/
+}
+
+.training_cylinder::-webkit-scrollbar-track {
+  background: var(--color-bg);
+  border-radius: 4px;
+}
+
+.training_cylinder::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent);
+  border-radius: 4px;
+  border: 2px solid var(--color-bg);
+}
+
+.training_cylinder::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent-dark);
+}
+
+/*  ======================
+    Secondary panel where it shows training description CSS
+    ====================== */
+
+.training_text_description {
+  flex: 2 1 400px;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  height: auto;
+  transition: opacity 0.4s ease;
+  opacity: 1;
+  align-self: center;
+  transition: margin-top 0.5s ease;
+}
+
+.training_text_description.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.training_text_description.fade-in {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+.training_text_description p {
+  font-size: 1rem;
+  justify-self: flex-start;
+  padding-left: 0;
+  color: #333;
+}
+
+.training_text_description h2,
+.training_text_description p {
+  transition: opacity 0.4s ease;
+}
+
+.fadde-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fadde-in {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/*  ======================
+    Training focus, modality, etc CSS
+    ====================== */
+
+.training_text_focuspoint {
+  display: none;
+  grid-template-columns: 2.5rem auto;
+  grid-template-rows: repeat(3, 3rem);
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+
+}
+
+.training_text_focuspoint.fadde-in {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.training_text_focuspoint.fadde-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#training_objective {
+  margin: 0;
+  padding-top: 0;
+  align-self: flex-start;
+}
+
+.training_text_focuspoint i {
+  color: var(--color-accent-dark);
+  align-self: center;
+  font-size: 2rem;
+}
+
+
+/*  ======================
+    Phone responsive CSS
+    ====================== */
+
+@media (max-width: 768px) {
+
+  .training_section {
+    padding: 8rem 1rem;
+    min-height: 70rem;
+    gap: 0.8rem;
+    justify-content: flex-start;
+    flex-direction: column;
+    flex-grow: 0;
+  }
+
+  /*  ======================
+    Training text description CSS
+    ====================== */
+
+  .training_text_description {
+    height: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    display: flex;
+    align-self: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .training_text_cylinder {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+  }
+
+  .training_text_description.h2 {
+    margin-bottom: 0rem;
+  }
+
+  .training_text_description.p {
+    margin-top: 0rem;
+  }
+
+  /*  ======================
+     Focus, modality, etc CSS
+    ====================== */
+
+  .training_text_focuspoint {
+    grid-template-rows: auto;
+  }
+
+  .fadde-in {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.4s ease;
+  }
+
+  .fadde-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+/* ======================================================
+   END SECTION #5: training_section CSS
+   ====================================================== */
+
+/*======================================================
+   SECTION #6: manual_development_section CSS
+   ====================================================== */
+
+.manual_development_section {
+  padding: 2rem;
+  background-color: var(--color-bg);
+  font-family: var(--font-main);
+  margin-block: 8rem;
+  margin-inline: 4rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/*  ======================
+    Header where is showed the manual description CSS
+    ====================== */
+
+.manual_development_header {
+  margin-block: 2rem;
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.manual_development_header h3 {
+  font-size: 1rem;
+  color: var(--color-primary);
+  margin-bottom: 0.3rem;
+  font-family: var(--font-heading);
+}
+
+.manual_development_header h2 {
+  font-size: 1.6rem;
+  color: var(--color-primary);
+  margin-bottom: 0.8rem;
+  font-family: var(--font-heading);
+  justify-self: center;
+}
+
+.manual_development_header_text h2,
+.manual_development_header_text p {
+  transition: opacity 0.4s ease-in-out;
+  opacity: 1;
+}
+
+.manual_fade_out {
+  transition: opacity 0.4s ease-in-out;
+  opacity: 0 !important;
+}
+
+#manual_development_description_tag {
+  font-size: 1rem;
+  color: var(--color-dark);
+  margin-bottom: 2rem;
+  font-family: var(--font-body);
+  justify-self: center;
+  max-width: 700px;
+  text-align: center
+}
+
+.active_header_manual {
+  padding: 1rem;
+  border-radius: 1rem;
+  transform: translateY(-6px);
+  box-shadow: 0 0 12px var(--color-accent-rgba);
+  transition:
+    padding 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-radius 0.3s ease,
+    opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
+  animation: trophyGlow 1.2s infinite ease-in-out;
+}
+
+/*  ======================
+     Section where all manual are added CSS
+    ====================== */
+
+.manual_development_description_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: none;
+  gap: 0;
+  margin-right: 0;
+  width: 100%;
+  max-width: 1000px;
+  height: 380px;
+  padding-inline: 1rem;
+  box-sizing: border-box;
+
+}
+
+.manual_development_description_container::-webkit-scrollbar {
+  height: 8px;
+  /*horizontal scroll height*/
+}
+
+.manual_development_description_container::-webkit-scrollbar-track {
+  background: var(--color-bg);
+  border-radius: 4px;
+}
+
+.manual_development_description_container::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent);
+  border-radius: 4px;
+  border: 2px solid var(--color-bg);
+}
+
+.manual_development_description_container::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent-dark);
+}
+
+/*  ======================
+    Every single card CSS
+    ====================== */
+
+.manual_development_card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 200px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-bg);
+  border-radius: 8px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  margin-right: 1rem;
+}
+
+.manual_development_card:hover {
+  box-shadow: 0 4px 12px var(--color-accent-dark-rgba);
+}
+
+.manual_development_description_text {
+  padding: 1rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.manual_development_image {
+  width: 100%;
+  margin: 0rem;
+  margin: 0;
+  text-align: center;
+  height: 125px;
+}
+
+.manual_development_image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 0 0 8px 8px;
+}
+
+.active_manual_card {
+  border-radius: 1rem;
+  transform: translateY(-6px);
+  box-shadow: 0 0 12px var(--color-accent-rgba);
+  transition:
+    padding 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-radius 0.3s ease,
+    opacity 0.4s ease-in-out;
+  animation: trophyGlow 1.2s infinite ease-in-out;
+
+}
+
+/*  ======================
+    Show details button CSS
+    ====================== */
+
+.btn_moreInfo {
+  margin-block: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  transition: background-color var(--transition-fast);
+}
+
+.btn_moreInfo:hover {
+  background-color: var(--color-accent-dark);
+}
+
+/*  ======================
+    Phone responsive CSS
+    ====================== */
+
+@media (max-width: 768px) {
+  .manual_development_section {
+    max-height: none;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: auto;
+    margin-inline: 1rem;
+  }
+
+  .manual_development_header {
+    margin-block: 1rem;
+    padding: 1rem;
+    min-height: 250px;
+    max-height: 400px;
+    height: auto;
+  }
+
+  .manual_development_description_container {
+    justify-content: flex-start !important;
+  }
+}
+
+/*======================================================
+   END SECTION #6: manual_development_section CSS
+   ====================================================== */
+
+/*======================================================
+   SECTION #7: SGA_section CSS
+   ====================================================== */
+
+.SGA_section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8rem 10rem;
+  background-color: var(--color-bg);
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/*  ======================
+    SGA texts CSS
+    ====================== */
+
+.sga_text_content {
+  flex: 1;
+  min-width: 280px;
+  max-width: 600px;
+  font-family: var(--font-body);
+}
+
+.sga_text_content h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  font-family: var(--font-heading);
+}
+
+.sga_text_content h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 1rem;
+  font-family: var(--font-heading);
+}
+
+.sga_text_content p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-dark);
+  font-family: var(--font-body);
+}
+
+/*  ======================
+    Image CSS
+    ====================== */
+
+.sga_image {
+  flex: 1;
+  min-width: 280px;
+  max-width: 600px;
+  display: flex;
+  margin-right: 0;
+  justify-content: end;
+  align-items: center;
+}
+
+.sga_image img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  background-color: var(--color-light);
+  transition: var(--transition-fast);
+}
+
+/*  ======================
+    Phone responsive CSS
+    ====================== */
+
+@media (max-width: 768px) {
+  .SGA_section {
+    flex-direction: column;
+    text-align: center;
+    padding: 6rem 2rem;
+  }
+
+  .sga_text_content h2 {
+    font-size: 1.6rem;
+  }
+
+  .sga_image {
+    margin-inline: 0;
+  }
+
+  .sga_image img {
+    max-width: 100%;
+  }
+}
+
+
+
+/*======================================================
+   END SECTION #7: SGA_section CSS
+   ====================================================== */
+
+/*======================================================
+   SECTION #8: Cta_section CSS
+   ====================================================== */
+
+
+.Cta_section {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  gap: 0.2rem;
+  padding: 8rem 0rem;
+  color: var(--color-light);
+  display: flex;
+  justify-content: center;
+}
+
+/*  ======================
+    CTA text CSS
+    ====================== */
+.cta_content {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  background-image: url("../ASSETS/IMG/OURSERVICESIMG/CTAOurServices.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding: 4rem;
+  border-radius: 8px;
+  max-width: 90%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta_content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.cta_content>* {
+  position: relative;
+  z-index: 1;
+}
+
+.cta_header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: transparent;
+  padding-right: 4rem;
+  height: auto;
+  justify-content: center;
+}
+
+/*  ======================
+    CTA title and content CSS
+    ====================== */
+
+.cta_title {
+  font-size: 2.2rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-light);
+  margin-bottom: 0.5rem;
+}
+
+.cta_description {
+  font-size: 1.2rem;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: var(--color-light);
+}
+
+/*  ======================
+    CTA buttons CSS
+    ====================== */
+
+.cta_buttons {
+  display: flex;
+  gap: 3rem;
+  flex-direction: row;
+  align-items: center;
+}
+
+.btn_schedule,
+.btn_questions {
+  font-size: 1rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+  display: inline-block;
+  text-align: center;
+  width: 220px;
+  height: 48px;
+  padding: 0;
+  line-height: 48px;
+}
+
+.btn_schedule {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.btn_schedule:hover {
+  background-color: var(--color-accent-dark);
+  color: var(--color-light);
+}
+
+.btn_questions {
+  background-color: transparent;
+  border: 2px solid var(--color-light);
+  color: var(--color-light);
+}
+
+.btn_questions:hover {
+  background-color: var(--color-light);
+  color: var(--color-primary);
+}
+
+/*  ======================
+    Phone responsive CSS
+    ====================== */
+
+@media (max-width: 768px) {
+  .Cta_section {
+    padding: 4rem 1rem;
+    display: flex;
+    flex-direction: column;
+    max-height: none;
+    height: auto;
+  }
+
+  .cta_content {
+    display: flex;
+    flex-direction: column;
+    max-height: none;
+    height: auto;
+    padding: 2rem;
+    gap: 4rem;
+    text-align: center;
+    width: 100%;
+    max-width: none;
+  }
+
+  .cta_header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 0;
+    flex-wrap: unset;
+  }
+
+  .cta_title {
+    font-size: 1.8rem;
+  }
+
+  .cta_description {
+    font-size: 1rem;
+  }
+
+  /*  ======================
+    CTA contact button CSS
+    ====================== */
+
+  .cta_buttons {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+  }
+
+  .btn_schedule,
+  .btn_questions {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+/*======================================================
+   END SECTION #8: Cta_section CSS
+   ====================================================== */
+
+/*======================================================
+   Footer CSS
+   ====================================================== */
+
+#site_footer {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  font-family: var(--font-body);
+  border-top: none;
+  position: relative;
+}
+
+#site_footer::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-accent);
+  margin-bottom: 2rem;
+}
+
+.main_footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* ======================
+  Footer Logo CSS
+====================== */
+
+.footer_logo {
+  flex: 1 1 120px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0%;
+  padding: 0%;
+  gap: 0.5rem;
+  max-width: 150px;
+}
+
+.footer_logo img {
+  height: 110px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 4rem;
+}
+
+/* ======================
+   Contact info CSS
+====================== */
+
+.footer_info {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.95rem;
+}
+
+.footer_info h2 {
+  font-style: normal;
+}
+
+.footer_info p {
+  margin: 0.2rem 0;
+  line-height: 1.4;
+}
+
+.footer_info a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.footer_info a:hover {
+  text-decoration: underline;
+}
+
+/* ======================
+   Social media CSS
+====================== */
+
+.footer_navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 10rem;
+  height: auto;
+  padding-right: 2rem;
+}
+
+.footer_social {
+  flex: 1 1 160px;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
+
+}
+
+.footer_social a {
+  color: white;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.footer_social a:hover {
+  color: var(--color-accent);
+}
+
+/* ======================
+   Links CSS
+====================== */
+.footer_links {
+  flex: 1 1 160px;
+  display: flex;
+  flex-direction: row;
+  gap: 4rem;
+  margin-top: 1rem;
+}
+
+.footer_links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-family: var(--font-heading);
+  transition: color 0.3s ease;
+}
+
+.footer_links a:hover {
+  color: var(--color-accent);
+}
+
+.footer_logo,
+.footer_info,
+.footer_social,
+.footer_links {
+  flex: 1 1 200px;
+}
+
+/*  ======================
+    Footer Legal Section CSS
+    ====================== */
+
+.footer_legal {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #c0c0c0;
+  margin-top: 2rem;
+}
+
+/*  ======================
+    Phone responsive CSS
+    ====================== */
+
+@media (max-width: 768px) {
+
+  #site_footer {
+    display: block;
+    width: 100%;
+    max-width: 768px;
+    box-sizing: border-box;
+    padding: 3rem 1rem;
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .main_footer {
+    flex: unset;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .footer_logo,
+  .footer_info,
+  .footer_social,
+  .footer_links {
+    flex: none;
+    max-width: 100%;
+    align-items: flex-start;
+    text-align: center;
+  }
+
+  /*  ======================
+    Footer logo CSS
+    ====================== */
+
+  .footer_logo {
+    padding: 0;
+    max-width: 120px;
+  }
+
+  .footer_logo img {
+    height: 120px;
+    border-radius: 3rem;
+  }
+
+  /*  ======================
+    Footer information CSS
+    ====================== */
+
+  .footer_info {
+    font-size: 0.9rem;
+    flex-direction: column;
+  }
+
+  .footer_navigation {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  /*  ======================
+    Links and social container CSS
+    ====================== */
+
+  .footer_navigation>* {
+    display: block;
+    min-height: 1rem;
+    flex-shrink: 0;
+    position: relative;
+    float: none;
+
+  }
+
+  /*  ======================
+    Footer social media CSS
+    ====================== */
+
+  .footer_social {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .footer_social a {
+    font-weight: 400px;
+  }
+
+  /*  ======================
+    Footer links CSS
+    ====================== */
+
+  .footer_links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .footer_links a {
+    font-size: 1rem;
+  }
+
+  /*  ======================
+    Footer legal Section CSS
+    ====================== */
+
+  .footer_legal {
+    height: 20rem;
+    display: block;
+    width: 100%;
+    font-size: 0.8rem;
+    margin-top: 1.5rem;
+  }
+}
+
+/* ======================================================
+   END Footer CSS
+   ====================================================== */

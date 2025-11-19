@@ -1,0 +1,65 @@
+[
+  {
+    "id": 9,
+    "title": "Análisis de vulnerabilidad",
+    "short_description": "Evaluamos los factores que aumentan los riesgos en el trabajo ante eventos adversos.",
+    "big_description": "Identificamos debilidades estructurales, operativas y humanas que puedan comprometer la seguridad y establecemos estrategias de soluciones para reducir la exposición al riesgo.",
+    "img": "../ASSETS/IMG/OURSERVICESIMG/CONSULTSIMG/AnalisisDeVulnerabilidad.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Inspecciones de Seguridad",
+    "short_description": "Realizamos inspecciones técnicas para verificar las condiciones laborales.",
+    "big_description": "Evaluamos áreas de trabajo, equipos, señalizaciones y cumplimientos normativos, generando informes con recomendaciones para mejorar la seguridad laboral.",
+    "img": "../ASSETS/IMG/OURSERVICESIMG/CONSULTSIMG/InspeccionDeSeguridad.jpg"
+  },
+  {
+    "id": 1,
+    "title": "Riesgos Físicos",
+    "short_description": "Identificamos y Evaluamos factores físicos que puedan afectar la salud de los trabajadores.",
+    "big_description": "Evaluamos las exposiciones a ruidos, agentes físicos y temperaturas, estableciendo medidas de control efectivas para la protección del personal.",
+    "img": "../ASSETS/IMG/OURSERVICESIMG/CONSULTSIMG/RiesgoFisico.jpeg"
+  },
+  {
+    "id": 2,
+    "title": "Riesgos Químicos",
+    "short_description": "Evaluamos la presencia de agentes químicos peligrosos en el entorno laboral.",
+    "big_description": "Evaluamos Sustancias Químicas utilizadas en Procesos Productivos, identificamos las rutas de exposición y diseñamos estrategias para controlar los riesgos existentes.",
+    "img": "../ASSETS/IMG/OURSERVICESIMG/CONSULTSIMG/RiesgoQuimico.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Riesgos Biológicos",
+    "short_description": "Asesoramos en la gestión de agentes biológicos que pueden afectar la salud de los colaboradores.",
+    "big_description": "Evaluamos la exposición a virus, bacterias y hongos en los ambientes laborales, estableciendo Protocolos de Bioseguridad y Prevención.",
+    "img": "../ASSETS/IMG/OURSERVICESIMG/CONSULTSIMG/RiesgosBiologicos.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Riesgos Psicosociales",
+    "short_description": "Identificamos factores que afectan el bienestar mental y emocional del trabajador.",
+    "big_description": "Evaluamos las condiciones laborales (estrés laboral, carga emocional, clima organizacional entre otras) y desarrollamos estrategias de control.",
+    "img": "../ASSETS/IMG/OURSERVICESIMG/CONSULTSIMG/RiesgoPsicosocial.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Riesgos Ergonómicos",
+    "short_description": "Evaluamos la interacción entre el trabajador y su entorno físico.",
+    "big_description": "Evaluamos posturas, movimientos repetitivos, puestos de trabajo y carga física, proponiendo soluciones ergonómicas para prevenir lesiones.",
+    "img": "../ASSETS/IMG/OURSERVICESIMG/CONSULTSIMG/RiesgosErgonomicos.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Riesgo Eléctricos",
+    "short_description": "Evaluamos condiciones que pueden generar accidentes eléctricos.",
+    "big_description": "Inspeccionamos instalaciones y equipos eléctricos, identificando fallas y proponiendo medidas de protección.",
+    "img": "../ASSETS/IMG/OURSERVICESIMG/CONSULTSIMG/RiesgoElectrico.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Planes de Emergencias",
+    "short_description": "Diseñamos planes para responder eficazmente ante distintas situaciones de emergencias en su empresa.",
+    "big_description": "Elaboramos estrategias de comunicación, evacuación, primeros auxilios y control de incidentes o accidentes, que puedan presentarse en su empresa.",
+    "img": "../ASSETS/IMG/OURSERVICESIMG/CONSULTSIMG/PlanesDeEmergencias.png"
+  }
+]

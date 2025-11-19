@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "Ley 618 y su Reglamento",
+    "description": "Ofrecemos Asesoría especializada en la aplicación de la Ley 618 y su Reglamento. Te ayudamos a interpretar y aplicar sus disposiciones y reglamentos, desde la conformación del Comité de Higiene y Seguridad hasta el cumplimiento de las auditorías.",
+    "duration": "4 Horas",
+    "objective": "Garantizar el <strong>cumplimiento</strong> de la Ley 618 y su Reglamento.",
+    "modality": "Presencial o virtual (MS Teams)",
+    "audience": "Gerentes, Jefes de RRHH, Jefes de Seguridad, Comités de H&S."
+  },
+  {
+    "id": 2,
+    "title": "Higiene Ocupacional",
+    "description": "Capacitamos al personal en la Identificación de Peligros, Evaluación de Exposiciones y Control de Agentes Físicos, Químicos y Biológicos que afectan el entorno laboral. Aplicamos metodologías adaptadas a cada sector productivo.",
+    "duration": "8 Horas",
+    "objective": "Capacitar al personal en la <strong>Evaluación y Control</strong> de <strong>Agentes de Riesgo</strong>.",
+    "modality": "Presencial o virtual (MS Teams)",
+    "audience": "Técnicos de H&S, Jefes de Mantenimiento, Supervisores Operativos."
+  },
+  {
+    "id": 3,
+    "title": "Prevención de Riesgos Laborales",
+    "description": "Diseñamos estrategias para Identificar Peligros, Evaluar Riesgos, Establecer Controles Efectivos de acuerdo a los resultados obtenidos en la Matriz IPER.",
+    "duration": "8 Horas",
+    "objective": "Fortalecer la <strong>identificación de peligros y la evaluación de riesgos</strong> para minimizar accidentes.",
+    "modality": "Presencial o virtual (MS Teams)",
+    "audience": "Recursos Humanos, Supervisores, Jefes de Producción y Personal de H&S."
+  },
+  {
+    "id": 4,
+    "title": "Prevención de Riesgos Químicos y Biológicos",
+    "description": "Brindamos formación técnica sobre el Manejo Seguro de Sustancias Peligrosas, incluyendo etiquetado SGA, almacenamiento, Hojas de Seguridad, Rutas de Exposición y Protocolos ante accidentes.",
+    "duration": "6 Horas",
+    "objective": "Fortalecer el <strong>Manejo Seguro de las Sustancias Quimicas Peligrosas</strong>.",
+    "modality": "Presencial",
+    "audience": "Personal de Bodega, Operativo y de Mantenimiento, Supervisores de área."
+  },
+  {
+    "id": 5,
+    "title": "Prevención de Riesgos Ergonómicos y Psicosociales",
+    "description": "Capacitamos en la identificación de factores ergonómicos (posturas, movimientos repetitivos, carga física) y psicosociales (estrés, clima organizacional) que afectan el desarrollo laboral.",
+    "duration": "4 Horas",
+    "objective": "Identificar los <strong>factores de riesgo ergonómico y psicosocial</strong> para mejorar el desempeño laboral.",
+    "modality": "Presencia o Virtual (MS Teams)",
+    "audience": "Jefes de Área, RRHH, Personal Administrativo y Operativo."
+  },
+  {
+    "id": 6,
+    "title": "Brigadas de Emergencia",
+    "description": "Fortalecemos las capacidades de respuestas de las brigadas de emergencias de primeros auxilios, evacuación y control de incendios para una respuesta efectiva.",
+    "duration": "8 Horas",
+    "objective": "Certificar a las brigadas de emergencia para una respuesta óptima en caso de incidentes o accidentes.",
+    "modality": "Presencial",
+    "audience": "Miembros de Brigadas, Jefes de Seguridad, Coordinadores de Emergencia."
+  }
+]
