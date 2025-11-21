@@ -1,9 +1,9 @@
 /* ==========================================================================
    Proyect: S&G Seguridad Ocupacional
-   Page: Inicio (index.html)
+   Page: About us (About_Us.html)
    Autor: YASB
-   Date: 23/10/2025
-   Description: Base CSS stylesheet for the homepage of Seguridad Ocupacional S&G
+   Date: 20/11/2025
+   Description: Base CSS stylesheet for the contact us page of Seguridad Ocupacional S&G
    ========================================================================== */
 
 :root {
@@ -23,7 +23,6 @@
     --transition-fast: 0.3s ease-in-out;
     --transition-medium: 0.5s ease-in-out;
 }
-
 
 /*  ===========================
     Applying global font styles
@@ -49,6 +48,10 @@ h6 {
     margin-top: 0;
 }
 
+html,
+body {
+    height: 100%;
+}
 
 /*  ======================================================
     SECTION #1: NavBar CSS
@@ -689,706 +692,94 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
 /* ======================================================
    END SECTION #1: NavBar CSS
    ====================================================== */
-
 /* ======================================================
-   SECTION #2: welcome_intruction CSS
+   END SECTION #1: Form CSS
    ====================================================== */
 
-#welcome_intruction {
-    position: relative;
-    min-height: 480px;
-    padding: 4rem 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    font-family: var(--font-body);
-    color: var(--color-dark);
-    background-color: transparent;
-    overflow: hidden;
-}
-
-/*  ======================
-    Background image welcome_intruction CSS
-    ====================== */
-
-#welcome_intruction::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../ASSETS/IMG/INDEX/IntroIndex.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    z-index: -1;
-    opacity: 1;
-    filter: brightness(40%);
-    background-color: rgba(0, 0, 0, 0.6);
-    mix-blend-mode: multiply;
-}
-
-#welcome_intruction>* {
-    position: relative;
-    z-index: 1;
-}
-
-#welcome_intruction h2 {
-    font-family: var(--font-body);
-    font-size: 2.4rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--color-light);
-}
-
-#welcome_intruction p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    color: var(--color-bg);
-    font-family: var(--font-body);
-}
-
-#welcome_intruction .text_box {
-    padding: 2rem 3rem;
-    border-radius: 1rem;
-    max-width: 800px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-@media (max-width: 768px) {
-    #welcome_intruction {
-        padding: 3rem 1rem;
-        align-items: center;
-        text-align: center;
-    }
-
-    #welcome_intruction h2 {
-        font-size: 1.8rem;
-        margin-bottom: 0.75rem;
-    }
-
-    #welcome_intruction p {
-        font-size: 1rem;
-        line-height: 1.5;
-    }
-
-    #welcome_intruction .text_box {
-        padding: 1.5rem 1rem;
-        max-width: 100%;
-        box-shadow: none;
-    }
-
-    #welcome_intruction::before {
-        background-attachment: scroll;
-        /* evita bugs en móviles */
-        background-position: center;
-    }
-}
-
-/* ======================================================
-   END SECTION #2: welcome_intruction CSS
-   ====================================================== */
-
-/* ======================================================
-   SECTION #3: about_Services CSS
-   ====================================================== */
-
-#about_Services {
+.Form {
+    padding: 40px 24px;
     background-color: var(--color-bg);
-    padding: 12rem 2rem;
-    font-family: var(--font-body);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-align: left;
-    justify-content: space-around;
-    gap: 2rem;
-    flex-wrap: nowrap;
-}
-
-.about_services_text {
-    max-width: 600px;
-    flex: 1 1 400px;
-}
-
-#about_Services h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    letter-spacing: 1px;
-}
-
-#about_Services h2 {
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin-bottom: 1rem;
-    font-family: var(--font-heading);
-}
-
-#about_Services p {
-    font-size: 1.1rem;
-    color: var(--color-dark);
-    max-width: 800px;
-    margin: 0 auto 2rem auto;
-    line-height: 1.6;
-}
-
-/*  ======================
-    Service IMG CSS
-    ====================== */
-
-.about_services_img {
-    flex: 0 0 auto;
-    width: 400px;
-    height: auto;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.about_services_img img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    aspect-ratio: 1 / 1;
-    /* Mantiene proporción cuadrada */
-    object-fit: cover;
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-@media (max-width: 768px) {
-    #about_Services {
-        flex-direction: column;
-        text-align: center;
-        padding: 3rem 1rem;
-        gap: 2rem;
-    }
-
-    .about_services_text {
-        max-width: 100%;
-        flex: 1 1 auto;
-    }
-
-    #about_Services h2 {
-        font-size: 1.8rem;
-    }
-
-    #about_Services h3 {
-        font-size: 1rem;
-    }
-
-    #about_Services p {
-        font-size: 1rem;
-        margin: 0 0 2rem 0;
-    }
-
-    .about_services_img {
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-    }
-
-    .about_services_img img {
-        width: 100%;
-        max-width: 100%;
-        aspect-ratio: 1 / 1;
-        height: auto;
-    }
-}
-
-/* ======================================================
-   END SECTION #3: about_Services CSS
-   ====================================================== */
-
-/* ======================================================
-   SECTION #4: our_little_services CSS
-   ====================================================== */
-
-#our_little_services {
-    background-color: var(--color-primary);
-    padding: 5rem 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    align-items: center;
-}
-
-.service_item {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    grid-template-rows: auto 0.7fr;
-    gap: 0.1rem;
-    align-items: center;
-    width: 100%;
-    max-width: 1500px;
-    margin: 0 auto 5rem auto;
-    /*This can control the distance between every service_item*/
-
-}
-
-/*  ======================
-    Text content in every service CSS
-    ====================== */
-
-.service_number_and_title {
-    all: unset;
-    grid-column: 1 / -1;
-    display: flex;
-    gap: 1rem;
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: var(--color-light);
-    margin-bottom: 7rem;
-}
-
-.service_text_content_title {
-    all: unset;
-}
-
-.service_text_content {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.service_text_content h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-light);
-    margin: 0;
-}
-
-.service_text_content h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 0;
-    color: var(--color-bg);
-}
-
-.service_Description {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--color-bg);
-}
-
-/*  ======================
-    Image in every service CSS
-    ====================== */
-
-.service_image {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    min-height: 280px;
-    overflow: hidden;
-}
-
-.service_image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/*  ======================
-    Info button CSS
-    ====================== */
-
-
-.our_little_service_button a {
-    display: inline-block;
-    font-family: var(--font-body);
-    background-color: var(--color-primary);
-    color: var(--color-bg);
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.our_little_service_button a:hover {
-    background-color: var(--color-accent);
-    color: var(--color-light);
-}
-
-
-@media (max-width: 768px) {
-    .service_item {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-        gap: 2rem;
-        margin-bottom: 3rem;
-        text-align: left;
-    }
-
-    .service_number_and_title {
-        justify-content: center;
-        margin-bottom: 2rem;
-        font-size: 0.9rem;
-        flex-wrap: wrap;
-    }
-
-    .service_text_content {
-        align-items: center;
-    }
-
-    .service_text_content h2 {
-        font-size: 1.5rem;
-    }
-
-    .service_text_content h3 {
-        font-size: 1.2rem;
-    }
-
-    .service_Description {
-        font-size: 1rem;
-        line-height: 1.5;
-        max-width: 90%;
-    }
-
-    .service_image {
-        width: 100%;
-        max-width: 350px;
-        margin: 0 auto;
-    }
-
-    .service_image img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 4 / 3;
-        object-fit: cover;
-    }
-
-    .our_little_service_button {
-        text-align: center;
-    }
-}
-
-/* ======================================================
-   END SECTION #4: our_little_services CSS
-   ====================================================== */
-
-/* ======================================================
-   SECTION #5: Why_Us CSS
-   ====================================================== */
-
-#why_Us {
-    background-color: white;
-    padding: 5rem 2rem;
-    font-family: var(--font-body);
-    max-width: 1200px;
-    margin: 0 auto;
-    /* display: flex; */
-    padding: 5rem 2rem;
-}
-
-.Why_Us_Question {
-    all: unset;
     text-align: center;
-    margin-bottom: 3rem;
+    font-family: var(--font-body);
+    color: var(--color-dark);
+    transition: var(--transition-medium);
 }
 
-.Why_Us_Question h2 {
-    font-size: 2.4rem;
-    font-weight: 700;
+.Form h1 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
     color: var(--color-primary);
+    margin-bottom: 20px;
 }
 
-/*  ======================
-    Layout img + benefits CSS
-    ====================== */
+.Form p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    color: var(--color-dark);
+}
 
-.why_Us_Content {
+.Form img {
+    width: 180px;
+    max-width: 100%;
+    margin-top: 24px;
+    border-radius: 8px;
+    /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); */
+    animation: fadeIn 0.6s var(--transition-fast);
+}
+
+.footer_social_body {
+    flex: 1 1 160px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    align-items: flex-start;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/*  ======================
-    Image CSS
-    ====================== */
-
-.why_Us_Image {
-    flex: 1 1 40%;
-}
-
-.why_Us_Image img {
-    width: 100%;
-    max-width: 500px;
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    object-fit: cover;
-}
-
-/*  ======================
-    Benefits text CSS
-    ====================== */
-
-.why_Us_Benefits {
-    flex: 1 1 55%;
-    display: flex;
-    flex-direction: column;
-}
-
-.why_Us_Benefits h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-primary);
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
     margin-top: 1rem;
 }
 
-.why_Us_Benefits p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--color-dark);
-    margin-top: -1.5rem;
-}
-
-@media (max-width: 768px) {
-    #why_Us {
-        padding: 3rem 1rem;
-    }
-
-    .Why_Us_Question h2 {
-        font-size: 1.8rem;
-    }
-
-    .why_Us_Content {
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
-    }
-
-    .why_Us_Image {
-        width: 100%;
-        max-width: 350px;
-        margin: 0 auto;
-    }
-
-    .why_Us_Image img {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        aspect-ratio: 4 / 3;
-    }
-
-    .why_Us_Benefits {
-        width: 100%;
-        align-items: center;
-        text-align: center;
-    }
-
-    .why_Us_Benefits h3 {
-        font-size: 1.2rem;
-        margin-top: 0.5rem;
-    }
-
-    .why_Us_Benefits p {
-        font-size: 1rem;
-        margin-top: 0;
-        max-width: 90%;
-    }
-}
-
-/* ======================================================
-   END SECTION #5: Why_Us CSS
-   ====================================================== */
-
-/* ======================================================
-   SECTION #6: contact_Us_Now CSS
-   ====================================================== */
-
-#contact_Us_Now {
-    background-color: var(--color-primary);
-    color: var(--color-light);
-    gap: 0.2rem;
-    padding: 8rem 0rem;
-    color: var(--color-light);
-    display: flex;
-    justify-content: center;
-}
-
-.cta_content {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    background-image: url("../ASSETS/IMG/INDEX/CTA.jpg");
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    padding: 4rem;
-    border-radius: 8px;
-    max-width: 90%;
-    box-sizing: border-box;
-    position: relative;
-    overflow: hidden;
-}
-
-.cta_content::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 0;
-}
-
-.cta_content>* {
-    position: relative;
-    z-index: 1;
-}
-
-.cta_header {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    background-color: transparent;
-    padding-right: 4rem;
-    height: auto;
-    justify-content: center;
-}
-
-/*  ======================
-    CTA title and content CSS
-    ====================== */
-
-.cta_title {
-    font-size: 2.2rem;
-    font-family: var(--font-heading);
-    font-weight: 700;
-    color: var(--color-light);
-    margin-bottom: 0.5rem;
-}
-
-.cta_description {
-    font-size: 1.2rem;
-    font-family: var(--font-body);
-    line-height: 1.6;
-    color: var(--color-light);
-}
-
-/*  ======================
-    CTA buttons CSS
-    ====================== */
-
-.cta_buttons {
-    display: flex;
-    gap: 3rem;
-    flex-direction: row;
-    align-items: center;
-}
-
-.btn_schedule,
-.btn_questions {
-    font-size: 1rem;
-    font-family: var(--font-body);
-    font-weight: 500;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background 0.3s ease, color 0.3s ease;
-    display: inline-block;
-    text-align: center;
-    width: 220px;
-    height: 48px;
-    padding: 0;
-    line-height: 48px;
-}
-
-.btn_schedule {
-    background-color: var(--color-accent);
-    color: var(--color-bg);
-}
-
-.btn_schedule:hover {
-    background-color: #e66c00;
-    color: var(--color-light);
-}
-
-.btn_questions {
-    background-color: transparent;
-    border: 2px solid var(--color-light);
-    color: var(--color-light);
-}
-
-.btn_questions:hover {
-    background-color: var(--color-light);
+.footer_social_body a {
     color: var(--color-primary);
+    font-size: 2rem;
+    transition: color 0.3s ease;
 }
 
-@media (max-width: 768px) {
-    #contact_Us_Now {
-        padding: 8rem 1rem;
-        display: flex;
-        flex-direction: column;
-        max-height: none;
-        height: auto;
+.footer_social_body a:hover {
+    color: var(--color-accent);
+}
+
+@media (max-width: 480px) {
+    .Form {
+        padding: 30px 16px;
     }
 
-    .cta_content {
-        display: flex;
-        flex-direction: column;
-        max-height: none;
-        height: auto;
-        padding: 4rem;
-        gap: 4rem;
-        text-align: center;
-        width: 100%;
-        max-width: none;
+    .Form h1 {
+        font-size: 1.5rem;
     }
 
-    .cta_header {
-        max-height: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-right: 0;
-        flex-wrap: unset;
+    .Form p {
+        font-size: 0.95rem;
     }
 
-    .cta_title {
-        font-size: 1.8rem;
+    .Form img {
+        width: 140px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
     }
 
-    .cta_description {
-        font-size: 1rem;
-    }
-
-    /*  ======================
-    CTA contact button CSS
-    ====================== */
-
-    .cta_buttons {
-        flex-direction: column;
-        gap: 1rem;
-        width: 100%;
-        align-items: center;
-    }
-
-    .btn_schedule,
-    .btn_questions {
-        width: 100%;
-        max-width: 280px;
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
 /* ======================================================
-   END SECTION #6: contact_Us_Now CSS
+   END SECTION #2: Form CSS
    ====================================================== */
-
 /* ======================================================
    Footer CSS
    ====================================================== */

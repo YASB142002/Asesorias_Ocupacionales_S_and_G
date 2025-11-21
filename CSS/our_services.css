@@ -3,7 +3,7 @@
    Page: Our Services (our_Services.html)
    Autor: YASB
    Date: 03/11/2025
-   Description: Base CSS stylesheet for the our service page of S&G Seguridad Ocupacional
+   Description: Base CSS stylesheet for the our service page of Seguridad Ocupacional S&G
    ========================================================================== */
 
 :root {
@@ -17,7 +17,7 @@
   /* #e67300 */
   --color-accent-dark-rgba: rgba(206, 103, 0, 0.8);
   /* #ce6700 */
-  --font-heading: 'Montserrat', sans-serif;
+  --font-heading: 'Jost', sans-serif;
   --font-body: 'Roboto', sans-serif;
   --font-main: 'Roboto', sans-serif;
   --transition-fast: 0.3s ease-in-out;
@@ -119,7 +119,9 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
   margin-left: 0.5rem;
 }
 
-.toggle_submenu {
+/*This toggle_submenu means the same class that arrow has */
+.toggle_submenu,
+.toggle_submenu_manual {
   background: none;
   border: none;
   color: var(--color-dark);
@@ -129,10 +131,13 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
   align-items: center;
   justify-content: center;
   padding: 0 1rem;
-  height: 2.6rem;
-  min-height: 100%;
+  min-height: 2.6rem;
   box-sizing: border-box;
   box-shadow: none;
+}
+
+.toggle_submenu_manual {
+  height: 4.2rem;
 }
 
 .arrow {
@@ -145,8 +150,12 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
   transform: rotate(180deg);
 }
 
-.submenu_training:hover .arrow.arrow_training {
+.submenu_training:hover .arrow.arrow_training,
+.submenu_manual:hover .arrow.arrow_manual,
+.submenu_consult:hover .arrow.arrow_consult {
   transform: rotate(-90deg);
+  color: var(--color-light);
+  background-color: var(--color-accent);
 }
 
 .submenu_services {
@@ -179,7 +188,6 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
   transform: rotate(180deg);
   transition: transform 0.3s ease;
   color: var(--color-light);
-  /* mantiene el color original */
 }
 
 .toggle_mainmenu:hover+.dropdown_services,
@@ -249,6 +257,108 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
 }
 
 /* ====================
+   Submenu: manual
+==================== */
+.submenu_manual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 3rem;
+  padding: 0 1rem;
+}
+
+.submenu_manual a {
+  flex: 1;
+  padding: 0.75rem 0;
+  text-decoration: none;
+  color: var(--color-dark);
+}
+
+.submenu_manual>a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--color-light);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-family: var(--font-heading);
+  flex: 1;
+  padding-right: 0.5rem;
+}
+
+.dropdown_manual {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  display: none;
+  background-color: var(--color-light);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1010;
+  min-width: 200px;
+}
+
+.submenu_manual:hover .dropdown_manual {
+  display: block;
+}
+
+/* ====================
+   Submenu: consult
+==================== */
+.submenu_consult {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 3rem;
+  padding: 0 1rem;
+}
+
+.submenu_consult a {
+  flex: 1;
+  padding: 0.75rem 0;
+  text-decoration: none;
+  color: var(--color-dark);
+}
+
+.submenu_consult>a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--color-light);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-family: var(--font-heading);
+  flex: 1;
+  padding-right: 0.5rem;
+}
+
+.dropdown_consult {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  display: none;
+  background-color: var(--color-light);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1010;
+  min-width: 200px;
+}
+
+.submenu_consult:hover .dropdown_consult {
+  display: block;
+}
+
+/* ====================
    Submenu links
 ==================== */
 .dropdown_services li {
@@ -260,8 +370,18 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
   margin: 0;
 }
 
+.dropdown_manual li {
+  margin: 0;
+}
+
+.dropdown_consult li {
+  margin: 0;
+}
+
 .dropdown_services li a,
-.dropdown_training li a {
+.dropdown_training li a,
+.dropdown_consult li a,
+.dropdown_manual li a {
   display: block;
   padding: 0.5rem 1rem;
   color: var(--color-dark);
@@ -274,7 +394,9 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
 }
 
 .dropdown_services li a:hover,
-.dropdown_training li a:hover {
+.dropdown_training li a:hover,
+.dropdown_consult li a:hover,
+.dropdown_manual li a:hover {
   background-color: var(--color-accent);
   color: var(--color-light);
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.4);
@@ -283,7 +405,11 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
 }
 
 .submenu_training:hover>a,
-.submenu_training:hover .toggle_submenu {
+.submenu_training:hover .toggle_submenu,
+.submenu_consult:hover .toggle_submenu,
+.submenu_consult:hover>a,
+.submenu_manual:hover>a,
+.submenu_manual:hover .toggle_submenu_manual {
   background-color: var(--color-accent);
   color: var(--color-light);
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.4);
@@ -293,13 +419,17 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
 
 
 .dropdown_services li:first-child a,
-.dropdown_training li:first-child a {
+.dropdown_training li:first-child a,
+.dropdown_consult li:first-child a,
+.dropdown_manual li:first-child a {
   border-top-left-radius: 1rem;
   border-top-right-radius: 1em;
 }
 
 .dropdown_services li:last-child a,
-.dropdown_training li:last-child a {
+.dropdown_training li:last-child a,
+.dropdown_consult li:last-child a,
+.dropdown_manual li:last-child a {
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1em;
 }
@@ -309,6 +439,7 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
     ====================== */
 
 #first_button_navbar {
+  all: unset;
   background-color: var(--color-accent);
   color: var(--color-light);
   border: 2px solid var(--color-accent-dark);
@@ -473,7 +604,86 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
     border-radius: 3px;
   }
 
-  .submenu_training:hover .arrow.arrow_training {
+  .submenu_manual {
+    position: relative;
+    overflow: visible;
+  }
+
+  .dropdown_manual {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    max-height: 0;
+    overflow-y: auto;
+    transform: scaleY(0);
+    transform-origin: top;
+    z-index: 40;
+    /* background-color: var(--color-primary); */
+  }
+
+  .dropdown_manual.expanded {
+    max-height: 1000px;
+    opacity: 1;
+    transform: scaleY(1);
+    display: block;
+  }
+
+  .dropdown_manual::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .dropdown_manual::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent);
+    border-radius: 3px;
+  }
+
+  .submenu_consult {
+    position: relative;
+    overflow: visible;
+  }
+
+  .dropdown_consult {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    max-height: 0;
+    overflow-y: auto;
+    transform: scaleY(0);
+    transform-origin: top;
+    z-index: 40;
+    /* background-color: var(--color-primary); */
+  }
+
+  .dropdown_consult.expanded {
+    max-height: 1000px;
+    opacity: 1;
+    transform: scaleY(1);
+    display: block;
+  }
+
+  .dropdown_consult::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .dropdown_consult::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent);
+    border-radius: 3px;
+  }
+
+  .submenu_training:hover .arrow.arrow_training,
+  .submenu_manual:hover .arrow.arrow_manual,
+  .submenu_consult:hover .arrow.arrow_consult {
+    transform: rotate(-180deg);
+  }
+
+  .toggle_submenu.active .arrow,
+  .toggle_submenu_manual.active .arrow {
     transform: rotate(-180deg);
   }
 
@@ -483,7 +693,6 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
 /* ======================================================
    END SECTION #1: NavBar CSS
    ====================================================== */
-
 /* ======================================================
    SECTION #2: intro_services CSS
    ====================================================== */
@@ -1749,6 +1958,7 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
   justify-content: space-between;
   align-items: center;
   padding: 8rem 10rem;
+  margin-block: 6rem;
   background-color: var(--color-bg);
   gap: 2rem;
   flex-wrap: wrap;
@@ -1852,7 +2062,7 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
   background-color: var(--color-primary);
   color: var(--color-light);
   gap: 0.2rem;
-  padding: 8rem 0rem;
+  padding: 12rem 0rem;
   color: var(--color-light);
   display: flex;
   justify-content: center;
@@ -2077,7 +2287,7 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
   margin: 0%;
   padding: 0%;
   gap: 0.5rem;
-  max-width: 150px;
+  max-width: 300px;
 }
 
 .footer_logo img {
@@ -2137,7 +2347,6 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
   justify-content: flex-end;
   align-items: center;
   margin-top: 1rem;
-
 }
 
 .footer_social a {
@@ -2233,8 +2442,7 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
     ====================== */
 
   .footer_logo {
-    padding: 0;
-    max-width: 120px;
+    align-self: center;
   }
 
   .footer_logo img {

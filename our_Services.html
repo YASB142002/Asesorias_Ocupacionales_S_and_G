@@ -7,16 +7,15 @@
   <meta name="description" content="Inicio del sitio institucional de S&G Asesorías Ocupacionales" />
   <title>Asesorías S&G | Servicios</title>
   <link rel="stylesheet" href="css/our_services.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap"
-    rel="stylesheet">
+  <link rel="stylesheet" href="ASSETS/IMG/ICONS/FONTAWESOME/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <header>
     <figure class="logo">
       <a href="index.html">
-        <img src="ASSETS/IMG/BRANDING/Logo_200x200.png" alt="Logo de S&G Asesorías Ocupacionales" />
+        <img src="../ASSETS/IMG/BRANDING/Logo_200x200.png" alt="Logo de S&G Asesorías Ocupacionales" />
       </a>
     </figure>
 
@@ -28,35 +27,89 @@
         <li><a href="about_Us.html">Nosotros</a></li>
 
         <li class="submenu_services">
-          <a href="our_services.html">Servicios</a>
+          <a href="">Servicios</a>
 
           <button class="toggle_mainmenu" aria-label="Mostrar menú">
             <i class="fas fa-chevron-down arrow arrow_services"></i>
           </button>
 
           <ul class="dropdown_services">
-            <li><a href="our_Services.html">Trámites</a></li>
-            <li><a href="our_Services.html">Asesorías</a></li>
+            <li><a href="#procedure">Trámites</a></li>
+
+            <li class="submenu_consult">
+              <a href="#consult">Asesorías</a>
+
+              <button class="toggle_submenu" aria-label="Mostrar submenú">
+                <i class="fas fa-chevron-down arrow arrow_consult"></i>
+              </button>
+              <ul class="dropdown_consult">
+                <li><a href="#consult" data-service="consult" data-id="9">Análisis de
+                    vulnerabilidad </a></li>
+                <li><a href="#consult" data-service="consult" data-id="10">Inspecciones de
+                    Seguridad</a></li>
+                <li><a href="#consult" data-service="consult" data-id="1">Riesgos
+                    Físicos</a></li>
+                <li><a href="#consult" data-service="consult" data-id="2">Riesgos
+                    Químicos</a></li>
+                <li><a href="#consult" data-service="consult" data-id="3">Riesgos
+                    Biológicos</a>
+                </li>
+                <li><a href="#consult">Mas!.. </a></li>
+              </ul>
+            </li>
 
             <li class="submenu_training">
-              <a href="our_Services.html">Capacitaciones</a>
+              <a href="#training">Capacitaciones</a>
 
               <button class="toggle_submenu" aria-label="Mostrar submenú">
                 <i class="fas fa-chevron-down arrow arrow_training"></i>
               </button>
 
               <ul class="dropdown_training">
-                <li><a href="our_Services.html">Ley 618 y su Reglamento </a></li>
-                <li><a href="our_Services.html">Higiene Ocupacional</a></li>
-                <li><a href="our_Services.html">Prevención de Riesgos Laborales</a></li>
-                <li><a href="our_Services.html">Prevención de Riesgos Químicos y Biológicos</a></li>
-                <li><a href="our_Services.html">Prevención de Riesgos Ergonómicos y Psicosociales</a></li>
-                <li><a href="our_Services.html">Brigadas de Emergencia</a></li>
+                <li><a href="#training" data-service="training" data-id="course_1">Ley 618 y
+                    su
+                    Reglamento </a></li>
+                <li><a href="#training" data-service="training" data-id="course_2">Higiene
+                    Ocupacional</a></li>
+                <li><a href="#training" data-service="training" data-id="course_3">Prevención
+                    de
+                    Riesgos Laborales</a></li>
+                <li><a href="#training" data-service="training" data-id="course_4">Prevención
+                    de
+                    Riesgos Químicos y Biológicos</a></li>
+                <li><a href="#training" data-service="training" data-id="course_5">Prevención
+                    de
+                    Riesgos Ergonómicos y Psicosociales</a>
+                </li>
+                <li><a href="#training" data-service="training" data-id="course_6">Brigadas de
+                    Emergencia</a></li>
+                <li><a href="#training">Mas!..</a></li>
               </ul>
             </li>
 
-            <li><a href="our_Services.html">Elaboración de Manuales</a></li>
-            <li><a href="our_Services.html">Sistema Globalmente Armonizado - SGA</a></li>
+            <li class="submenu_manual">
+              <a href="#manual">Elaboración de Manuales</a>
+
+              <button class="toggle_submenu_manual" aria-label="Mostrar submenú">
+                <i class="fas fa-chevron-down arrow arrow_manual"></i>
+              </button>
+              <ul class="dropdown_manual">
+                <li><a href="#manual" data-service="manual" data-id="manual_1">Manual
+                    Operativo
+                  </a></li>
+                <li><a href="#manual" data-service="manual" data-id="manual_2">Procedimientos
+                    de
+                    Trabajos Seguros
+                  </a></li>
+                <li><a href="#manual" data-service="manual" data-id="manual_3">Planes de
+                    Emergencia y Respuestas</a></li>
+                <li><a href="#manual" data-service="manual" data-id="manual_4">Gestión de
+                    Residuos Químicos Peligrosos</a></li>
+              </ul>
+            </li>
+
+            <li><a href="#sga">Sistema Globalmente Armonizado - SGA</a>
+            </li>
           </ul>
         </li>
       </ul>
@@ -85,7 +138,7 @@
       </figure>
     </section>
 
-    <section class="procedures_service">
+    <section class="procedures_service" id="procedure">
       <article class="procedures_text_content">
         <p>Trámites</p>
         <h2>Licencia de Higiene y Seguridad.</h2>
@@ -149,7 +202,7 @@
           trabajadores y el cumplimiento de la legislación laboral.</p>
       </header>
 
-      <section class="cards_section">
+      <section class="cards_section" id="consult">
         <section class="secondary_cards_section" id="secondary_cards_section">
           <!-- This is the container where all secondary consulting service will be add with js -->
         </section>
@@ -163,7 +216,7 @@
           <!-- In this container is where all training courser will be adde with js -->
         </section>
       </article>
-      <article class="training_text_description">
+      <article class="training_text_description" id="training">
         <h2>Descubra el Valor de la Prevención Especializada</h2>
         <p>
           Seleccione una de nuestras Capacitaciones Técnicas en el menú para conocer el enfoque y los
@@ -185,7 +238,7 @@
       </article>
     </section>
 
-    <section class="manual_development_section">
+    <section class="manual_development_section" id="manual">
       <header class="manual_development_header">
         <article class="manual_development_header_text">
           <h3>Manuales</h3>
@@ -201,7 +254,7 @@
       </section>
     </section>
 
-    <section class="SGA_section">
+    <section class="SGA_section" id="sga">
 
       <article class="sga_text_content">
         <h3>SGA</h3>
@@ -236,11 +289,10 @@
   <footer id="site_footer">
     <section class="main_footer">
       <figure class="footer_logo">
-        <img src="ASSETS/IMG/BRANDING/Logo_200x200.png" alt="Logo de S&G Asesorías Ocupacionales" />
+        <img src="ASSETS/IMG/BRANDING/Isologo.png" alt="Logo de S&G Asesorías Ocupacionales" />
       </figure>
 
       <address class="footer_info">
-        <h2>Asesorías Ocupacionales S&G</h2>
         <p>Managua, Nicaragua</p>
         <p>Correo: <a href="mailto:contacto@sgasesorias.com">contacto@asesoriassg.com</a></p>
         <p>Teléfono: <a href="tel:+50588042988">+505 8804 2988</a></p>

@@ -43,8 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Navbar
   const menuToggle = document.getElementById("menu_toggle");
   const mainNav = document.getElementById("main_nav");
-  const toggleTraining = document.querySelector(".toggle_submenu");
+  const toggleTraining = document.querySelector(".submenu_training .toggle_submenu");
   const dropdownTraining = document.querySelector(".dropdown_training");
+  const toggleConsult = document.querySelector(".submenu_consult .toggle_submenu");
+  const dropdownConsult = document.querySelector(".dropdown_consult");
+  const toggleManual = document.querySelector(".toggle_submenu_manual");
+  const dropdownManual = document.querySelector(".dropdown_manual");
   const toggleServices = document.querySelector(".toggle_mainmenu");
   const dropdownServices = document.querySelector(".dropdown_services");
 
@@ -67,6 +71,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const manualTitleEl = manualHeaderEl?.querySelector('h2');
   const manualDescEl = manualHeaderEl?.querySelector('p');
 
+  //Utility
+  const params = new URLSearchParams(window.location.search);
+  const selectedService = params?.get("selectedService");
+  const selectedElement = params?.get("ID");
+  const aTags = document.querySelectorAll('a[data-service]');
 
   //===========================================================================================================================================================================================================================================
   //    Global State
@@ -77,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let manualData = [];
   let lastSelectedConsultCard = null;
   let lastSelectedManual = null;
-  let isCardAnimating = false;
+  let lastToggleSelected = null;
 
   //===========================================================================================================================================================================================================================================
   //    Utility Functions
@@ -117,6 +126,72 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  /**
+   * This funtion activate the click event in consult, training and manual developing sections (only dynamic service sections)
+   * @param {number} selectedElement - Catch the id number to search the specific service that user selected
+   */
+  function activateElement(selectedElement) {
+
+    let triggerSelected = null;
+    console.log(selectedElement);
+    switch (selectedService?.toLowerCase()) {
+      case "consult":
+        triggerSelected = consultsContainer?.querySelector(`button[data-id="${selectedElement}"]`);
+        triggerSelected?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "center"
+        });
+        break;
+      case "training":
+        {
+          const courseElement = trainingContainer?.querySelector(`p[data-id="course_${selectedElement}"]`);
+          selectTrainingCourse(courseElement);
+          return;
+        }
+      case "manual":
+        console.log(selectedElement);
+        triggerSelected = manualsContainer?.querySelector(`button[data-id="manual_${selectedElement}"]`);
+        break;
+    }
+
+    triggerSelected?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    triggerSelected?.click();
+  }
+
+  function activateInternalElement(service, elementID) {
+    if (!elementID) {
+      const container = document.getElementById(service);
+      container?.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+      return;
+    }
+
+    let triggerSelected = null;
+
+    switch (service) {
+      case "consult":
+        triggerSelected = consultsContainer?.querySelector(`button[data-id="${elementID}"]`);
+        triggerSelected?.click();
+        break;
+      case "training":
+        {
+          const searchID = String(elementID).includes('course_') ? elementID : `course_${elementID}`;
+          triggerSelected = trainingContainer?.querySelector(`p[data-id="${searchID}"]`);
+          if (triggerSelected) {
+            selectTrainingCourse(triggerSelected);
+          }
+        }
+        break;
+      case "manual":
+        triggerSelected = manualsContainer?.querySelector(`button[data-id="${elementID}"]`);
+        triggerSelected?.click();
+        break;
+    }
+
+    triggerSelected?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+  }
+
+
   //===========================================================================================================================================================================================================================================
   //    Navbar Logic
   //===========================================================================================================================================================================================================================================
@@ -136,13 +211,75 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleButton.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          dropdownElement.classList.toggle("expanded");
+
+          // If it's a submenu, close all other submenus first.
+          if (dropdownElement.parentElement.closest('.dropdown_services')) {
+            const submenus = [
+              { toggle: toggleConsult, dropdown: dropdownConsult },
+              { toggle: toggleTraining, dropdown: dropdownTraining },
+              { toggle: toggleManual, dropdown: dropdownManual },
+            ];
+
+            submenus.forEach(submenu => {
+              if (submenu.dropdown && submenu.dropdown !== dropdownElement) {
+                submenu.dropdown.classList.remove("expanded");
+                submenu.toggle?.classList.remove("active");
+              }
+            });
+          }
+
+          const isSameToggle = lastToggleSelected === toggleButton;
+
+          if (isSameToggle) {
+            dropdownElement.classList.remove("expanded");
+            toggleButton.classList.remove("active");
+            lastToggleSelected = null;
+            return;
+          }
+
+          // Close if last exists
+          if (lastToggleSelected && lastToggleSelected !== toggleButton) {
+            const prevDropdown = document.querySelector(lastToggleSelected.dataset.target);
+            prevDropdown?.classList.remove("expanded");
+            lastToggleSelected.classList.remove("active");
+          }
+
+          // Enable new toggle
+          const isNowExpanded = dropdownElement.classList.toggle("expanded");
+          toggleButton.classList.toggle("active", isNowExpanded);
+
+          if (!toggleButton.classList.contains("toggle_mainmenu")) lastToggleSelected = toggleButton;
+
+          if (!isNowExpanded) {
+            toggleButton.blur();
+          }
         });
       }
     };
 
     handleToggle(toggleServices, dropdownServices);
     handleToggle(toggleTraining, dropdownTraining);
+    handleToggle(toggleConsult, dropdownConsult);
+    handleToggle(toggleManual, dropdownManual);
+
+    aTags.forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+
+        const service = link.dataset.service;
+        const elementID = link.dataset.id || null;
+
+        activateInternalElement(service, elementID);
+
+        // This update the URL without recharge the page
+        const hash = link.getAttribute("href");
+        const query = elementID
+          ? `?selectedService=${service}&courseID=${elementID}`
+          : `?selectedService=${service}`;
+        history.pushState(null, "", `${query}${hash}`);
+      });
+    });
+
   }
 
   //===========================================================================================================================================================================================================================================
@@ -226,6 +363,22 @@ document.addEventListener("DOMContentLoaded", () => {
   //    Training Section Logic
   //===========================================================================================================================================================================================================================================
 
+  function selectTrainingCourse(courseItem) {
+    console.log(courseItem);
+
+    if (!courseItem) return;
+    const activeCourseP = trainingContainer?.querySelector('p.active');
+    if (courseItem.classList.contains('active')) return;
+
+    const id = Number.parseInt(courseItem.dataset.id?.split("_")[1], 10);
+    const courseData = trainingData.find(c => Number(c.id) === id);
+    if (courseData) {
+      activeCourseP?.classList.remove('active');
+      courseItem.classList.add('active');
+      updateTrainingDescription(courseData);
+    }
+  }
+
   function renderTrainingInCylinder(courses) {
     if (!trainingContainer) return;
     trainingContainer.innerHTML = "";
@@ -233,6 +386,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const courseItem = document.createElement("p");
       courseItem.setAttribute("data-id", `course_${course.id}`);
       courseItem.innerHTML = `${course.title}`;
+      courseItem.addEventListener('click', (e) => {
+        e.stopPropagation();
+        selectTrainingCourse(courseItem);
+      });
       trainingContainer.appendChild(courseItem);
     });
   }
@@ -411,22 +568,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- Training Section ---
+    const isTrainingLink = target.closest('a[data-service="training"]');
     const isInsideCylinder = trainingContainer?.contains(target);
     const activeCourseP = trainingContainer?.querySelector('p.active');
-    if (isInsideCylinder && target.tagName === 'P') {
-      e.stopPropagation();
-      if (target.classList.contains('active')) return;
-
-      const id = Number.parseInt(target.dataset.id?.split("_")[1], 10);
-      const course = trainingData.find(c => c.id === id);
-      if (course) {
-        activeCourseP?.classList.remove('active');
-        target.classList.add('active');
-        updateTrainingDescription(course);
-      }
-      return;
-    }
-    if (activeCourseP && !isInsideCylinder) {
+    if (activeCourseP && !isInsideCylinder && !target.closest('.training_text_description') && !isTrainingLink) {
       activeCourseP.classList.remove('active');
       resetTrainingDescription();
     }
@@ -452,17 +597,28 @@ document.addEventListener("DOMContentLoaded", () => {
     } = e;
 
     // --- Navbar Logic ---
-    if (menuToggle?.contains(target) || toggleServices?.contains(target) || toggleTraining?.contains(target)) {
-      return;
-    }
-    if (mainNav && !mainNav.contains(target)) {
+
+    if (mainNav && !mainNav.contains(target)) {//This check if click was on main menu (inicio, nosotros, servicios)
       mainNav.classList.remove("expanded");
-      if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+      if (menuToggle) menuToggle.setAttribute("aria-expanded", "false"); //This line remove the active status in service_arrow
+
+      if (toggleConsult) toggleConsult?.classList.remove("active"); //This line remove the active status in service_arrow
+      if (toggleManual) toggleManual?.classList.remove("active"); //This line remove the active status in service_arrow
+      if (toggleTraining) toggleTraining?.classList.remove("active"); //This line remove the active status in service_arrow
       dropdownServices?.classList.remove("expanded");
       dropdownTraining?.classList.remove("expanded");
-    } else if (dropdownServices && !dropdownServices.contains(target) && dropdownTraining && !dropdownTraining.contains(target)) {
-      dropdownServices.classList.remove("expanded");
-      dropdownTraining.classList.remove("expanded");
+      dropdownConsult?.classList.remove("expanded");
+      dropdownManual?.classList.remove("expanded");
+    } else {
+      if (dropdownServices && !dropdownServices.contains(target) && dropdownTraining && !dropdownTraining.contains(target) && dropdownConsult && !dropdownConsult.contains(target) && dropdownManual && !dropdownManual.contains(target)) {
+        dropdownServices.classList.remove("expanded");
+        dropdownTraining.classList.remove("expanded");
+        dropdownConsult.classList.remove("expanded");
+        dropdownManual.classList.remove("expanded");
+      }
+      if (toggleConsult) toggleConsult?.classList.remove("active"); //This line remove the active status in service_arrow
+      if (toggleManual) toggleManual?.classList.remove("active"); //This line remove the active status in service_arrow
+      if (toggleTraining) toggleTraining?.classList.remove("active"); //This line remove the active status in service_arrow
     }
 
     // --- Consults Reset Logic ---
@@ -472,6 +628,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function initialize() {
+
     setupNavbar();
 
     [consultData, trainingData, manualData] = await Promise.all([
@@ -487,6 +644,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("click", handleGlobalClicks);
     document.addEventListener("mousedown", handleGlobalMousedown);
     window.addEventListener('resize', alignManualCards);
+    activateElement(selectedElement);
   }
 
   initialize();

@@ -7,16 +7,15 @@
   <meta name="description" content="Inicio del sitio institucional de S&G Asesorías Ocupacionales" />
   <title>S&G Asesorías | Nosotros</title>
   <link rel="stylesheet" href="CSS/About_Us_Stylesheet.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Roboto:wght@400;500&display=swap"
-    rel="stylesheet">
+  <link rel="stylesheet" href="ASSETS/IMG/ICONS/FONTAWESOME/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <header>
     <figure class="logo">
       <a href="index.html">
-        <img src="ASSETS/IMG/BRANDING/Logo_200x200.png" alt="Logo de S&G Asesorías Ocupacionales" />
+        <img src="../ASSETS/IMG/BRANDING/Logo_200x200.png" alt="Logo de S&G Asesorías Ocupacionales" />
       </a>
     </figure>
 
@@ -35,28 +34,82 @@
           </button>
 
           <ul class="dropdown_services">
-            <li><a href="our_Services.html">Trámites</a></li>
-            <li><a href="our_Services.html">Asesorías</a></li>
+            <li><a href="our_Services.html?selectedService=procedure#procedure">Trámites</a></li>
+
+            <li class="submenu_consult">
+              <a href="our_Services.html?selectedService=consult#consult">Asesorías</a>
+              <!-- our_Services.html?selectedService=consult&consultID=9#consult when add consultsubmenu-->
+              <button class="toggle_submenu" aria-label="Mostrar submenú">
+                <i class="fas fa-chevron-down arrow arrow_consult"></i>
+              </button>
+              <ul class="dropdown_consult">
+                <li><a href="our_Services.html?selectedService=consult&ID=9#consult">Análisis de
+                    vulnerabilidad </a></li>
+                <li><a href="our_Services.html?selectedService=consult&ID=10#consult">Inspecciones de
+                    Seguridad</a></li>
+                <li><a href="our_Services.html?selectedService=consult&ID=1#consult">Riesgos
+                    Físicos</a></li>
+                <li><a href="our_Services.html?selectedService=consult&ID=2#consult">Riesgos
+                    Químicos</a></li>
+                <li><a href="our_Services.html?selectedService=consult&ID=3#consult">Riesgos
+                    Biológicos</a>
+                </li>
+                <li><a href="our_Services.html?selectedService=consult#consult">Mas!.. </a></li>
+              </ul>
+            </li>
 
             <li class="submenu_training">
-              <a href="our_Services.html">Capacitaciones</a>
+              <a href="our_Services.html?selectedService=training#training">Capacitaciones</a>
 
               <button class="toggle_submenu" aria-label="Mostrar submenú">
                 <i class="fas fa-chevron-down arrow arrow_training"></i>
               </button>
 
               <ul class="dropdown_training">
-                <li><a href="our_Services.html">Ley 618 y su Reglamento </a></li>
-                <li><a href="our_Services.html">Higiene Ocupacional</a></li>
-                <li><a href="our_Services.html">Prevención de Riesgos Laborales</a></li>
-                <li><a href="our_Services.html">Prevención de Riesgos Químicos y Biológicos</a></li>
-                <li><a href="our_Services.html">Prevención de Riesgos Ergonómicos y Psicosociales</a></li>
-                <li><a href="our_Services.html">Brigadas de Emergencia</a></li>
+                <li><a href="our_Services.html?selectedService=training&ID=1#training">Ley 618 y
+                    su
+                    Reglamento </a></li>
+                <li><a href="our_Services.html?selectedService=training&ID=2#training">Higiene
+                    Ocupacional</a></li>
+                <li><a href="our_Services.html?selectedService=training&ID=3#training">Prevención
+                    de
+                    Riesgos Laborales</a></li>
+                <li><a href="our_Services.html?selectedService=training&ID=4#training">Prevención
+                    de
+                    Riesgos Químicos y Biológicos</a></li>
+                <li><a href="our_Services.html?selectedService=training&ID=5#training">Prevención
+                    de
+                    Riesgos Ergonómicos y Psicosociales</a>
+                </li>
+                <li><a href="our_Services.html?selectedService=training&ID=6#training">Brigadas de
+                    Emergencia</a></li>
+                <li><a href="our_Services.html?selectedService=training#training">Mas!..</a></li>
               </ul>
             </li>
 
-            <li><a href="our_Services.html">Elaboración de Manuales</a></li>
-            <li><a href="our_Services.html">Sistema Globalmente Armonizado - SGA</a></li>
+            <li class="submenu_manual">
+              <a href="our_Services.html?selectedService=manual#manual">Elaboración de Manuales</a>
+
+              <button class="toggle_submenu_manual" aria-label="Mostrar submenú">
+                <i class="fas fa-chevron-down arrow arrow_manual"></i>
+              </button>
+              <ul class="dropdown_manual">
+                <li><a href="our_Services.html?selectedService=manual&ID=1#manual">Manual
+                    Operativo
+                  </a></li>
+                <li><a href="our_Services.html?selectedService=manual&ID=2#manual">Procedimientos
+                    de
+                    Trabajos Seguros
+                  </a></li>
+                <li><a href="our_Services.html?selectedService=manual&ID=3#manual">Planes de
+                    Emergencia y Respuestas</a></li>
+                <li><a href="our_Services.html?selectedService=manual&ID=4#manual">Gestión de
+                    Residuos Químicos Peligrosos</a></li>
+              </ul>
+            </li>
+
+            <li><a href="our_Services.html?selectedService=sga#sga">Sistema Globalmente Armonizado - SGA</a>
+            </li>
           </ul>
         </li>
       </ul>
@@ -92,7 +145,7 @@
         <header class="solutions_title">
           <h2 class="main_title">Soluciones integrales</h2>
           <p class="main_description">
-            S&G Asesorías Ocupacionales es una empresa nicaragüense dedicada a brindar soluciones técnicas en higiene
+            Asesorías Ocupacionales S&G es una empresa nicaragüense dedicada a brindar soluciones técnicas en higiene
             industrial, seguridad ocupacional y manejo responsable de sustancias químicas. Nuestro equipo combina
             experiencia normativa, conocimiento técnico y compromiso ético para proteger la salud de los trabajadores y
             fortalecer la cultura preventiva en las organizaciones.
@@ -126,7 +179,7 @@
     <section class="Identity_section">
       <article class="identity_content">
         <header class="identity_header">
-          <h2 class="identity_title">Nuestra identidad</h2>
+          <h2 class="identity_title">Nuestra Identidad</h2>
         </header>
 
         <section class="identity_blocks">
@@ -135,7 +188,7 @@
               <i class="fas fa-building identity_icon" aria-hidden="true"></i>
             </article>
             <article class="identity_texts">
-              <h3 class="item_title">Nuestra Misión</h3>
+              <h3 class="item_title">Misión</h3>
               <p class="item_description">
                 Brindar soluciones integrales en Higiene y Seguridad Ocupacional, con énfasis en la gestión responsable
                 de sustancias químicas, mediante asesorías técnicas, capacitación efectiva y cumplimiento normativo.
@@ -150,7 +203,7 @@
               <i class="fas fa-eye identity_icon" aria-hidden="true"></i>
             </article>
             <article class="identity_texts">
-              <h3 class="item_title">Nuestra Visión</h3>
+              <h3 class="item_title">Visión</h3>
               <p class="item_description">
                 Ser reconocidos como empresa líder en asesorías y salud ocupacional en Nicaragua, destacando nuestra
                 excelencia técnica, innovación en el manejo de riesgos químicos y contribución activa a entornos
@@ -164,12 +217,12 @@
               <i class="fas fa-shield identity_icon" aria-hidden="true"></i>
             </article>
             <article class="identity_texts">
-              <h3 class="item_title">Nuestros Valores</h3>
+              <h3 class="item_title">Valores</h3>
               <p class="item_description">
                 Nuestro motor es el Compromiso con la Salud y Seguridad de los trabajadores, guiado siempre por la
                 Responsabilidad y Ética Profesional en la gestión de riesgos químicos. Buscamos la Excelencia Técnica e
                 Innovación en cada solución que ofrecemos, asegurando la Integridad y Cumplimiento Normativo adaptado a
-                Nicaragua y los estándares internacionales, todo ello con el fin último de robustecer una sólida Cultura
+                Nicaragua y los estándares internacionales, todo ello con el fin de fortalecer la Cultura
                 Preventiva y Concientización en cada organización que asesoramos.
               </p>
             </article>
@@ -226,7 +279,7 @@
     <section class="Cta_section">
       <article class="cta_content">
         <header class="cta_header">
-          <h2 class="cta_title">Proteja a su equipo - Agende una asesoría sobre seguridad química hoy</h2>
+          <h2 class="cta_title">Proteja a su equipo - Agende una Asesoría sobre Seguridad Química hoy mismo</h2>
           <p class="cta_description">
             Permitamos diseñar la estrategia que garantizará la seguridad y el
             cumplimiento normativo de su empresa.
@@ -244,11 +297,10 @@
   <footer id="site_footer">
     <section class="main_footer">
       <figure class="footer_logo">
-        <img src="ASSETS/IMG/BRANDING/Logo_200x200.png" alt="Logo de S&G Asesorías Ocupacionales" />
+        <img src="ASSETS/IMG/BRANDING/Isologo.png" alt="Logo de S&G Asesorías Ocupacionales" />
       </figure>
 
       <address class="footer_info">
-        <h2>Asesorías Ocupacionales S&G</h2>
         <p>Managua, Nicaragua</p>
         <p>Correo: <a href="mailto:contacto@sgasesorias.com">contacto@asesoriassg.com</a></p>
         <p>Teléfono: <a href="tel:+50588042988">+505 8804 2988</a></p>
