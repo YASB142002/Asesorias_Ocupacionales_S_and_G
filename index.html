@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Inicio del sitio institucional de S&G Asesorías Ocupacionales" />
     <title>Asesorías S&G</title>
+    <link rel="stylesheet" href="CSS/global.css">
     <link rel="stylesheet" href="css/stylesheet.css" />
+    <link rel="stylesheet" href="CSS/generalAnimations.css">
+    <link rel="icon" href="ASSETS/IMG/ICONS/IsotipoIcon.png" type="image/png">
     <link rel="stylesheet" href="ASSETS/IMG/ICONS/FONTAWESOME/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 </head>
@@ -123,8 +126,10 @@
     <main>
         <section id="welcome_intruction">
             <article class="text_box">
-                <h2>Protegemos su empresa con soluciones integrales de Seguridad Ocupacional.</h2>
-                <p>Asesorías Ocupacionales S&G ofrece servicios especializados en Higiene y Seguridad Laboral. Nuestro
+                <h2 class="scroll-hidden from-behind">Protegemos su empresa con soluciones integrales de Seguridad
+                    Ocupacional.</h2>
+                <p class="scroll-hidden from-left">Asesorías Ocupacionales S&G ofrece servicios especializados en
+                    Higiene y Seguridad Laboral. Nuestro
                     compromiso es garantizar entornos de trabajo seguros y cumplir con las normativas nacionales.</p>
             </article>
         </section>
@@ -132,15 +137,16 @@
         <section id="about_Services">
             <article class="about_services_text">
                 <!-- <h3>Expertos</h3> -->
-                <h2>Evite Multas y Accidentes</h2>
-                <p>Deje de preocuparse por inspecciones sorpresa y riesgos ocultos. Brindamos asesoría técnica
+                <h2 class="scroll-hidden from-behind">Evite Multas y Accidentes</h2>
+                <p class="scroll-hidden from-left">Deje de preocuparse por inspecciones sorpresa y riesgos ocultos.
+                    Brindamos asesoría técnica
                     especializada y programas de formación práctica enfocadas en el cumplimiento de las normativas
                     nacionales,
                     higiene
                     industrial y la gestión segura de productos químicos.</p>
             </article>
 
-            <figure class="about_services_img">
+            <figure class="about_services_img scroll-hidden from-behind">
                 <img src="../ASSETS/IMG/INDEX/about_Services.png" alt="Imagen complementaria para nuestros servicios">
             </figure>
         </section>
@@ -148,13 +154,12 @@
         <section id="our_little_services">
 
             <article class="service_item" id="service_Internal_Audits">
-                <header class="service_number_and_title">
+                <header class="service_number_and_title scroll-hidden from-behind">
                     <p>01</p>
                     <p>Auditorías</p>
                 </header>
-                <section class="service_text_content">
+                <section class="service_text_content scroll-hidden from-left">
                     <header class="service_text_content_title">
-                        <!-- <h3>Cumplimiento</h3> -->
                         <h2>Auditorías internas en Higiene y Seguridad Ocupacional</h2>
                     </header>
                     <p class="service_Description">
@@ -166,7 +171,7 @@
                     </aside>
                 </section>
 
-                <figure class="service_image">
+                <figure class="service_image scroll-hidden from-behind">
                     <img src="ASSETS/IMG/INDEX/Internal_Audits.png"
                         alt="Imagen representativa de auditorías internas" />
                 </figure>
@@ -174,14 +179,13 @@
             </article>
 
             <article class="service_item" id="service_SGA_Implementation">
-                <header class="service_number_and_title">
+                <header class="service_number_and_title scroll-hidden from-behind">
                     <p>02</p>
                     <p>SGA</p>
                 </header>
 
-                <section class="service_text_content">
+                <section class="service_text_content scroll-hidden from-left">
                     <header class="service_text_content_title">
-                        <!-- <h3>Implementación</h3> -->
                         <h2>Implementación del Sistema Globalmente Armonizado (SGA)</h2>
                     </header>
                     <p class="service_Description">
@@ -193,7 +197,7 @@
                     </aside>
                 </section>
 
-                <figure class="service_image">
+                <figure class="service_image scroll-hidden from-behind">
                     <img src="ASSETS/IMG/INDEX/SGA_Implementation.jpg"
                         alt="Imagen representativa de la implementación del SGA" />
                 </figure>
@@ -201,14 +205,13 @@
 
             <article class="service_item" id="service_Emergency_Plans">
 
-                <header class="service_number_and_title">
+                <header class="service_number_and_title scroll-hidden from-behind">
                     <p>03</p>
                     <p>Emergencias</p>
                 </header>
 
-                <section class="service_text_content">
+                <section class="service_text_content scroll-hidden from-left">
                     <header class="service_text_content_title">
-                        <!-- <h3>Respuesta</h3> -->
                         <h2>Planes de Emergencia y Respuesta ante incidentes químicos</h2>
                     </header>
                     <p class="service_Description">
@@ -220,21 +223,20 @@
                     </aside>
                 </section>
 
-                <figure class="service_image">
+                <figure class="service_image scroll-hidden from-behind">
                     <img src="ASSETS/IMG/INDEX/Emergency_Plans.jpg"
                         alt="Imagen representativa de los planes de seguridad" />
                 </figure>
             </article>
 
             <article class="service_item" id="service_Waste_Management">
-                <header class="service_number_and_title">
+                <header class="service_number_and_title scroll-hidden from-behind">
                     <p>04</p>
                     <p>Residuos</p>
                 </header>
 
-                <section class="service_text_content">
+                <section class="service_text_content scroll-hidden from-left">
                     <header class="service_text_content_title">
-                        <!-- <h3>Gestión</h3> -->
                         <h2>Clasificación y Gestión de Residuos Peligrosos</h2>
                     </header>
                     <p class="service_Description">
@@ -246,7 +248,7 @@
                     </aside>
                 </section>
 
-                <figure class="service_image">
+                <figure class="service_image scroll-hidden from-behind">
                     <img src="ASSETS/IMG/INDEX/Waste_Management.jpg"
                         alt="Imagen representativa de la gestión de residuos peligrosos" />
                 </figure>
@@ -255,29 +257,29 @@
         </section>
 
         <section id="why_Us">
-            <header class="Why_Us_Question">
+            <header class="Why_Us_Question scroll-hidden from-behind">
                 <h2>¿Por qué nosotros?</h2>
             </header>
 
             <section class="why_Us_Content">
-                <aside class="why_Us_Image">
-                    <img src="ASSETS/IMG/INDEX/Why_Us.jpg"
+                <aside class="why_Us_Image scroll-hidden from-behind">
+                    <img src="ASSETS/IMG/INDEX/Why_Us.png"
                         alt="Imagen ilustrativa de por qué elegir nuestros servicios" />
                 </aside>
 
                 <article class="why_Us_Benefits">
-                    <h3>Protección que trasciende límites</h3>
-                    <p>
+                    <h3 class="scroll-hidden from-right">Protección que trasciende límites</h3>
+                    <p class="scroll-hidden from-behind">
                         Nuestra metodología integral aborda los riesgos laborales desde una perspectiva holística,
                         garantizando la seguridad de cada trabajador como un compromiso fundamental.
                     </p>
-                    <h3>Soluciones adaptadas a su industria</h3>
-                    <p>
+                    <h3 class="scroll-hidden from-right">Soluciones adaptadas a su industria</h3>
+                    <p class="scroll-hidden from-behind">
                         Cada sector tiene desafíos únicos. Diseñamos estrategias personalizadas que se ajustan
                         específicamente a las necesidades de su organización, maximizando la eficacia preventiva.
                     </p>
-                    <h3>Cultura de prevención sostenible</h3>
-                    <p>
+                    <h3 class="scroll-hidden from-right">Cultura de prevención sostenible</h3>
+                    <p class="scroll-hidden from-behind">
                         No solo implementamos normas, formamos equipos comprometidos con la seguridad. Desarrollamos
                         programas que transforman la percepción de riesgo en cada nivel organizacional.
                     </p>
@@ -287,14 +289,14 @@
 
         <section id="contact_Us_Now">
             <article class="cta_content">
-                <header class="cta_header">
+                <header class="cta_header scroll-hidden from-bottom">
                     <h2 class="cta_title">Transforme la seguridad de su empresa ahora mismo</h2>
                     <p class="cta_description">
                         Contáctenos para una consultoría personalizada y descubra cómo podemos proteger a su equipo
                     </p>
                 </header>
 
-                <nav class="cta_buttons">
+                <nav class="cta_buttons scroll-hidden from-bottom">
                     <a href="contact_Us.html#faq" class="btn_questions">¿Tiene dudas? Contáctenos</a>
                 </nav>
             </article>
@@ -342,7 +344,7 @@
             &copy; 2025 Asesorías Ocupacionales S&G. Todos los derechos reservados.
         </small>
     </footer>
-    <script src="JS/ui_index.js"></script>
+    <script type="module" src="JS/ui_general.js"></script>
 </body>
 
 </html>

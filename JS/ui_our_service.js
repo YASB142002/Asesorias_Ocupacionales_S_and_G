@@ -1,3 +1,9 @@
+//Description: This file is designed to handle all logic in our service page, hangle every dynamic section
+//Autor: YASB
+//Date: 18/11/2025
+
+import { renderAnimations } from "./ui_animations.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   //===========================================================================================================================================================================================================================================
   //    Configuration and Constants
@@ -126,6 +132,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function scrollToElement(el) {
+    const rect = el?.getBoundingClientRect();
+
+    if (window.innerWidth > 768) {
+      // PC view → vertical scroll
+      const offset = 300; //Extra pixels to avoid it scroll more than necessary
+      window.scrollTo({
+        top: window.scrollY + rect.top - offset,
+        behavior: "smooth"
+      });
+    } else {
+      // Mobile view → horizontal scroll
+      const offset = 50;
+      window.scrollTo({
+        left: window.scrollX + rect.left - offset,
+        behavior: "smooth"
+      });
+    }
+
+  }
+
+
   /**
    * This funtion activate the click event in consult, training and manual developing sections (only dynamic service sections)
    * @param {number} selectedElement - Catch the id number to search the specific service that user selected
@@ -133,7 +161,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function activateElement(selectedElement) {
 
     let triggerSelected = null;
-    console.log(selectedElement);
     switch (selectedService?.toLowerCase()) {
       case "consult":
         triggerSelected = consultsContainer?.querySelector(`button[data-id="${selectedElement}"]`);
@@ -150,15 +177,22 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
       case "manual":
-        console.log(selectedElement);
         triggerSelected = manualsContainer?.querySelector(`button[data-id="manual_${selectedElement}"]`);
         break;
     }
 
-    triggerSelected?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-    triggerSelected?.click();
+    if (!triggerSelected == null) {
+      scrollToElement(triggerSelected);
+      triggerSelected?.click();
+    }
   }
 
+  /**
+   * This function is designed to show and highlight a specific service item on the webpage.
+   * @param {String} service It takes a service (like "consult", "training", or "manual") to know what kind service user clicked
+   * @param {Int} elementID It takes the service id to know what specific service user clicked
+   * @returns After finding and activating the specific element  it smoothly scrolls the page to place that element in the center of the screen, ensuring the user sees it.
+   */
   function activateInternalElement(service, elementID) {
     if (!elementID) {
       const container = document.getElementById(service);
@@ -188,7 +222,8 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
     }
 
-    triggerSelected?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+
+    scrollToElement(triggerSelected);
   }
 
 
@@ -645,6 +680,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("mousedown", handleGlobalMousedown);
     window.addEventListener('resize', alignManualCards);
     activateElement(selectedElement);
+
+    renderAnimations(CONSTANTS);
   }
 
   initialize();
