@@ -44,6 +44,10 @@ document.addEventListener("DOMContentLoaded", () => {
     //    Navbar Logic
     //===========================================================================================================================================================================================================================================
 
+    /**
+     * Sets up the event listeners for the main navigation menu.
+     * This includes the mobile menu toggle and the dropdown menus for services.
+     */
     function setupNavbar() {
         if (menuToggle) {
             menuToggle.addEventListener("click", (e) => {
@@ -54,6 +58,13 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
+        /**
+         * Creates a click event listener for a toggle button to show or hide a corresponding dropdown element.
+         * It manages the 'expanded' and 'active' states and ensures only one dropdown is open at a time.
+         *
+         * @param {HTMLElement | null} toggleButton - The button element that triggers the dropdown.
+         * @param {HTMLElement | null} dropdownElement - The dropdown element to be shown or hidden.
+         */
         const handleToggle = (toggleButton, dropdownElement) => {
             if (toggleButton && dropdownElement) {
                 toggleButton.addEventListener("click", (e) => {
@@ -115,6 +126,12 @@ document.addEventListener("DOMContentLoaded", () => {
     //    Global Event Listeners and Initialization
     //===========================================================================================================================================================================================================================================
 
+    /**
+     * Handles 'mousedown' events on the document to close any open navigation or dropdown menus
+     * when a click occurs outside of them.
+     *
+     * @param {MouseEvent} e - The mousedown event object.
+     */
     function handleGlobalMousedown(e) {
         const {
             target
@@ -142,6 +159,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    /**
+     * Initializes all UI components and event listeners when the script runs.
+     * This function sets up the navigation bar, registers global event listeners,
+     * and starts the scroll-based animations.
+     */
     function initialize() {
         setupNavbar();
 

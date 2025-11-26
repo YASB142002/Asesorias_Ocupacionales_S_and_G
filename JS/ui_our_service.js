@@ -131,6 +131,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  /**
+   * Smoothly scrolls the page to bring the specified element into the center of the viewport.
+   * A delay is added to ensure the scroll happens after other UI updates.
+   * @param {HTMLElement} el - The element to scroll to.
+   */
   function scrollToElement(el) {
     if (!el) {
       return;
@@ -245,6 +250,10 @@ document.addEventListener("DOMContentLoaded", () => {
   //    Navbar Logic
   //===========================================================================================================================================================================================================================================
 
+  /**
+   * Sets up all event listeners for the navigation bar, including the mobile menu toggle,
+   * dropdowns, and links that activate internal page sections.
+   */
   function setupNavbar() {
     if (menuToggle) {
       menuToggle.addEventListener("click", (e) => {
@@ -333,6 +342,11 @@ document.addEventListener("DOMContentLoaded", () => {
   //    Consults Section Logic
   //===========================================================================================================================================================================================================================================
 
+  /**
+   * Renders the list of consultancy services into the designated container.
+   * It clears any existing content and creates a card for each consult service.
+   * @param {Array<object>} consults - An array of consult objects to render.
+   */
   function renderConsults(consults) {
     if (!consultsContainer) return;
     consultsContainer.innerHTML = "";
@@ -355,6 +369,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+	/**
+	 * Resets the last selected consult card to its original state.
+	 * It removes active classes, resets text content, and applies a fade-out transition.
+	 */
   function cleanSelectedConsultCard() {
     const cardToClean = lastSelectedConsultCard;
     if (!cardToClean) return;
@@ -379,12 +397,22 @@ document.addEventListener("DOMContentLoaded", () => {
     void cardToClean.offsetWidth;
   }
 
+	/**
+	 * Applies active styling to a selected consult card, including elevation and box shadow.
+	 * @param {HTMLElement} selectedCard - The consult card element to style.
+	 */
   function applyStyleSecondaryCard(selectedCard) {
     selectedCard.classList.add("active_card");
     selectedCard.style.transform = "translateY(-4px)";
     selectedCard.style.boxShadow = "0 0 12px var(--color-accent-dark)";
   }
 
+	/**
+	 * Handles the click event on a consult card. It expands the card to show more details
+	 * or collapses it if it's already active. Manages the state of the currently selected card.
+	 * @param {HTMLElement} selectedCard - The card element that was clicked.
+	 * @param {object} consult - The consult data object corresponding to the clicked card.
+	 */
   function handleConsultClick(selectedCard, consult) {
     if (lastSelectedConsultCard === selectedCard) {
       cleanSelectedConsultCard();
@@ -410,6 +438,11 @@ document.addEventListener("DOMContentLoaded", () => {
   //    Training Section Logic
   //===========================================================================================================================================================================================================================================
 
+	/**
+	 * Handles the selection of a training course from the cylinder list.
+	 * It updates the active state and calls the function to display the course details.
+	 * @param {HTMLElement} courseItem - The course element (a <p> tag) that was clicked.
+	 */
   function selectTrainingCourse(courseItem) {
     if (!courseItem) return;
     const activeCourseP = trainingContainer?.querySelector('p.active');
@@ -424,6 +457,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+	/**
+	 * Renders the list of training courses inside the 'cylinder' container.
+	 * Each course is a clickable paragraph that triggers the selection logic.
+	 * @param {Array<object>} courses - An array of course objects to render.
+	 */
   function renderTrainingInCylinder(courses) {
     if (!trainingContainer) return;
     trainingContainer.innerHTML = "";
@@ -439,6 +477,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+	/**
+	 * Updates the training description area with the details of a selected course or resets it to default.
+	 * It uses a fade-in/fade-out animation for a smooth visual transition.
+	 * @param {object} course - The course data object to display.
+	 * @param {boolean} [isReset=false] - If true, resets the view to its default state.
+	 */
   function updateTrainingDescription(course, isReset = false) {
     const FADE_OUT_CLASS = 'fade-out';
     const FADE_IN_CLASS = 'fade-in';
@@ -497,6 +541,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+	/**
+	 * Resets the training description area to its default content.
+	 */
   function resetTrainingDescription() {
     updateTrainingDescription(CONSTANTS.TRAINING_DEFAULTS, true);
   }
@@ -505,6 +552,11 @@ document.addEventListener("DOMContentLoaded", () => {
   //    Manuals Section Logic
   //===========================================================================================================================================================================================================================================
 
+	/**
+	 * Creates and returns an HTML element for a single manual card.
+	 * @param {object} manual - The manual data object.
+	 * @returns {HTMLElement} The article element representing the manual card.
+	 */
   function createManualCard(manual) {
     const card = document.createElement('article');
     card.className = 'manual_development_card';
@@ -522,6 +574,10 @@ document.addEventListener("DOMContentLoaded", () => {
     return card;
   }
 
+	/**
+	 * Renders all manual cards into their container and aligns them.
+	 * @param {Array<object>} manuals - An array of manual objects.
+	 */
   function renderManuals(manuals) {
     if (!manualsContainer) return;
     manualsContainer.innerHTML = '';
@@ -532,6 +588,10 @@ document.addEventListener("DOMContentLoaded", () => {
     alignManualCards();
   }
 
+	/**
+	 * Aligns the manual cards in their container. If the total width of the cards
+	 * is less than the container width, it centers them; otherwise, it aligns them to the start.
+	 */
   function alignManualCards() {
     if (!manualsContainer) return;
     const cards = manualsContainer.querySelectorAll('.manual_development_card');
@@ -547,6 +607,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+	/**
+	 * Executes a fade-out/fade-in transition on the manual description header.
+	 * @param {Function} callback - A function to execute at the midpoint of the transition (after fade-out).
+	 */
   function runManualFadeTransition(callback) {
     const elements = [manualTitleEl, manualDescEl].filter(el => el);
     if (elements.length === 0) {
@@ -560,6 +624,11 @@ document.addEventListener("DOMContentLoaded", () => {
     elements.forEach(el => el.classList.add('manual_fade_out'));
   }
 
+	/**
+	 * Updates the manual header section to display the details of the selected manual.
+	 * It manages the active state for the selected card.
+	 * @param {object} manual - The manual data object to display.
+	 */
   function updateManualDisplay(manual) {
     if (!manualHeaderEl || lastSelectedManual?.id === manual.id) return;
 
@@ -580,6 +649,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+	/**
+	 * Resets the manual header section to its default content and deactivates any selected manual card.
+	 */
   function resetManualDisplay() {
     if (!lastSelectedManual || !manualHeaderEl) return;
 
@@ -598,6 +670,12 @@ document.addEventListener("DOMContentLoaded", () => {
   //    Global Event Listeners and Initialization
   //===========================================================================================================================================================================================================================================
 
+	/**
+	 * Handles global click events for the entire page to manage UI state.
+	 * This includes interactions with consult cards, training courses, and manual cards,
+	 * and resetting components when clicking away from them.
+	 * @param {MouseEvent} e - The click event object.
+	 */
   function handleGlobalClicks(e) {
     const {
       target
@@ -642,6 +720,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+	/**
+	 * Handles global mousedown events, primarily for closing menus and dropdowns
+	 * when the user clicks outside of them.
+	 * @param {MouseEvent} e - The mousedown event object.
+	 */
   function handleGlobalMousedown(e) {
     const {
       target
@@ -678,6 +761,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+	/**
+	 * Asynchronously initializes the page. It fetches all necessary data,
+	 * renders the dynamic sections, sets up navigation and global event listeners,
+	 * and triggers any entry animations or element activations based on URL parameters.
+	 */
   async function initialize() {
 
     setupNavbar();
