@@ -3,24 +3,24 @@
     "id": 1,
     "title": "Manual Operativo",
     "description": "Contiene lineamientos para la ejecución eficiente de tareas operativas dentro de la organización.",
-    "img": "../ASSETS/IMG/OURSERVICESIMG/MANUALDEVELOPINGIMG/ManualOperativo.png"
+    "img": "./ASSETS/IMG/OURSERVICESIMG/MANUALDEVELOPINGIMG/ManualOperativo.png"
   },
   {
     "id": 2,
     "title": "Procedimientos de Trabajos Seguros",
     "description": "Establece prácticas seguras para la realización de actividades laborales, minimizando riesgos y garantizando la integridad del personal.",
-    "img": "../ASSETS/IMG/OURSERVICESIMG/MANUALDEVELOPINGIMG/ProcedimientosDeTrabajosSeguros.png"
+    "img": "./ASSETS/IMG/OURSERVICESIMG/MANUALDEVELOPINGIMG/ProcedimientosDeTrabajosSeguros.png"
   },
   {
     "id": 3,
     "title": "Planes de Emergencia y Respuestas",
     "description": "Incluye protocolos de actuación ante emergencias químicas, con planes de evacuación, contención y comunicación de incidentes/accidentes.",
-    "img": "../ASSETS/IMG/OURSERVICESIMG/MANUALDEVELOPINGIMG/ManualPlanesDeEmergencia.png"
+    "img": "./ASSETS/IMG/OURSERVICESIMG/MANUALDEVELOPINGIMG/ManualPlanesDeEmergencia.png"
   },
   {
     "id": 4,
     "title": "Gestión de Residuos Químicos Peligrosos",
     "description": "Describe procedimientos para el manejo, almacenamiento y disposición final de residuos químicos peligrosos conforme a normativas ambientales.",
-    "img": "../ASSETS/IMG/OURSERVICESIMG/MANUALDEVELOPINGIMG/ManualResiduo.jpg"
+    "img": "./ASSETS/IMG/OURSERVICESIMG/MANUALDEVELOPINGIMG/ManualResiduo.jpg"
   }
 ]
