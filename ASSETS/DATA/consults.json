@@ -1,7 +1,7 @@
 [
   {
     "id": 9,
-    "title": "Análisis de vulnerabilidad",
+    "title": "Análisis de Vulnerabilidad",
     "short_description": "Evaluamos los factores que aumentan los riesgos en el trabajo ante eventos adversos.",
     "big_description": "Identificamos debilidades estructurales, operativas y humanas que puedan comprometer la seguridad y establecemos estrategias de soluciones para reducir la exposición al riesgo.",
     "img": "../ASSETS/IMG/OURSERVICESIMG/CONSULTSIMG/AnalisisDeVulnerabilidad.jpg"
@@ -50,7 +50,7 @@
   },
   {
     "id": 6,
-    "title": "Riesgo Eléctricos",
+    "title": "Riesgos Eléctricos",
     "short_description": "Evaluamos condiciones que pueden generar accidentes eléctricos.",
     "big_description": "Inspeccionamos instalaciones y equipos eléctricos, identificando fallas y proponiendo medidas de protección.",
     "img": "../ASSETS/IMG/OURSERVICESIMG/CONSULTSIMG/RiesgoElectrico.jpg"

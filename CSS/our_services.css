@@ -374,110 +374,6 @@
 }
 
 /*  ======================
-    Main card CSS
-    ====================== */
-
-.main_card {
-  background-color: var(--color-bg);
-  padding: 0;
-  border-radius: 0.75rem;
-  display: flex;
-  flex-direction: column;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: center;
-  height: 632px;
-  width: 400px;
-  box-shadow: 0px 3px 9px rgba(0, 0, 0, 0.4);
-}
-
-.active_main_card {
-  animation: trophyGlow 1.2s infinite ease-in-out;
-}
-
-.main_card_information {
-  padding: 1rem;
-  padding-bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1rem;
-  height: 400px;
-}
-
-.main_card_text {
-  background-color: var(--color-bg);
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  align-items: flex-start;
-}
-
-.main_card h3 {
-  font-size: 1.5rem;
-  font-family: var(--font-heading);
-  color: var(--color-primary);
-  margin-bottom: 0.5rem;
-}
-
-.main_card p {
-  font-size: 1rem;
-  color: var(--color-dark);
-  line-height: 1.5;
-  margin-bottom: 1rem;
-}
-
-.main_card_text h3,
-.main_card_text p {
-  transition: opacity 0.3s ease;
-  opacity: 1;
-}
-
-.main_card_text.fade_out h3,
-.main_card_text.fade_out p {
-  opacity: 0;
-}
-
-
-.boton_contact {
-  display: inline-block;
-  background-color: var(--color-accent);
-  color: var(--color-light);
-  padding: 0.5rem 1rem;
-  border: 2px solid var(--color-accent);
-  border-radius: 4px;
-  text-decoration: none;
-  font-family: var(--font-body);
-  font-weight: 400;
-  transition: background-color var(--transition-fast);
-}
-
-.boton_contact:hover {
-  background-color: var(--color-accent-dark);
-}
-
-/*  ======================
-    Main card Figure CSS
-    ====================== */
-
-.main_card figure {
-  width: 100%;
-  height: 250px;
-  overflow: hidden;
-  margin-top: 1rem;
-  margin-bottom: 0;
-  border-bottom-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-}
-
-.main_card figure img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/*  ======================
     Secondary cards CSS
     ====================== */
 
@@ -525,7 +421,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 510px;
+  height: 540px;
   /*FLAG: height: 500px; is almost enough to Simulacro de emergencia y/o autoprotección btn_moreinfo is not showing up complete yet*/
   gap: 2rem;
   align-items: flex-end;
@@ -889,12 +785,6 @@
   pointer-events: none;
 }
 
-.training_text_description.fade-in {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-
 .training_text_description p {
   font-size: 1rem;
   justify-self: flex-start;
@@ -907,15 +797,18 @@
   transition: opacity 0.4s ease;
 }
 
-.fadde-out {
+.fade-out {
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.4s ease;
 }
 
-.fadde-in {
+.fade-in {
   opacity: 1;
   pointer-events: auto;
+  transition: opacity 0.4s ease;
 }
+
 
 /*  ======================
     Training focus, modality, etc CSS
@@ -933,12 +826,12 @@
 
 }
 
-.training_text_focuspoint.fadde-in {
+.training_text_focuspoint.fade-in {
   opacity: 1;
   pointer-events: auto;
 }
 
-.training_text_focuspoint.fadde-out {
+.training_text_focuspoint.fade-out {
   opacity: 0;
   pointer-events: none;
 }
@@ -954,7 +847,6 @@
   align-self: center;
   font-size: 2rem;
 }
-
 
 /*  ======================
     Phone responsive CSS
@@ -1008,13 +900,7 @@
     grid-template-rows: auto;
   }
 
-  .fadde-in {
-    opacity: 1;
-    pointer-events: auto;
-    transition: opacity 0.4s ease;
-  }
-
-  .fadde-out {
+  .fade-out {
     opacity: 0;
     pointer-events: none;
   }
@@ -1046,7 +932,7 @@
     ====================== */
 
 .manual_development_header {
-  margin-block: 2rem;
+  margin-block: 3rem;
   background-color: var(--color-bg);
   display: flex;
   flex-direction: column;

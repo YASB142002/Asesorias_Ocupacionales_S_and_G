@@ -50,6 +50,7 @@ h6 {
 html,
 body {
     height: 100%;
+    overflow-x: hidden;
 }
 
 /*  ======================================================
@@ -65,6 +66,13 @@ header {
     padding: 0.5rem 2rem;
     max-height: 130px;
     font-family: var(--font-main);
+}
+
+.utility_MenuBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 800px;
 }
 
 /* ====================
@@ -471,14 +479,28 @@ nav ul.mainmenu>li:hover .arrow.arrow_services {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         padding: 1rem;
         position: relative;
         z-index: 20;
     }
 
+    .utility_MenuBar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+    }
+
+    .logo {
+        margin: 0;
+    }
+
+
     .logo img {
         height: 80px;
+        margin: 0;
     }
 
     #menu_toggle {

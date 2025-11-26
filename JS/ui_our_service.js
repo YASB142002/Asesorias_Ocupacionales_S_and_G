@@ -127,32 +127,18 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!cleaned) return [];
       return JSON.parse(cleaned);
     } catch (error) {
-      console.error(`Error loading data from ${path}:`, error);
       return []; // Return empty array on error
     }
   }
 
   function scrollToElement(el) {
-    const rect = el?.getBoundingClientRect();
-
-    if (window.innerWidth > 768) {
-      // PC view → vertical scroll
-      const offset = 300; //Extra pixels to avoid it scroll more than necessary
-      window.scrollTo({
-        top: window.scrollY + rect.top - offset,
-        behavior: "smooth"
-      });
-    } else {
-      // Mobile view → horizontal scroll
-      const offset = 50;
-      window.scrollTo({
-        left: window.scrollX + rect.left - offset,
-        behavior: "smooth"
-      });
+    if (!el) {
+      return;
     }
-
+    setTimeout(() => {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+    }, 450);
   }
-
 
   /**
    * This funtion activate the click event in consult, training and manual developing sections (only dynamic service sections)
@@ -173,16 +159,27 @@ document.addEventListener("DOMContentLoaded", () => {
       case "training":
         {
           const courseElement = trainingContainer?.querySelector(`p[data-id="course_${selectedElement}"]`);
-          selectTrainingCourse(courseElement);
+          if (courseElement) {
+            selectTrainingCourse(courseElement);
+            courseElement.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+              inline: "center"
+            });
+          }
           return;
         }
       case "manual":
         triggerSelected = manualsContainer?.querySelector(`button[data-id="manual_${selectedElement}"]`);
+        triggerSelected?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "end"
+        });
         break;
     }
 
-    if (!triggerSelected == null) {
-      scrollToElement(triggerSelected);
+    if (triggerSelected !== null && triggerSelected !== undefined) {
       triggerSelected?.click();
     }
   }
@@ -201,29 +198,46 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     let triggerSelected = null;
+    let elementToScrollTo = null;
 
     switch (service) {
       case "consult":
-        triggerSelected = consultsContainer?.querySelector(`button[data-id="${elementID}"]`);
-        triggerSelected?.click();
+        {
+          const consultId = parseInt(String(elementID).replace('consult_', ''), 10);
+          const consult = consultData.find(c => c.id === consultId);
+          triggerSelected = consultsContainer?.querySelector(`button[data-id="${consultId}"]`);
+          elementToScrollTo = triggerSelected?.closest(".secondary_card");
+
+          if (elementToScrollTo && consult) {
+            handleConsultClick(elementToScrollTo, consult);
+          }
+        }
         break;
       case "training":
         {
           const searchID = String(elementID).includes('course_') ? elementID : `course_${elementID}`;
           triggerSelected = trainingContainer?.querySelector(`p[data-id="${searchID}"]`);
+          elementToScrollTo = triggerSelected;
           if (triggerSelected) {
             selectTrainingCourse(triggerSelected);
           }
         }
         break;
       case "manual":
-        triggerSelected = manualsContainer?.querySelector(`button[data-id="${elementID}"]`);
-        triggerSelected?.click();
+        {
+          const searchID = String(elementID).includes('manual_') ? elementID : `manual_${elementID}`;
+          const manualId = parseInt(searchID.replace('manual_', ''), 10);
+          const manual = manualData.find(m => m.id === manualId);
+          triggerSelected = manualsContainer?.querySelector(`button[data-id="${searchID}"]`);
+          elementToScrollTo = triggerSelected?.closest('.manual_development_card');
+
+          if (manual) {
+            updateManualDisplay(manual);
+          }
+        }
         break;
     }
-
-
-    scrollToElement(triggerSelected);
+    scrollToElement(elementToScrollTo);
   }
 
 
@@ -298,20 +312,18 @@ document.addEventListener("DOMContentLoaded", () => {
     handleToggle(toggleManual, dropdownManual);
 
     aTags.forEach(link => {
+      link.addEventListener("mousedown", e => {
+        e.stopPropagation();
+      });
+
       link.addEventListener("click", e => {
         e.preventDefault();
+        e.stopPropagation();
 
         const service = link.dataset.service;
         const elementID = link.dataset.id || null;
 
         activateInternalElement(service, elementID);
-
-        // This update the URL without recharge the page
-        const hash = link.getAttribute("href");
-        const query = elementID
-          ? `?selectedService=${service}&courseID=${elementID}`
-          : `?selectedService=${service}`;
-        history.pushState(null, "", `${query}${hash}`);
       });
     });
 
@@ -399,8 +411,6 @@ document.addEventListener("DOMContentLoaded", () => {
   //===========================================================================================================================================================================================================================================
 
   function selectTrainingCourse(courseItem) {
-    console.log(courseItem);
-
     if (!courseItem) return;
     const activeCourseP = trainingContainer?.querySelector('p.active');
     if (courseItem.classList.contains('active')) return;
@@ -421,7 +431,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const courseItem = document.createElement("p");
       courseItem.setAttribute("data-id", `course_${course.id}`);
       courseItem.innerHTML = `${course.title}`;
-      courseItem.addEventListener('click', (e) => {
+      courseItem.addEventListener('mousedown', (e) => {
         e.stopPropagation();
         selectTrainingCourse(courseItem);
       });
@@ -430,57 +440,60 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateTrainingDescription(course, isReset = false) {
-    const elementsToAnimate = [descriptionTitle, descriptionParagraph, focusPoint].filter(el => el);
+    const FADE_OUT_CLASS = 'fade-out';
+    const FADE_IN_CLASS = 'fade-in';
+    const animationDuration = 400;
 
-    const updateContent = () => {
-      // Update text content
+    const elementsToFade = [descriptionTitle, descriptionParagraph, focusPoint].filter(Boolean);
+
+    // If there are no elements to fade, do nothing.
+    if (elementsToFade.length === 0) return;
+
+    // Use the first element as the primary element for the transitionend event.
+    const primaryElement = elementsToFade[0];
+
+    // Fallback timer to ensure the function completes even if transitionend doesn't fire.
+    const fallbackTimeout = setTimeout(() => {
+      onFadeOutComplete();
+    }, animationDuration + 100);
+
+    const onFadeOutComplete = () => {
+      // Clear the fallback timeout since the transition completed successfully.
+      clearTimeout(fallbackTimeout);
+
+      // Update all text content
       if (descriptionTitle) descriptionTitle.textContent = course.title;
       if (descriptionParagraph) descriptionParagraph.textContent = course.description;
       if (objectiveEl) objectiveEl.innerHTML = course.objective;
       if (modalityEl) modalityEl.textContent = course.modality;
       if (audienceEl) audienceEl.textContent = course.audience;
-      if (focusPoint) focusPoint.style.display = "grid";
-      if (descriptionBox) {
-        if (!window.innerWidth > CONSTANTS.BREAKPOINTS.MOBILE) descriptionBox.style.alignSelf = "flex-start";
-      };
 
-
-
-
-      // Fade in main description elements
-      [descriptionTitle, descriptionParagraph].forEach(el => {
-        if (el) {
-          el.classList.remove('fadde-out');
-          el.classList.add('fadde-in');
-        }
-      });
-
-      // Handle visibility of the focus point details
+      // Set the display property for focusPoint before the animation.
       if (focusPoint) {
-        if (isReset) {
-          // Hide if resetting
-          focusPoint.classList.remove('fadde-in');
-          focusPoint.classList.add('fadde-out');
-          focusPoint.style.display = "none";
-          if (window.innerWidth > CONSTANTS.BREAKPOINTS.MOBILE) descriptionBox.style.alignSelf = "center";
-        } else {
-          // Show if a course is selected
-          focusPoint.classList.remove('fadde-out');
-          focusPoint.classList.add('fadde-in');
-        }
+        focusPoint.style.display = isReset ? 'none' : 'grid';
       }
+
+      // Use requestAnimationFrame to apply the fade-in class on the next frame.
+      requestAnimationFrame(() => {
+        const elementsToFadeIn = [descriptionTitle, descriptionParagraph];
+        if (!isReset && focusPoint) {
+          elementsToFadeIn.push(focusPoint);
+        }
+
+        elementsToFadeIn.forEach(el => {
+          el.classList.remove(FADE_OUT_CLASS);
+          el.classList.add(FADE_IN_CLASS);
+        });
+      });
     };
 
-    if (elementsToAnimate.length === 0) {
-      updateContent();
-      return;
-    }
+    // Listen for the end of the transition on the primary element.
+    runAfterTransition(primaryElement, onFadeOutComplete);
 
-    // Animate all elements out together
-    runAfterTransition(elementsToAnimate[0], updateContent);
-    elementsToAnimate.forEach(el => {
-      el.classList.remove('fadde-in');
-      el.classList.add('fadde-out');
+    // Add fade-out class to all elements to trigger the transition.
+    elementsToFade.forEach(el => {
+      el.classList.remove(FADE_IN_CLASS);
+      el.classList.add(FADE_OUT_CLASS);
     });
   }
 
@@ -590,6 +603,8 @@ document.addEventListener("DOMContentLoaded", () => {
       target
     } = e;
 
+    const isServiceLink = target.closest('a[data-service]');
+
     // --- Consults Section ---
     const consultButton = target.closest(".btn_moreInfo[data-type='consult']");
     if (consultButton) {
@@ -618,10 +633,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const manual = manualData.find(m => m.id === manualId);
       if (manual) {
         updateManualDisplay(manual);
+        scrollToElement(document.getElementById('manual'));
       }
       return;
     }
-    if (!target.closest('.manual_development_card') && lastSelectedManual) {
+    if (!target.closest('.manual_development_card') && lastSelectedManual && !isServiceLink) {
       resetManualDisplay();
     }
   }
