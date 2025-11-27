@@ -11,9 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const CONSTANTS = {
     PATHS: {
-      CONSULTS: "ASSETS/DATA/consults.json",
-      TRAINING: "ASSETS/DATA/training.json",
-      MANUALS: "ASSETS/DATA/manuals.json",
+      CONSULTS: "./ASSETS/DATA/consults.json",
+      TRAINING: "./ASSETS/DATA/training.json",
+      MANUALS: "./ASSETS/DATA/manuals.json",
     },
     BREAKPOINTS: {
       MOBILE: 932,
@@ -732,7 +732,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Exit if the click is on the menu toggle button
     if (target === menuToggle) {
-        return;
+      return;
     }
 
     // --- Navbar Logic ---
