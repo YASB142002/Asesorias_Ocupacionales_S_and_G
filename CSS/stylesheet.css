@@ -12,7 +12,7 @@
 
 #welcome_intruction {
     position: relative;
-    min-height: 480px;
+    min-height: 580px;
     padding: 4rem 2rem;
     display: flex;
     flex-direction: column;

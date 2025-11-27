@@ -137,8 +137,13 @@ document.addEventListener("DOMContentLoaded", () => {
             target
         } = e;
 
+        // Exit if the click is on the menu toggle button
+        if (target === menuToggle) {
+            return;
+        }
+
         // --- Navbar Logic ---
-        if (mainNav && !mainNav.contains(target)) {//This check if click was on main menu (inicio, nosotros, servicios)
+        if (mainNav && !mainNav.contains(target)) { //This check if click was on main menu (inicio, nosotros, servicios)
             mainNav.classList.remove("expanded");
             if (menuToggle) menuToggle.setAttribute("aria-expanded", "false"); //This line remove the active status in service_arrow
 
