@@ -132,17 +132,38 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /**
+   * Smoothly scrolls the page to bring the specified element into view.
+   * @param {HTMLElement} el - The element to scroll to.
+   * @param {string} [block='center'] - The vertical alignment of the element.
+   * @param {string} [inline='center'] - The horizontal alignment of the element.
+   */
+  function scrollToElement(el, block = 'center', inline = 'center') {
+    if (!el) {
+      return;
+    }
+    // Use requestAnimationFrame to ensure the scroll happens after other UI updates.
+    requestAnimationFrame(() => {
+      el.scrollIntoView({
+        behavior: 'smooth',
+        block,
+        inline
+      });
+    });
+  }
+
+  /**
    * Smoothly scrolls the page to bring the specified element into the center of the viewport.
    * A delay is added to ensure the scroll happens after other UI updates.
    * @param {HTMLElement} el - The element to scroll to.
    */
-  function scrollToElement(el) {
-    if (!el) {
-      return;
+  function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
-    setTimeout(() => {
-      el.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
-    }, 450);
   }
 
   /**
@@ -150,42 +171,8 @@ document.addEventListener("DOMContentLoaded", () => {
    * @param {number} selectedElement - Catch the id number to search the specific service that user selected
    */
   function activateElement(selectedElement) {
-
-    let triggerSelected = null;
-    switch (selectedService?.toLowerCase()) {
-      case "consult":
-        triggerSelected = consultsContainer?.querySelector(`button[data-id="${selectedElement}"]`);
-        triggerSelected?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-          inline: "center"
-        });
-        break;
-      case "training":
-        {
-          const courseElement = trainingContainer?.querySelector(`p[data-id="course_${selectedElement}"]`);
-          if (courseElement) {
-            selectTrainingCourse(courseElement);
-            courseElement.scrollIntoView({
-              behavior: "smooth",
-              block: "center",
-              inline: "center"
-            });
-          }
-          return;
-        }
-      case "manual":
-        triggerSelected = manualsContainer?.querySelector(`button[data-id="manual_${selectedElement}"]`);
-        triggerSelected?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-          inline: "end"
-        });
-        break;
-    }
-
-    if (triggerSelected !== null && triggerSelected !== undefined) {
-      triggerSelected?.click();
+    if (selectedService && selectedElement) {
+      showAndScrollToService(selectedService, selectedElement);
     }
   }
 
@@ -195,36 +182,31 @@ document.addEventListener("DOMContentLoaded", () => {
    * @param {Int} elementID It takes the service id to know what specific service user clicked
    * @returns After finding and activating the specific element  it smoothly scrolls the page to place that element in the center of the screen, ensuring the user sees it.
    */
-  function activateInternalElement(service, elementID) {
+  function showAndScrollToService(service, elementID) {
     if (!elementID) {
-      const container = document.getElementById(service);
-      container?.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+      scrollToSection(service);
       return;
     }
-
-    let triggerSelected = null;
-    let elementToScrollTo = null;
 
     switch (service) {
       case "consult":
         {
           const consultId = parseInt(String(elementID).replace('consult_', ''), 10);
           const consult = consultData.find(c => c.id === consultId);
-          triggerSelected = consultsContainer?.querySelector(`button[data-id="${consultId}"]`);
-          elementToScrollTo = triggerSelected?.closest(".secondary_card");
-
-          if (elementToScrollTo && consult) {
-            handleConsultClick(elementToScrollTo, consult);
+          const selectedCard = consultsContainer?.querySelector(`.secondary_card[data-id="consult_${consultId}"]`);
+          if (selectedCard && consult) {
+            handleConsultClick(selectedCard, consult);
+            scrollToSection('consult');
           }
         }
         break;
       case "training":
         {
           const searchID = String(elementID).includes('course_') ? elementID : `course_${elementID}`;
-          triggerSelected = trainingContainer?.querySelector(`p[data-id="${searchID}"]`);
-          elementToScrollTo = triggerSelected;
-          if (triggerSelected) {
-            selectTrainingCourse(triggerSelected);
+          const courseElement = trainingContainer?.querySelector(`p[data-id="${searchID}"]`);
+          if (courseElement) {
+            selectTrainingCourse(courseElement);
+            scrollToSection('training');
           }
         }
         break;
@@ -233,16 +215,13 @@ document.addEventListener("DOMContentLoaded", () => {
           const searchID = String(elementID).includes('manual_') ? elementID : `manual_${elementID}`;
           const manualId = parseInt(searchID.replace('manual_', ''), 10);
           const manual = manualData.find(m => m.id === manualId);
-          triggerSelected = manualsContainer?.querySelector(`button[data-id="${searchID}"]`);
-          elementToScrollTo = triggerSelected?.closest('.manual_development_card');
-
           if (manual) {
             updateManualDisplay(manual);
+            scrollToSection('manual');
           }
         }
         break;
     }
-    scrollToElement(elementToScrollTo);
   }
 
 
@@ -259,8 +238,12 @@ document.addEventListener("DOMContentLoaded", () => {
       menuToggle.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        mainNav?.classList.toggle("expanded");
-        menuToggle.setAttribute("aria-expanded", mainNav?.classList.contains("expanded") ? "true" : "false");
+        const isExpanded = mainNav?.classList.toggle("expanded");
+        menuToggle.setAttribute("aria-expanded", isExpanded ? "true" : "false");
+
+        if (!isExpanded) {
+          closeDropdowns();
+        }
       });
     }
 
@@ -270,13 +253,18 @@ document.addEventListener("DOMContentLoaded", () => {
           e.preventDefault();
           e.stopPropagation();
 
-          // If it's a submenu, close all other submenus first.
+          // Close all other submenus in the services dropdown
           if (dropdownElement.parentElement.closest('.dropdown_services')) {
-            const submenus = [
-              { toggle: toggleConsult, dropdown: dropdownConsult },
-              { toggle: toggleTraining, dropdown: dropdownTraining },
-              { toggle: toggleManual, dropdown: dropdownManual },
-            ];
+            const submenus = [{
+              toggle: toggleConsult,
+              dropdown: dropdownConsult
+            }, {
+              toggle: toggleTraining,
+              dropdown: dropdownTraining
+            }, {
+              toggle: toggleManual,
+              dropdown: dropdownManual
+            }, ];
 
             submenus.forEach(submenu => {
               if (submenu.dropdown && submenu.dropdown !== dropdownElement) {
@@ -286,33 +274,29 @@ document.addEventListener("DOMContentLoaded", () => {
             });
           }
 
-          const isSameToggle = lastToggleSelected === toggleButton;
-
-          if (isSameToggle) {
-            dropdownElement.classList.remove("expanded");
-            toggleButton.classList.remove("active");
-            lastToggleSelected = null;
-            return;
-          }
-
-          // Close if last exists
-          if (lastToggleSelected && lastToggleSelected !== toggleButton) {
-            const prevDropdown = document.querySelector(lastToggleSelected.dataset.target);
-            prevDropdown?.classList.remove("expanded");
-            lastToggleSelected.classList.remove("active");
-          }
-
-          // Enable new toggle
+          // Toggle the current dropdown
           const isNowExpanded = dropdownElement.classList.toggle("expanded");
           toggleButton.classList.toggle("active", isNowExpanded);
 
-          if (!toggleButton.classList.contains("toggle_mainmenu")) lastToggleSelected = toggleButton;
-
-          if (!isNowExpanded) {
+          // Update the last selected toggle
+          if (isNowExpanded) {
+            lastToggleSelected = toggleButton;
+          } else {
+            lastToggleSelected = null;
             toggleButton.blur();
           }
         });
       }
+    };
+
+    /**
+     * Closes all dropdown menus in the navigation bar.
+     * It removes the 'expanded' class from dropdowns and the 'active' class from toggles.
+     */
+    const closeDropdowns = () => {
+      [dropdownServices, dropdownConsult, dropdownTraining, dropdownManual].forEach(d => d?.classList.remove("expanded"));
+      [toggleServices, toggleConsult, toggleTraining, toggleManual].forEach(t => t?.classList.remove("active"));
+      lastToggleSelected = null;
     };
 
     handleToggle(toggleServices, dropdownServices);
@@ -332,7 +316,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const service = link.dataset.service;
         const elementID = link.dataset.id || null;
 
-        activateInternalElement(service, elementID);
+        showAndScrollToService(service, elementID);
+        closeDropdowns();
       });
     });
 
@@ -429,6 +414,9 @@ document.addEventListener("DOMContentLoaded", () => {
       applyStyleSecondaryCard(selectedCard);
       cardPElement.textContent = consult.big_description;
       selectedCard.classList.remove("secondary_fade_out");
+      setTimeout(() => {
+        scrollToElement(selectedCard, 'start', 'nearest');
+      }, 500);
     });
     selectedCard.classList.add("secondary_fade_out");
     void selectedCard.offsetWidth;
@@ -646,6 +634,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lastCardEl?.classList.remove("active_manual_card");
       }
       lastSelectedManual = manual;
+      scrollToElement(cardEl, 'nearest', 'center');
     });
   }
 
@@ -686,12 +675,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Consults Section ---
     const consultButton = target.closest(".btn_moreInfo[data-type='consult']");
     if (consultButton) {
-      const selectedCard = target.closest(".secondary_card");
       const id = Number.parseInt(consultButton.dataset.id, 10);
-      const consult = consultData.find(c => c.id === id);
-      if (consult && selectedCard) {
-        handleConsultClick(selectedCard, consult);
-      }
+      showAndScrollToService('consult', id);
       return;
     }
 
@@ -707,12 +692,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // --- Manuals Section ---
     const manualButton = target.closest(".btn_moreInfo[data-type='manual']");
     if (manualButton) {
-      const manualId = Number.parseInt(manualButton.dataset.id.split("_")[1], 10);
-      const manual = manualData.find(m => m.id === manualId);
-      if (manual) {
-        updateManualDisplay(manual);
-        scrollToElement(document.getElementById('manual'));
-      }
+      const manualId = manualButton.dataset.id;
+      showAndScrollToService('manual', manualId);
       return;
     }
     if (!target.closest('.manual_development_card') && lastSelectedManual && !isServiceLink) {
@@ -730,35 +711,26 @@ document.addEventListener("DOMContentLoaded", () => {
       target
     } = e;
 
-    // Exit if the click is on the menu toggle button
+    // Do nothing if the click is on the menu toggle button
     if (target === menuToggle) {
       return;
     }
 
-    // --- Navbar Logic ---
-
-    if (mainNav && !mainNav.contains(target)) {//This check if click was on main menu (inicio, nosotros, servicios)
+    // Close the main navigation menu if the click is outside of it
+    if (mainNav && !mainNav.contains(target)) {
       mainNav.classList.remove("expanded");
-      if (menuToggle) menuToggle.setAttribute("aria-expanded", "false"); //This line remove the active status in service_arrow
-
-      if (toggleConsult) toggleConsult?.classList.remove("active"); //This line remove the active status in service_arrow
-      if (toggleManual) toggleManual?.classList.remove("active"); //This line remove the active status in service_arrow
-      if (toggleTraining) toggleTraining?.classList.remove("active"); //This line remove the active status in service_arrow
-      dropdownServices?.classList.remove("expanded");
-      dropdownTraining?.classList.remove("expanded");
-      dropdownConsult?.classList.remove("expanded");
-      dropdownManual?.classList.remove("expanded");
-    } else {
-      if (dropdownServices && !dropdownServices.contains(target) && dropdownTraining && !dropdownTraining.contains(target) && dropdownConsult && !dropdownConsult.contains(target) && dropdownManual && !dropdownManual.contains(target)) {
-        dropdownServices.classList.remove("expanded");
-        dropdownTraining.classList.remove("expanded");
-        dropdownConsult.classList.remove("expanded");
-        dropdownManual.classList.remove("expanded");
-      }
-      if (toggleConsult) toggleConsult?.classList.remove("active"); //This line remove the active status in service_arrow
-      if (toggleManual) toggleManual?.classList.remove("active"); //This line remove the active status in service_arrow
-      if (toggleTraining) toggleTraining?.classList.remove("active"); //This line remove the active status in service_arrow
+      menuToggle.setAttribute("aria-expanded", "false");
     }
+
+    // Close all dropdowns if the click is outside of them
+    const allDropdowns = [dropdownServices, dropdownConsult, dropdownTraining, dropdownManual];
+    const allToggles = [toggleServices, toggleConsult, toggleTraining, toggleManual];
+    if (allDropdowns.every(d => d && !d.contains(target))) {
+      allDropdowns.forEach(d => d?.classList.remove("expanded"));
+      allToggles.forEach(t => t?.classList.remove("active"));
+      lastToggleSelected = null;
+    }
+
 
     // --- Consults Reset Logic ---
     if (lastSelectedConsultCard && !target.closest(".secondary_card")) {
